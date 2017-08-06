@@ -13,6 +13,8 @@
 		19EF95001F37580B00085BCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EF94FE1F37580B00085BCA /* Main.storyboard */; };
 		19EF95021F37580B00085BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19EF95011F37580B00085BCA /* Assets.xcassets */; };
 		19EF95051F37580B00085BCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EF95031F37580B00085BCA /* LaunchScreen.storyboard */; };
+		19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950A1F3758C300085BCA /* ExpandableTableView.swift */; };
+		19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950C1F3759E700085BCA /* ExpandableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		19EF95011F37580B00085BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19EF95041F37580B00085BCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19EF95061F37580B00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19EF950A1F3758C300085BCA /* ExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableView.swift; sourceTree = "<group>"; };
+		19EF950C1F3759E700085BCA /* ExpandableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 		19EF94EB1F3757AC00085BCA /* ExpandableCell */ = {
 			isa = PBXGroup;
 			children = (
+				19EF950A1F3758C300085BCA /* ExpandableTableView.swift */,
+				19EF950C1F3759E700085BCA /* ExpandableCell.swift */,
 				19EF94EC1F3757AC00085BCA /* ExpandableCell.h */,
 				19EF94ED1F3757AC00085BCA /* Info.plist */,
 			);
@@ -148,6 +154,7 @@
 					19EF94E81F3757AC00085BCA = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 4G7K3CN2JU;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					19EF94F71F37580B00085BCA = {
@@ -201,6 +208,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */,
+				19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +348,7 @@
 		19EF94F21F3757AC00085BCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
@@ -351,6 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.ExpandableCell;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -358,6 +369,7 @@
 		19EF94F31F3757AC00085BCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
