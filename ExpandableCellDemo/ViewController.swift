@@ -10,11 +10,11 @@ import UIKit
 import ExpandableCell
 
 class ViewController: UIViewController {
+    @IBOutlet weak var tableView: ExpandableTableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tableView = ExpandableTableView()
         tableView.expandableDelegate = self
         tableView.register(UINib(nibName: "ExpandableNormalCell", bundle: nil), forCellReuseIdentifier: ExpandableNormalCell.ID)
         tableView.register(UINib(nibName: "ExpandableExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandedCell.ID)
@@ -38,21 +38,37 @@ extension ViewController: ExpandableDelegate {
     }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath, expandableCellStyle: ExpandableCellStyle, isExpanded: Bool) {
-        print()
+        print("didSelectRow:\(indexPath) expandableCellStyle: \(expandableCellStyle), isExpanded: \(isExpanded)")
     }
-    
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> ExpandableCell {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0,1,4:
-                let cell =
+            case 0, 1, 4:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                return cell
+                
+            case 2, 3:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                return cell
+
             default:
-                <#code#>
+                break
             }
         case 1:
-            break
+            switch indexPath.row {
+            case 1, 2:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                return cell
+                
+            case 0, 3, 4:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                return cell
+                
+            default:
+                break
+            }
         default:
             break
         }

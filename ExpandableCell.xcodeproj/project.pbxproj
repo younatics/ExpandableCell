@@ -13,6 +13,8 @@
 		1921BF751F38187600BFD528 /* ExpandableNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF741F38187600BFD528 /* ExpandableNormalCell.xib */; };
 		1921BF781F381B8400BFD528 /* ExpandableExpandableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF761F381B8400BFD528 /* ExpandableExpandableCell.xib */; };
 		1921BF791F381B8400BFD528 /* ExpandableExpandedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */; };
+		19C2D1061F38393600A6B3FE /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
+		19C2D1071F38393600A6B3FE /* ExpandableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19EF94EE1F3757AC00085BCA /* ExpandableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 19EF94EC1F3757AC00085BCA /* ExpandableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19EF94FB1F37580B00085BCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FA1F37580B00085BCA /* AppDelegate.swift */; };
 		19EF94FD1F37580B00085BCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FC1F37580B00085BCA /* ViewController.swift */; };
@@ -22,6 +24,30 @@
 		19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950A1F3758C300085BCA /* ExpandableTableView.swift */; };
 		19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950C1F3759E700085BCA /* ExpandableCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		19C2D1081F38393600A6B3FE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19EF94E01F3757AC00085BCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19EF94E81F3757AC00085BCA;
+			remoteInfo = ExpandableCell;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		19C2D10A1F38393600A6B3FE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				19C2D1071F38393600A6B3FE /* ExpandableCell.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1921BF6D1F37FF2700BFD528 /* ExpandableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19C2D1061F38393600A6B3FE /* ExpandableCell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,10 +184,12 @@
 				19EF94F41F37580B00085BCA /* Sources */,
 				19EF94F51F37580B00085BCA /* Frameworks */,
 				19EF94F61F37580B00085BCA /* Resources */,
+				19C2D10A1F38393600A6B3FE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				19C2D1091F38393600A6B3FE /* PBXTargetDependency */,
 			);
 			name = ExpandableCellDemo;
 			productName = ExpandableCellDemo;
@@ -255,6 +284,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		19C2D1091F38393600A6B3FE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19EF94E81F3757AC00085BCA /* ExpandableCell */;
+			targetProxy = 19C2D1081F38393600A6B3FE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		19EF94FE1F37580B00085BCA /* Main.storyboard */ = {
@@ -421,6 +458,7 @@
 		19EF95071F37580B00085BCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
 				INFOPLIST_FILE = ExpandableCellDemo/Info.plist;
@@ -434,6 +472,7 @@
 		19EF95081F37580B00085BCA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
 				INFOPLIST_FILE = ExpandableCellDemo/Info.plist;
