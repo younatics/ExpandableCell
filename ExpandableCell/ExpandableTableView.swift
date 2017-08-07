@@ -37,6 +37,20 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = expandableDelegate else { return }
         
+        let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
+        if cell.style == .expandable && !cell.isExpanded {
+            let count = delegate.expandableTableView(self, numberOfRowsInSection: indexPath.section)
+            var expandedCells = [IndexPath]()
+            
+            for i in indexPath.row..<count {
+                let tempIndexPath = IndexPath(row: i, section: indexPath.section)
+                let cell = delegate.expandableTableView(self, cellForRowAt: tempIndexPath)
+                if cell.style == .expanded {
+                    
+                }
+            }
+        }
+        
         delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: .normal, isExpanded: true)
     }
     
