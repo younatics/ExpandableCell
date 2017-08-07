@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1921BF6E1F37FF2700BFD528 /* ExpandableCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921BF6D1F37FF2700BFD528 /* ExpandableCellDelegate.swift */; };
+		1921BF701F3802C900BFD528 /* ExpandableCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */; };
 		19EF94EE1F3757AC00085BCA /* ExpandableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 19EF94EC1F3757AC00085BCA /* ExpandableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19EF94FB1F37580B00085BCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FA1F37580B00085BCA /* AppDelegate.swift */; };
 		19EF94FD1F37580B00085BCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FC1F37580B00085BCA /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		1921BF6D1F37FF2700BFD528 /* ExpandableCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellDelegate.swift; sourceTree = "<group>"; };
+		1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellStyle.swift; sourceTree = "<group>"; };
 		19EF94E91F3757AC00085BCA /* ExpandableCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExpandableCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EF94EC1F3757AC00085BCA /* ExpandableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandableCell.h; sourceTree = "<group>"; };
 		19EF94ED1F3757AC00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				19EF950A1F3758C300085BCA /* ExpandableTableView.swift */,
 				19EF950C1F3759E700085BCA /* ExpandableCell.swift */,
+				1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */,
 				1921BF6D1F37FF2700BFD528 /* ExpandableCellDelegate.swift */,
 				19EF94EC1F3757AC00085BCA /* ExpandableCell.h */,
 				19EF94ED1F3757AC00085BCA /* Info.plist */,
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1921BF6E1F37FF2700BFD528 /* ExpandableCellDelegate.swift in Sources */,
+				1921BF701F3802C900BFD528 /* ExpandableCellStyle.swift in Sources */,
 				19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */,
 				19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */,
 			);

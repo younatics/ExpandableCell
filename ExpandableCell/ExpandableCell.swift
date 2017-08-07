@@ -9,6 +9,6 @@
 import UIKit
 
 class ExpandableCell: UITableViewCell {
-    var isExpandable = false
+    var style: ExpandableCellStyle = .normal
     
 }

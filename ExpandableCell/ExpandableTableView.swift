@@ -9,11 +9,16 @@
 import UIKit
 
 class ExpandableTableView: UITableView {
+    var expandableCellDelegate: ExpandableCellDelegate? {
+        didSet {
+            self.dataSource = self
+            self.dataSource = self
+        }
+    }
+    
     override init(frame: CGRect, style: UITableViewStyle) {
         super.init(frame: frame, style: style)
         
-        self.dataSource = self
-        self.dataSource = self
     }
     
     required init?(coder aDecoder: NSCoder) {

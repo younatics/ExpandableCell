@@ -1,13 +1,15 @@
 //
-//  ExpandableCellDelegate.swift
+//  ExpandableCellStyle.swift
 //  ExpandableCell
 //
 //  Created by Seungyoun Yi on 2017. 8. 7..
 //  Copyright © 2017년 SeungyounYi. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol ExpandableCellDelegate: UITableViewDelegate, UITableViewDataSource {
-    
+enum ExpandableCellStyle {
+    case normal
+    case expandable
+    case expanded
 }
