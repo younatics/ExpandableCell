@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ExpandableTableView: UITableView {
-    var expandableCellDelegate: ExpandableCellDelegate? {
+open class ExpandableTableView: UITableView {
+    var expandableDelegate: ExpandableDelegate? {
         didSet {
             self.dataSource = self
             self.dataSource = self
@@ -21,18 +21,18 @@ class ExpandableTableView: UITableView {
         
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
     }
 }
 
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
 

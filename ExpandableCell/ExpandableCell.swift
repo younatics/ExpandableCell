@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ExpandableCell: UITableViewCell {
+open class ExpandableCell: UITableViewCell {
     var style: ExpandableCellStyle = .normal
+    var isExpanded = false
     
 }

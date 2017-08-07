@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ExpandableCellStyle {
+public enum ExpandableCellStyle {
     case normal
     case expandable
     case expanded
