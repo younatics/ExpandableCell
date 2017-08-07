@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import ExpandableCell
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tableView = UITableView()
+        let tableView = ExpandableTableView()
+        tableView.expandableDelegate = self
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -23,3 +27,14 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: ExpandableDelegate {
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath, expandableCellStyle: ExpandableCellStyle, isExpanded: Bool) {
+        print()
+    }
+    
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> ExpandableCell {
+        return ExpandableCell()
+    }
+    
+}

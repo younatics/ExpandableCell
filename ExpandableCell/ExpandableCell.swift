@@ -9,7 +9,21 @@
 import UIKit
 
 open class ExpandableCell: UITableViewCell {
-    var style: ExpandableCellStyle = .normal
-    var isExpanded = false
+    public var style: ExpandableCellStyle = .normal
+    public var isExpanded = false
+    
+    public init(style: UITableViewCellStyle, reuseIdentifier: String?, expandableStyle: ExpandableCellStyle, isExpanded: Bool) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.style = expandableStyle
+        self.isExpanded = isExpanded
+
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+    }
+    
+    
     
 }

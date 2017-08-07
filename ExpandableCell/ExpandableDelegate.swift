@@ -8,12 +8,10 @@
 
 import UIKit
 
-public protocol ExpandableDelegate: UITableViewDelegate, UITableViewDataSource {
+public protocol ExpandableDelegate {
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> ExpandableCell
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath, expandableCellStyle: ExpandableCellStyle, isExpanded: Bool)
     
-    
-
 }

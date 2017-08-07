@@ -9,7 +9,7 @@
 import UIKit
 
 open class ExpandableTableView: UITableView {
-    var expandableDelegate: ExpandableDelegate? {
+    public var expandableDelegate: ExpandableDelegate? {
         didSet {
             self.dataSource = self
             self.dataSource = self
@@ -29,10 +29,14 @@ open class ExpandableTableView: UITableView {
 
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let delegate = expandableDelegate else { return 0 }
+        
         return 10
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let delegate = expandableDelegate else { return UITableViewCell() }
+
         return UITableViewCell()
     }
 
