@@ -28,16 +28,26 @@ open class ExpandableTableView: UITableView {
 }
 
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        guard let delegate = expandableDelegate else { return 0 }
+        
+        return delegate.numberOfSections(in: self)
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
         
-        return 10
+        let count = delegate.expandableTableView(self, numberOfRowsInSection: section)
+        
+        return count
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
-
-        return UITableViewCell()
+        let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
+        
+        
+        return cell
     }
 
     
