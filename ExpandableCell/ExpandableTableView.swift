@@ -12,7 +12,7 @@ open class ExpandableTableView: UITableView {
     public var expandableDelegate: ExpandableDelegate? {
         didSet {
             self.dataSource = self
-            self.dataSource = self
+            self.delegate = self
         }
     }
     
@@ -34,6 +34,12 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         return delegate.numberOfSections(in: self)
     }
     
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let delegate = expandableDelegate else { return }
+        
+        delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: .normal, isExpanded: true)
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
         
@@ -45,7 +51,6 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
         let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
-        
         
         return cell
     }

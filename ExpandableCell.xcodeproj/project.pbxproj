@@ -13,8 +13,8 @@
 		1921BF751F38187600BFD528 /* ExpandableNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF741F38187600BFD528 /* ExpandableNormalCell.xib */; };
 		1921BF781F381B8400BFD528 /* ExpandableExpandableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF761F381B8400BFD528 /* ExpandableExpandableCell.xib */; };
 		1921BF791F381B8400BFD528 /* ExpandableExpandedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */; };
-		19C2D1061F38393600A6B3FE /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
-		19C2D1071F38393600A6B3FE /* ExpandableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1946DA951F3841E30077D2FD /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
+		1946DA961F3841E30077D2FD /* ExpandableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19EF94EE1F3757AC00085BCA /* ExpandableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 19EF94EC1F3757AC00085BCA /* ExpandableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19EF94FB1F37580B00085BCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FA1F37580B00085BCA /* AppDelegate.swift */; };
 		19EF94FD1F37580B00085BCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FC1F37580B00085BCA /* ViewController.swift */; };
@@ -26,7 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		19C2D1081F38393600A6B3FE /* PBXContainerItemProxy */ = {
+		1946DA971F3841E30077D2FD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 19EF94E01F3757AC00085BCA /* Project object */;
 			proxyType = 1;
@@ -36,13 +36,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		19C2D10A1F38393600A6B3FE /* Embed Frameworks */ = {
+		1946DA991F3841E30077D2FD /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				19C2D1071F38393600A6B3FE /* ExpandableCell.framework in Embed Frameworks */,
+				1946DA961F3841E30077D2FD /* ExpandableCell.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19C2D1061F38393600A6B3FE /* ExpandableCell.framework in Frameworks */,
+				1946DA951F3841E30077D2FD /* ExpandableCell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,12 +184,12 @@
 				19EF94F41F37580B00085BCA /* Sources */,
 				19EF94F51F37580B00085BCA /* Frameworks */,
 				19EF94F61F37580B00085BCA /* Resources */,
-				19C2D10A1F38393600A6B3FE /* Embed Frameworks */,
+				1946DA991F3841E30077D2FD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				19C2D1091F38393600A6B3FE /* PBXTargetDependency */,
+				1946DA981F3841E30077D2FD /* PBXTargetDependency */,
 			);
 			name = ExpandableCellDemo;
 			productName = ExpandableCellDemo;
@@ -286,10 +286,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		19C2D1091F38393600A6B3FE /* PBXTargetDependency */ = {
+		1946DA981F3841E30077D2FD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 19EF94E81F3757AC00085BCA /* ExpandableCell */;
-			targetProxy = 19C2D1081F38393600A6B3FE /* PBXContainerItemProxy */;
+			targetProxy = 1946DA971F3841E30077D2FD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

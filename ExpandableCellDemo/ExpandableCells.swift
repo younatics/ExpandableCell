@@ -9,6 +9,7 @@
 import UIKit
 import ExpandableCell
 
+
 class ExpandableNormalCell: ExpandableCell {
     static let ID = "ExpandableNormalCell"
     override func awakeFromNib() {
