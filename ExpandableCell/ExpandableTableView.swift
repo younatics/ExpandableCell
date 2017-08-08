@@ -55,13 +55,13 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             self.insertRows(at: expandableData.indexPathsWhere(indexPath: indexPath), with: .top)
         }
         
-        delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: .normal, isExpanded: true)
+        delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: cell.style, isExpanded: cell.isExpanded)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
         
-        return delegate.expandableTableView(self, numberOfRowsInSection: section) + delegate.expandableTableView(self, numberOfExpandedRowsInSection: section)
+        return delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableData.numberOfExpandedRowsInSection(section: section)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
