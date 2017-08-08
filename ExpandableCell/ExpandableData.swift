@@ -36,11 +36,11 @@ class ExpandableData {
         let count = foo.element.expandedCellCount
         
         var indexPaths = [IndexPath]()
-        
-        for i in 1..<count {
-            let tempIndexPath = IndexPath(row: indexPath.row + i, section: indexPath.section)
+        for i in 0..<count {
+            let tempIndexPath = IndexPath(row: indexPath.row + i + 1, section: indexPath.section)
             indexPaths.append(tempIndexPath)
         }
+        
         return indexPaths
     }
     

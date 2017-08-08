@@ -61,6 +61,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
         
+        print(delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableData.numberOfExpandedRowsInSection(section: section))
         return delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableData.numberOfExpandedRowsInSection(section: section)
     }
 
