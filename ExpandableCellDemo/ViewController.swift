@@ -20,6 +20,11 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "ExpandableExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandableCell.ID)
         
+        
+        let cell = ExpandableCell()
+        
+        let data = [ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell]
+        
     }
 
     override func didReceiveMemoryWarning() {

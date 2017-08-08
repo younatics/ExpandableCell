@@ -39,16 +39,9 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
         if cell.style == .expandable && !cell.isExpanded {
-            let count = delegate.expandableTableView(self, numberOfRowsInSection: indexPath.section)
-            var expandedCells = [IndexPath]()
-            
-            for i in indexPath.row..<count {
-                let tempIndexPath = IndexPath(row: i, section: indexPath.section)
-                let cell = delegate.expandableTableView(self, cellForRowAt: tempIndexPath)
-                if cell.style == .expanded {
-                    
-                }
-            }
+            let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath)
+            for
+            self.insertRows(at: expandedCells, with: .top)
         }
         
         delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: .normal, isExpanded: true)
