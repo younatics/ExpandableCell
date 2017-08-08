@@ -20,11 +20,6 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "ExpandableExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandableCell.ID)
         
-        
-        let cell = ExpandableCell()
-        
-        let data = [ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell, ExpandableNormalCell]
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +29,33 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ExpandableDelegate {
+    func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]? {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
+                var cells = [UITableViewCell]()
+                cells.append(cell)
+                cells.append(cell)
+                return cells
+                
+            case 2, 3:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
+                var cells = [UITableViewCell]()
+                cells.append(cell)
+                cells.append(cell)
+                return cells
+                
+            default:
+                break
+            }
+        default:
+            break
+        }
+        return nil
+    }
+
     func numberOfSections(in tableView: ExpandableTableView) -> Int {
         return 2
     }

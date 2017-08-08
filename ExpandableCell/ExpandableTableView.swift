@@ -37,7 +37,6 @@ open class ExpandableTableView: UITableView {
 }
 
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
-    
     public func numberOfSections(in tableView: UITableView) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
         
@@ -49,10 +48,10 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
         if cell.style == .expandable && !cell.isExpanded {
-            let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath)
-            expandableData.append(indexPath: indexPath, expandedCells: expandedCells)
-            
-            self.insertRows(at: expandableData.indexPathsWhere(indexPath: indexPath), with: .top)
+            if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
+                expandableData.append(indexPath: indexPath, expandedCells: expandedCells)
+                self.insertRows(at: expandableData.indexPathsWhere(indexPath: indexPath), with: .top)
+            }
         }
         
         delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: cell.style, isExpanded: cell.isExpanded)
@@ -66,9 +65,17 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
-        let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
         
-        return cell
+        if let indexPath = expandableData.indexPathBeforeExpand(indexPath: indexPath) {
+            let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
+            return cell
+        } else {
+            let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
+            return cell
+
+        }
+        
+        return UITableViewCell()
     }
 
     

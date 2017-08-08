@@ -10,19 +10,26 @@ import UIKit
 
 struct ExpandedData {
     var indexPath: IndexPath
-    var expanedCells: [UITableViewCell]
+    var expandedCells: [UITableViewCell]
+    var expandedCellCount: Int {
+        return expandedCells.count
+    }
+    
+    var maximumIndexPath: IndexPath {
+        return IndexPath(row: indexPath.row + expandedCellCount, section: indexPath.section)
+    }
 }
 
 class ExpandableData {
     var expandedDatas = [ExpandedData]()
     
     func append(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
-        expandedDatas.append(ExpandedData(indexPath: indexPath, expanedCells: expandedCells))
+        expandedDatas.append(ExpandedData(indexPath: indexPath, expandedCells: expandedCells))
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
         guard let foo = expandedDatas.enumerated().first(where: {$0.element.indexPath == indexPath}) else { return [IndexPath]() }
-        let count = foo.element.expanedCells.count
+        let count = foo.element.expandedCellCount
         
         var indexPaths = [IndexPath]()
         
@@ -38,10 +45,14 @@ class ExpandableData {
         let filteredExpandedDatas = expandedDatas.filter( { (expandedData: ExpandedData) -> Bool in return (expandedData.indexPath.section == section) } )
         
         for filteredExpandedData in filteredExpandedDatas {
-            count += filteredExpandedData.expanedCells.count
+            count += filteredExpandedData.expandedCellCount
         }
-        
         return count
+    }
+    
+    func indexPathBeforeExpand(indexPath: IndexPath) -> IndexPath? {
+        
+        return IndexPath()
     }
     
 }
