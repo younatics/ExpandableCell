@@ -51,6 +51,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
                 expandableData.append(indexPath: indexPath, expandedCells: expandedCells)
                 self.insertRows(at: expandableData.indexPathsWhere(indexPath: indexPath), with: .top)
+                cell.isExpanded = true
             }
         }
         
@@ -66,16 +67,13 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
         
-        if let indexPath = expandableData.indexPathBeforeExpand(indexPath: indexPath) {
-            let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
-            return cell
-        } else {
-            let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
-            return cell
+        let indexPathBeforeExpand = expandableData.indexPathBeforeExpand(indexPath: indexPath)
+        let cell = delegate.expandableTableView(self, cellForRowAt: indexPathBeforeExpand)
 
+        if cell.isExpanded {
+            
         }
-        
-        return UITableViewCell()
+        return cell
     }
 
     
