@@ -35,9 +35,10 @@ extension ViewController: ExpandableDelegate {
             switch indexPath.row {
             case 0:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
+                guard let cell2 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
                 var cells = [UITableViewCell]()
                 cells.append(cell)
-                cells.append(cell)
+                cells.append(cell2)
                 return cells
                 
             case 2, 3:

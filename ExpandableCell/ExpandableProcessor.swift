@@ -78,9 +78,8 @@ class ExpandableProcessor {
             let filteredExpandedData = filteredExpandedDatas[0]
             
             for i in 1..<filteredExpandedData.expandedCellCount + 1{
-                print(filteredExpandedData.indexPath.row + i)
-                print(indexPath.row)
                 if filteredExpandedData.indexPath.row + i == indexPath.row {
+                    print(filteredExpandedData.expandedCells[i-1])
                     return filteredExpandedData.expandedCells[i-1]
                 }
             }
