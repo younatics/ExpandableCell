@@ -69,13 +69,25 @@ class ExpandableProcessor {
         return IndexPath(row: indexPath.row - count, section: indexPath.section)
     }
     
-    func expandedCell(at indexPath: IndexPath) -> UITableViewCell {
+    func expandedCell(at indexPath: IndexPath) -> UITableViewCell? {
         let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.indexPath.section == indexPath.section) && (expandedData.indexPath.row > indexPath.row) && (expandedData.expandedCellCount < indexPath.row)
+            return (expandedData.indexPath.section == indexPath.section) && (expandedData.expandedCellCount >= indexPath.row) && (expandedData.indexPath.row < indexPath.row)
         })
         
-        print(filteredExpandedDatas)
-        return UITableViewCell()
+        if filteredExpandedDatas.count > 0 {
+            let filteredExpandedData = filteredExpandedDatas[0]
+            
+            for i in 1..<filteredExpandedData.expandedCellCount + 1{
+                print(filteredExpandedData.indexPath.row + i)
+                print(indexPath.row)
+                if filteredExpandedData.indexPath.row + i == indexPath.row {
+                    return filteredExpandedData.expandedCells[i-1]
+                }
+            }
+        }
+        
+//        print(filteredExpandedDatas)
+        return nil
     }
     
 }
