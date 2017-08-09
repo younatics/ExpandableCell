@@ -41,8 +41,6 @@ class ExpandableProcessor {
         for i in 0..<expandableDatas.count {
             if expandableDatas[i].clickedIndexPath == indexPath {
                 willRemovedIndexPaths = expandableDatas[i].expandedIndexPaths
-                print(expandableDatas[i].clickedIndexPath)
-                print(expandableDatas[i].originalIndexPath)
                 expandableDatas.remove(at: i)
                 
                 return
@@ -50,9 +48,11 @@ class ExpandableProcessor {
         }
     }
     
-    func isAlreadyExpanded(indexPath: IndexPath) -> Bool {
+    func isExpandable(at indexPath: IndexPath) -> Bool {
+        let originalIndexPath = original(indexPath: indexPath)
+        
         let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.clickedIndexPath == indexPath)
+            return (expandedData.clickedIndexPath == originalIndexPath)
         })
         
         if filteredExpandedDatas.count > 0 {
@@ -60,6 +60,17 @@ class ExpandableProcessor {
         } else {
             return false
         }
+    }
+    
+    func isAlreadyExpanded(at indexPath: IndexPath) -> Bool {
+        for expandableData in expandableDatas {
+            for expandedIndexPath in expandableData.expandedIndexPaths {
+                if expandedIndexPath == indexPath {
+                    return true
+                }
+            }
+        }
+        return false
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
@@ -98,17 +109,11 @@ class ExpandableProcessor {
     }
     
     func expandedCell(at indexPath: IndexPath) -> UITableViewCell? {
-        let originalIndexPath = original(indexPath: indexPath)
-        
         for expandableData in expandableDatas {
             if let index = expandableData.expandedIndexPaths.index(of: indexPath) {
                 return expandableData.expandedCells[index]
             }
         }
-        
-        print("expandedCell indexPath: \(indexPath)")
-        print("expandedCell originalIndexPath: \(originalIndexPath)")
-
         return nil
     }
     

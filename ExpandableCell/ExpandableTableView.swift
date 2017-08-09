@@ -50,19 +50,19 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
         print("didSelectRowAt: \(originalIndexPath)")
 
-        let cell = delegate.expandableTableView(self, cellForRowAt: originalIndexPath)
-        if !expandableProcessor.isAlreadyExpanded(indexPath: indexPath) {
-            if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) {
-                expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells)
-                self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
-            }
+        guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
+        // 오리지널 인덱스가 현재 셀의 인덱스와 겹치는 경우에 대해서는 어떻게 처리를 해야할까?
+        
+        if !expandableProcessor.isExpandable(at: indexPath) {
+            expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells)
+            self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
         } else {
             expandableProcessor.delete(indexPath: indexPath)
             guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return }
             self.deleteRows(at: indexPaths, with: .top)
         }
         
-        delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: cell.style, isExpanded: cell.isExpanded)
+//        delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: cell.style, isExpanded: cell.isExpanded)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

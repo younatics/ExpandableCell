@@ -15,8 +15,6 @@ public protocol ExpandableDelegate {
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int
     
-//    func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfExpandedRowsInSection section: Int) -> Int
-
     func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?
 
     func numberOfSections(in tableView: ExpandableTableView) -> Int
