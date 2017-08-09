@@ -46,9 +46,12 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let delegate = expandableDelegate else { return }
         
-        let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
-        if cell.style == .expandable && !cell.isExpanded {
-            if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
+        let indexPathBeforeExpand = expandableProcessor.indexPathBeforeExpand(indexPath: indexPath)
+        print(indexPathBeforeExpand)
+
+        let cell = delegate.expandableTableView(self, cellForRowAt: indexPathBeforeExpand)
+        if !cell.isExpanded {
+            if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPathBeforeExpand) {
                 expandableProcessor.append(indexPath: indexPath, expandedCells: expandedCells)
                 self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
                 cell.isExpanded = true
@@ -67,22 +70,23 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
         
-//        print(indexPath)
         let indexPathBeforeExpand = expandableProcessor.indexPathBeforeExpand(indexPath: indexPath)
+        
+//        print(indexPath)
 //        print(indexPathBeforeExpand)
 
-        let cell = delegate.expandableTableView(self, cellForRowAt: indexPathBeforeExpand)
+//        let cell = delegate.expandableTableView(self, cellForRowAt: indexPathBeforeExpand)
         if let cell = expandableProcessor.expandedCell(at: indexPath) {
             return cell
         } else {
             let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
             return cell
         }
-        print("cellForRowAt: \(indexPath), style: \(cell.style), isExpanded: \(cell.isExpanded)")
-        if cell.isExpanded == true {
-            
-        }
-        return cell
+//        print("cellForRowAt: \(indexPath), style: \(cell.style), isExpanded: \(cell.isExpanded)")
+//        if cell.isSelected == true {
+        
+//        }
+        return UITableViewCell()
     }
 
     

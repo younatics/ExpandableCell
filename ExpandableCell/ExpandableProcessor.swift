@@ -9,18 +9,19 @@
 import UIKit
 
 struct ExpandableData {
-    var indexPath: IndexPath
+    var clickedIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
+    var expandedIndexPaths: [IndexPath] {
+        var indexPaths = [IndexPath]()
+        for i in 0..<expandedCells.count {
+            let indexPath = IndexPath(row: clickedIndexPath.row + i + 1 , section: clickedIndexPath.section)
+            indexPaths.append(indexPath)
+        }
+        print(indexPaths)
+        return indexPaths
+    }
     var expandedCellCount: Int {
         return expandedCells.count
-    }
-    
-    var maximumIndexPath: IndexPath {
-        return IndexPath(row: indexPath.row + expandedCellCount, section: indexPath.section)
-    }
-    
-    func expandedCell(index: Int) -> UITableViewCell {
-        return expandedCells[index]
     }
 }
 
@@ -28,26 +29,24 @@ class ExpandableProcessor {
     var expandableData = [ExpandableData]()
     
     func append(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
-        expandableData.append(ExpandableData(indexPath: indexPath, expandedCells: expandedCells))
+        expandableData.append(ExpandableData(clickedIndexPath: indexPath, expandedCells: expandedCells))
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
-        guard let foo = expandableData.enumerated().first(where: {$0.element.indexPath == indexPath}) else { return [IndexPath]() }
-        let count = foo.element.expandedCellCount
+        let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
+            return (expandedData.clickedIndexPath == indexPath)
+        })
         
-        var indexPaths = [IndexPath]()
-        for i in 0..<count {
-            let tempIndexPath = IndexPath(row: indexPath.row + i + 1, section: indexPath.section)
-            indexPaths.append(tempIndexPath)
+        if filteredExpandedDatas.count > 1 {
+            fatalError("Somwthing Wrong")
         }
-        
-        return indexPaths
+        return filteredExpandedDatas[0].expandedIndexPaths
     }
     
     func numberOfExpandedRowsInSection(section: Int) -> Int {
         var count = 0
         let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.indexPath.section == section)
+            return (expandedData.clickedIndexPath.section == section)
         })
         
         for filteredExpandedData in filteredExpandedDatas {
@@ -57,21 +56,21 @@ class ExpandableProcessor {
     }
     
     func indexPathBeforeExpand(indexPath: IndexPath) -> IndexPath {
-        var count = 0
         let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.indexPath.section == indexPath.section) && (expandedData.indexPath.row < indexPath.row)
+            return (expandedData.clickedIndexPath.section == indexPath.section) && (expandedData.expandedCellCount >= indexPath.row) && (expandedData.clickedIndexPath.row < indexPath.row)
         })
-        
-        for filteredExpandedData in filteredExpandedDatas {
-            count += filteredExpandedData.expandedCellCount
+        if filteredExpandedDatas.count > 1 {
+            fatalError("Somwthing Wrong")
+        } else if filteredExpandedDatas.count == 1 {
+            return filteredExpandedDatas[0].indexPath
+        } else {
+            return indexPath
         }
-
-        return IndexPath(row: indexPath.row - count, section: indexPath.section)
     }
     
     func expandedCell(at indexPath: IndexPath) -> UITableViewCell? {
         let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.indexPath.section == indexPath.section) && (expandedData.expandedCellCount >= indexPath.row) && (expandedData.indexPath.row < indexPath.row)
+            return (expandedData.clickedIndexPath.section == indexPath.section) && (expandedData.expandedCellCount >= indexPath.row) && (expandedData.clickedIndexPath.row < indexPath.row)
         })
         
         if filteredExpandedDatas.count > 0 {
@@ -79,7 +78,6 @@ class ExpandableProcessor {
             
             for i in 1..<filteredExpandedData.expandedCellCount + 1{
                 if filteredExpandedData.indexPath.row + i == indexPath.row {
-                    print(filteredExpandedData.expandedCells[i-1])
                     return filteredExpandedData.expandedCells[i-1]
                 }
             }

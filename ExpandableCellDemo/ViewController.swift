@@ -36,16 +36,19 @@ extension ViewController: ExpandableDelegate {
             case 0:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
                 guard let cell2 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
+                guard let cell3 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
                 var cells = [UITableViewCell]()
                 cells.append(cell)
                 cells.append(cell2)
+                cells.append(cell3)
                 return cells
                 
             case 2, 3:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
+                guard let cell2 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
                 var cells = [UITableViewCell]()
                 cells.append(cell)
-                cells.append(cell)
+                cells.append(cell2)
                 return cells
                 
             default:
@@ -73,11 +76,11 @@ extension ViewController: ExpandableDelegate {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0, 1, 4:
+            case 0, 2, 3:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
                 return cell
                 
-            case 2, 3:
+            case 1, 4:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
                 return cell
 
@@ -86,11 +89,11 @@ extension ViewController: ExpandableDelegate {
             }
         case 1:
             switch indexPath.row {
-            case 1, 2:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
-                return cell
+//            case 1, 2:
+//                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
+//                return cell
                 
-            case 0, 3, 4:
+            case 0, 1, 2, 3, 4:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
                 return cell
                 
