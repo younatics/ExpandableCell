@@ -11,6 +11,7 @@ import UIKit
 struct ExpandableData {
     // 그냥 인덱스 패쓰를 받은 후 클릭 한 후  오리지널 인덱스 패쓰를 저장 -> 그 이후 expandedIndexPaths를 인덱스 패쓰기준으로 세팅 -> 만약 인덱스 패쓰와 오리지널 인덱스 패쓰가 다른 경우에는 expandedIndexPaths를 다시 수정하여 저장 하면 버그가 없지 않을 까?
     var clickedIndexPath: IndexPath
+    var originalIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
     var expandedIndexPaths: [IndexPath] {
         var indexPaths = [IndexPath]()
@@ -19,7 +20,7 @@ struct ExpandableData {
             indexPaths.append(indexPath)
         }
         // 실시간으로 인덱스가 반영되어야함 클릭트 인덱스 패쓰가 있어도 다음 것이 오면 다시 반영되야함.
-        print("expandedIndexPaths: \(indexPaths)")
+        print("clickedIndexPath: \(clickedIndexPath), originalIndexPath: \(originalIndexPath), expandedIndexPaths: \(indexPaths)")
         return indexPaths
     }
     var expandedCellCount: Int {
@@ -31,7 +32,7 @@ class ExpandableProcessor {
     var expandableDatas = [ExpandableData]()
     
     func append(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
-        expandableDatas.append(ExpandableData(clickedIndexPath: indexPath, expandedCells: expandedCells))
+        expandableDatas.append(ExpandableData(clickedIndexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells))
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
@@ -73,7 +74,7 @@ class ExpandableProcessor {
         let originalIndexPath = original(indexPath: indexPath)
         
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: originalIndexPath) {
+            if let index = expandableData.expandedIndexPaths.index(of: indexPath) {
                 return expandableData.expandedCells[index]
             }
         }
