@@ -10,6 +10,7 @@ import UIKit
 
 struct ExpandableData {
     // 그냥 인덱스 패쓰를 받은 후 클릭 한 후  오리지널 인덱스 패쓰를 저장 -> 그 이후 expandedIndexPaths를 인덱스 패쓰기준으로 세팅 -> 만약 인덱스 패쓰와 오리지널 인덱스 패쓰가 다른 경우에는 expandedIndexPaths를 다시 수정하여 저장 하면 버그가 없지 않을 까?
+    // ㅋ
     var clickedIndexPath: IndexPath
     var originalIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
@@ -30,9 +31,35 @@ struct ExpandableData {
 
 class ExpandableProcessor {
     var expandableDatas = [ExpandableData]()
+    var willRemovedIndexPaths: [IndexPath]?
     
-    func append(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
+    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
         expandableDatas.append(ExpandableData(clickedIndexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells))
+    }
+    
+    func delete(indexPath: IndexPath) {
+        for i in 0..<expandableDatas.count {
+            if expandableDatas[i].clickedIndexPath == indexPath {
+                willRemovedIndexPaths = expandableDatas[i].expandedIndexPaths
+                print(expandableDatas[i].clickedIndexPath)
+                print(expandableDatas[i].originalIndexPath)
+                expandableDatas.remove(at: i)
+                
+                return
+            }
+        }
+    }
+    
+    func isAlreadyExpanded(indexPath: IndexPath) -> Bool {
+        let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
+            return (expandedData.clickedIndexPath == indexPath)
+        })
+        
+        if filteredExpandedDatas.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
@@ -41,7 +68,7 @@ class ExpandableProcessor {
         })
         
         if filteredExpandedDatas.count > 1 {
-            fatalError("Somwthing Wrong")
+            fatalError("Something Wrong")
         }
         return filteredExpandedDatas[0].expandedIndexPaths
     }
@@ -82,21 +109,6 @@ class ExpandableProcessor {
         print("expandedCell indexPath: \(indexPath)")
         print("expandedCell originalIndexPath: \(originalIndexPath)")
 
-//        let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
-//            return (expandedData.clickedIndexPath.section == originalIndexPath.section)
-//        })
-//        
-//        print(filteredExpandedDatas)
-//        
-//        if filteredExpandedDatas.count > 0 {
-//            let filteredExpandedData = filteredExpandedDatas[0]
-//            
-//            for i in 1..<filteredExpandedData.expandedCellCount + 1 {
-//                if filteredExpandedData.clickedIndexPath.row + i == indexPath.row {
-//                    return filteredExpandedData.expandedCells[i-1]
-//                }
-//            }
-//        }
         return nil
     }
     

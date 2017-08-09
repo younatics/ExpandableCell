@@ -44,18 +44,22 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let delegate = expandableDelegate else { return }
         
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
         print("didSelectRowAt: \(originalIndexPath)")
 
         let cell = delegate.expandableTableView(self, cellForRowAt: originalIndexPath)
-        if !cell.isExpanded {
+        if !expandableProcessor.isAlreadyExpanded(indexPath: indexPath) {
             if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) {
-                expandableProcessor.append(indexPath: indexPath, expandedCells: expandedCells)
+                expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells)
                 self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
-                cell.isExpanded = true
             }
+        } else {
+            expandableProcessor.delete(indexPath: indexPath)
+            guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return }
+            self.deleteRows(at: indexPaths, with: .top)
         }
         
         delegate.expandableTableView(self, didSelectRowAt: indexPath, expandableCellStyle: cell.style, isExpanded: cell.isExpanded)
@@ -70,23 +74,11 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
         
-        
-//        print(indexPath)
-//        print(indexPathBeforeExpand)
-
-//        let cell = delegate.expandableTableView(self, cellForRowAt: indexPathBeforeExpand)
         if let cell = expandableProcessor.expandedCell(at: indexPath) {
             return cell
         } else {
             let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
             return cell
         }
-//        print("cellForRowAt: \(indexPath), style: \(cell.style), isExpanded: \(cell.isExpanded)")
-//        if cell.isSelected == true {
-        
-//        }
-        return UITableViewCell()
     }
-
-    
 }
