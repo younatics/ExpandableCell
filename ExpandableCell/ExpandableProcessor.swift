@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ExpandedData {
+struct ExpandableData {
     var indexPath: IndexPath
     var expandedCells: [UITableViewCell]
     var expandedCellCount: Int {
@@ -24,15 +24,15 @@ struct ExpandedData {
     }
 }
 
-class ExpandableData {
-    var expandedDatas = [ExpandedData]()
+class ExpandableProcessor {
+    var expandableData = [ExpandableData]()
     
     func append(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
-        expandedDatas.append(ExpandedData(indexPath: indexPath, expandedCells: expandedCells))
+        expandableData.append(ExpandableData(indexPath: indexPath, expandedCells: expandedCells))
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
-        guard let foo = expandedDatas.enumerated().first(where: {$0.element.indexPath == indexPath}) else { return [IndexPath]() }
+        guard let foo = expandableData.enumerated().first(where: {$0.element.indexPath == indexPath}) else { return [IndexPath]() }
         let count = foo.element.expandedCellCount
         
         var indexPaths = [IndexPath]()
@@ -46,7 +46,7 @@ class ExpandableData {
     
     func numberOfExpandedRowsInSection(section: Int) -> Int {
         var count = 0
-        let filteredExpandedDatas = expandedDatas.filter({ (expandedData: ExpandedData) -> Bool in
+        let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
             return (expandedData.indexPath.section == section)
         })
         
@@ -58,7 +58,7 @@ class ExpandableData {
     
     func indexPathBeforeExpand(indexPath: IndexPath) -> IndexPath {
         var count = 0
-        let filteredExpandedDatas = expandedDatas.filter({ (expandedData: ExpandedData) -> Bool in
+        let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
             return (expandedData.indexPath.section == indexPath.section) && (expandedData.indexPath.row < indexPath.row)
         })
         
@@ -70,7 +70,7 @@ class ExpandableData {
     }
     
     func expandedCell(at indexPath: IndexPath) -> UITableViewCell {
-        let filteredExpandedDatas = expandedDatas.filter({ (expandedData: ExpandedData) -> Bool in
+        let filteredExpandedDatas = expandableData.filter({ (expandedData: ExpandableData) -> Bool in
             return (expandedData.indexPath.section == indexPath.section) && (expandedData.indexPath.row > indexPath.row) && (expandedData.expandedCellCount < indexPath.row)
         })
         

@@ -9,7 +9,7 @@
 import UIKit
 
 open class ExpandableTableView: UITableView {
-    fileprivate var expandableData = ExpandableData()
+    fileprivate var expandableProcessor = ExpandableProcessor()
 
     public var expandableDelegate: ExpandableDelegate? {
         didSet {
@@ -49,8 +49,8 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
         if cell.style == .expandable && !cell.isExpanded {
             if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
-                expandableData.append(indexPath: indexPath, expandedCells: expandedCells)
-                self.insertRows(at: expandableData.indexPathsWhere(indexPath: indexPath), with: .top)
+                expandableProcessor.append(indexPath: indexPath, expandedCells: expandedCells)
+                self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
                 cell.isExpanded = true
             }
         }
@@ -61,14 +61,14 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
         
-        print(delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableData.numberOfExpandedRowsInSection(section: section))
-        return delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableData.numberOfExpandedRowsInSection(section: section)
+        print(delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableProcessor.numberOfExpandedRowsInSection(section: section))
+        return delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableProcessor.numberOfExpandedRowsInSection(section: section)
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
         
-        let indexPathBeforeExpand = expandableData.indexPathBeforeExpand(indexPath: indexPath)
+        let indexPathBeforeExpand = expandableProcessor.indexPathBeforeExpand(indexPath: indexPath)
         let cell = delegate.expandableTableView(self, cellForRowAt: indexPathBeforeExpand)
 
         if cell.isExpanded {

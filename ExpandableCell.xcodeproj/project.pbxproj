@@ -15,7 +15,7 @@
 		1921BF791F381B8400BFD528 /* ExpandableExpandedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */; };
 		1946DA951F3841E30077D2FD /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
 		1946DA961F3841E30077D2FD /* ExpandableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		19E5B2671F39DD9400E7D311 /* ExpandableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E5B2661F39DD9400E7D311 /* ExpandableData.swift */; };
+		19E5B2671F39DD9400E7D311 /* ExpandableProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */; };
 		19EF94EE1F3757AC00085BCA /* ExpandableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 19EF94EC1F3757AC00085BCA /* ExpandableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		19EF94FB1F37580B00085BCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FA1F37580B00085BCA /* AppDelegate.swift */; };
 		19EF94FD1F37580B00085BCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF94FC1F37580B00085BCA /* ViewController.swift */; };
@@ -57,7 +57,7 @@
 		1921BF741F38187600BFD528 /* ExpandableNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableNormalCell.xib; sourceTree = "<group>"; };
 		1921BF761F381B8400BFD528 /* ExpandableExpandableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableExpandableCell.xib; sourceTree = "<group>"; };
 		1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableExpandedCell.xib; sourceTree = "<group>"; };
-		19E5B2661F39DD9400E7D311 /* ExpandableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableData.swift; sourceTree = "<group>"; };
+		19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableProcessor.swift; sourceTree = "<group>"; };
 		19EF94E91F3757AC00085BCA /* ExpandableCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExpandableCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EF94EC1F3757AC00085BCA /* ExpandableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandableCell.h; sourceTree = "<group>"; };
 		19EF94ED1F3757AC00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,7 +127,7 @@
 				19EF950C1F3759E700085BCA /* ExpandableCell.swift */,
 				1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */,
 				1921BF6D1F37FF2700BFD528 /* ExpandableDelegate.swift */,
-				19E5B2661F39DD9400E7D311 /* ExpandableData.swift */,
+				19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */,
 				19EF94EC1F3757AC00085BCA /* ExpandableCell.h */,
 				19EF94ED1F3757AC00085BCA /* Info.plist */,
 			);
@@ -269,7 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19E5B2671F39DD9400E7D311 /* ExpandableData.swift in Sources */,
+				19E5B2671F39DD9400E7D311 /* ExpandableProcessor.swift in Sources */,
 				1921BF6E1F37FF2700BFD528 /* ExpandableDelegate.swift in Sources */,
 				1921BF701F3802C900BFD528 /* ExpandableCellStyle.swift in Sources */,
 				19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */,
