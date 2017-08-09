@@ -48,7 +48,7 @@ class ExpandableProcessor {
         }
     }
     
-    func isExpandable(at indexPath: IndexPath) -> Bool {
+    func isExpandable2(at indexPath: IndexPath) -> Bool {
         let originalIndexPath = original(indexPath: indexPath)
         
         let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
@@ -61,17 +61,22 @@ class ExpandableProcessor {
             return false
         }
     }
-    
-    func isAlreadyExpanded(at indexPath: IndexPath) -> Bool {
+    // 함수 두개 분기처리해서 처리하자 잘래.
+    func isExpandable(at indexPath: IndexPath) -> Bool {
         for expandableData in expandableDatas {
             for expandedIndexPath in expandableData.expandedIndexPaths {
                 if expandedIndexPath == indexPath {
-                    return true
+                    return false
                 }
             }
+            
+            if expandableData.clickedIndexPath == indexPath {
+                return false
+            }
         }
-        return false
+        return true
     }
+
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
         let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
