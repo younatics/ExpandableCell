@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandableCell" rowHeight="66" id="X13-W3-mzV" customClass="ExpandableCell" customModule="ExpandableCellDemo" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandableCell" rowHeight="66" id="X13-W3-mzV" customClass="ExpandableCell2" customModule="ExpandableCellDemo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X13-W3-mzV" id="0E9-wZ-z0c">
@@ -31,7 +31,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.5725490196078431" green="0.6588235294117647" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="59" y="-10"/>
+            <point key="canvasLocation" x="58.5" y="-10"/>
         </tableViewCell>
     </objects>
 </document>

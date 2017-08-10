@@ -9,6 +9,7 @@
 import UIKit
 
 open class ExpandableTableView: UITableView {
+    public var animation: UITableViewRowAnimation = .top
     fileprivate var expandableProcessor = ExpandableProcessor()
 
     public var expandableDelegate: ExpandableDelegate? {
@@ -23,7 +24,6 @@ open class ExpandableTableView: UITableView {
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func numberOfSections(in tableView: UITableView) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
-        
         return delegate.numberOfSections(in: self)
     }
     
@@ -41,17 +41,16 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         if expandableProcessor.isExpandable(at: indexPath) {
             expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
-            self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
+            self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
         } else {
             expandableProcessor.delete(indexPath: indexPath)
             guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return }
-            self.deleteRows(at: indexPaths, with: .top)
+            self.deleteRows(at: indexPaths, with: animation)
         }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
-        
         return delegate.expandableTableView(self, numberOfRowsInSection: section) + expandableProcessor.numberOfExpandedRowsInSection(section: section)
     }
 
@@ -79,7 +78,6 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         }
     }
 }
-
 
 //MARK: Optional methods
 extension ExpandableTableView {

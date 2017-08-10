@@ -14,8 +14,9 @@ class NormalCell: UITableViewCell {
     static let ID = "NormalCell"
 }
 
-class ExpandableCell: UITableViewCell {
+class ExpandableCell2: ExpandableCell {
     static let ID = "ExpandableCell"
+    
 }
 
 class ExpandedCell: UITableViewCell {

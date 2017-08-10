@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         tableView.expandableDelegate = self
         tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
-        tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell.ID)
+        tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
         
     }
 
@@ -114,7 +114,7 @@ extension ViewController: ExpandableDelegate {
         case 0:
             switch indexPath.row {
             case 0, 2, 3:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell.ID) else { return UITableViewCell() }
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell2.ID) else { return UITableViewCell() }
                 return cell
                 
             case 1, 4:
