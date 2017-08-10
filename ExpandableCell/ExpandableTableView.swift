@@ -46,11 +46,13 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             }
         } else if expandableStyle == .openAndClose {
             if expandableProcessor.isExpandable(at: indexPath) {
+                let openIndexPath = expandableProcessor.correct(indexPath: indexPath)
                 if let _formerIndexPath = formerIndexPath {
                     close(indexPath: _formerIndexPath)
                 }
-                open(indexPath: indexPath, delegate: delegate)
-                formerIndexPath = indexPath
+                print(openIndexPath)
+                open(indexPath: openIndexPath, delegate: delegate)
+                formerIndexPath = openIndexPath
             } else {
                 close(indexPath: indexPath)
                 formerIndexPath = nil

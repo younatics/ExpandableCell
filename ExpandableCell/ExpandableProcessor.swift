@@ -46,7 +46,8 @@ class ExpandableProcessor {
     }
     
     func delete(indexPath: IndexPath) {
-        var deletedIndexPath = IndexPath()
+        // 여기 수정이 필요함. 여기만 수정하면 끝인가?
+        var deletedIndexPath = IndexPath(row: 0, section: 0)
         var deletedCellCount = 0
         
         for i in 0..<expandableDatas.count {
@@ -147,5 +148,18 @@ class ExpandableProcessor {
         }
         
         return nil
+    }
+    
+    func correct(indexPath: IndexPath) -> IndexPath {
+        let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
+            return (expandedData.indexPath.section == indexPath.section) && (expandedData.indexPath.row < indexPath.row)
+        })
+
+        var count = 0
+        for expandableData in filteredExpandedDatas {
+            count += expandableData.expandedCellCount
+        }
+        
+        return IndexPath(row: indexPath.row - count, section: indexPath.section)
     }
 }

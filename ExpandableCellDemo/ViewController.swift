@@ -105,7 +105,7 @@ extension ViewController: ExpandableDelegate {
     }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRow:\(indexPath)")
+//        print("didSelectRow:\(indexPath)")
     }
     
     
