@@ -52,6 +52,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
         guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
         // 오리지널 인덱스가 현재 셀의 인덱스와 겹치는 경우에 대해서는 어떻게 처리를 해야할까?n -> 현재 들고있는 [ExpandableDatas]에 최대 indexPath.row를 계산하여 포함이 되어있으면 구문을 안타게 한다?
+        guard !expandableProcessor.isExpandedCell(at: indexPath) else { return }
         
         if expandableProcessor.isExpandable(at: indexPath) {
             expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells)

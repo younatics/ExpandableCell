@@ -48,6 +48,10 @@ class ExpandableProcessor {
         }
     }
     
+    func refreshIndexPaths() {
+        
+    }
+    
     func isExpandable2(at indexPath: IndexPath) -> Bool {
         let originalIndexPath = original(indexPath: indexPath)
         
@@ -61,15 +65,23 @@ class ExpandableProcessor {
             return false
         }
     }
-    // 함수 두개 분기처리해서 처리하자 잘래.
-    func isExpandable(at indexPath: IndexPath) -> Bool {
+    
+    func isExpandedCell(at indexPath: IndexPath) -> Bool {
         for expandableData in expandableDatas {
             for expandedIndexPath in expandableData.expandedIndexPaths {
                 if expandedIndexPath == indexPath {
-                    return false
+                    return true
                 }
             }
-            
+        }
+        
+        return false
+    }
+    
+    
+    // 함수 두개 분기처리해서 처리하자 잘래.
+    func isExpandable(at indexPath: IndexPath) -> Bool {
+        for expandableData in expandableDatas {
             if expandableData.clickedIndexPath == indexPath {
                 return false
             }
