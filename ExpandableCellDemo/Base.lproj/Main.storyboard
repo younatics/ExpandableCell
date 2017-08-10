@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rgj-32-aFx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--ExpandableCell-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ExpandableCellDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,23 +22,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2vu-5y-4uM" customClass="ExpandableTableView" customModule="ExpandableCell">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2vu-5y-4uM" secondAttribute="bottom" id="997-ea-lrg"/>
-                            <constraint firstItem="2vu-5y-4uM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ZSo-F9-0oT"/>
-                            <constraint firstAttribute="trailing" secondItem="2vu-5y-4uM" secondAttribute="trailing" id="hKv-X9-BZf"/>
-                            <constraint firstItem="2vu-5y-4uM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="sBS-Jz-o10"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2vu-5y-4uM" secondAttribute="bottom" id="JPV-EF-K0c"/>
+                            <constraint firstItem="2vu-5y-4uM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Mfc-m9-JTr"/>
+                            <constraint firstAttribute="trailing" secondItem="2vu-5y-4uM" secondAttribute="trailing" id="O18-jr-QWs"/>
+                            <constraint firstItem="2vu-5y-4uM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="em4-Mh-sei"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="ExpandableCell" id="CXN-9d-Y6i"/>
                     <connections>
                         <outlet property="tableView" destination="2vu-5y-4uM" id="9RE-Vo-7Mi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079.2" y="113.79310344827587"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1mB-US-dYD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rgj-32-aFx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lwA-eo-cpa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Ndt-HR-JIz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d1x-Xl-T4P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="140" y="113.79310344827587"/>
         </scene>

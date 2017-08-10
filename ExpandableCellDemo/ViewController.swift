@@ -16,9 +16,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.expandableDelegate = self
-        tableView.register(UINib(nibName: "ExpandableNormalCell", bundle: nil), forCellReuseIdentifier: ExpandableNormalCell.ID)
-        tableView.register(UINib(nibName: "ExpandableExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandedCell.ID)
-        tableView.register(UINib(nibName: "ExpandableExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableExpandableCell.ID)
+        tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
+        tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
+        tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell.ID)
         
     }
 
@@ -30,9 +30,9 @@ class ViewController: UIViewController {
 
 extension ViewController: ExpandableDelegate {
     func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]? {
-        guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
-        guard let cell2 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
-        guard let cell3 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandedCell.ID) as? ExpandableCell else { return [UITableViewCell]() }
+        guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) else { return [UITableViewCell]() }
+        guard let cell2 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) else { return [UITableViewCell]() }
+        guard let cell3 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) else { return [UITableViewCell]() }
 
         var cells = [UITableViewCell]()
 
@@ -109,16 +109,16 @@ extension ViewController: ExpandableDelegate {
     }
     
     
-    func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> ExpandableCell {
+    func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0, 2, 3:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell.ID) else { return UITableViewCell() }
                 return cell
                 
             case 1, 4:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID)  else { return UITableViewCell() }
                 return cell
 
             default:
@@ -127,7 +127,7 @@ extension ViewController: ExpandableDelegate {
         case 1:
             switch indexPath.row {
             case 0, 1, 2, 3, 4:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID) else { return UITableViewCell() }
                 return cell
                 
             default:
@@ -137,7 +137,7 @@ extension ViewController: ExpandableDelegate {
             break
         }
         
-        return ExpandableCell()
+        return UITableViewCell()
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -145,10 +145,10 @@ extension ViewController: ExpandableDelegate {
         case 0:
             switch indexPath.row {
             case 0, 2, 3:
-                return 88
+                return 66
                 
             case 1, 4:
-                return 66
+                return 55
                 
             default:
                 break
@@ -156,7 +156,7 @@ extension ViewController: ExpandableDelegate {
         case 1:
             switch indexPath.row {
             case 0, 1, 2, 3, 4:
-                return 66
+                return 55
                 
             default:
                 break

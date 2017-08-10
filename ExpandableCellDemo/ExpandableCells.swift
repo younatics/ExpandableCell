@@ -10,25 +10,15 @@ import UIKit
 import ExpandableCell
 
 
-class ExpandableNormalCell: ExpandableCell {
-    static let ID = "ExpandableNormalCell"
-    override func awakeFromNib() {
-        self.style = .normal
-    }
+class NormalCell: UITableViewCell {
+    static let ID = "NormalCell"
 }
 
-class ExpandableExpandableCell: ExpandableCell {
-    static let ID = "ExpandableExpandableCell"
-
-    override func awakeFromNib() {
-        self.style = .expandable
-    }
+class ExpandableCell: UITableViewCell {
+    static let ID = "ExpandableCell"
 }
 
-class ExpandableExpandedCell: ExpandableCell {
-    static let ID = "ExpandableExpandedCell"
+class ExpandedCell: UITableViewCell {
+    static let ID = "ExpandedCell"
 
-    override func awakeFromNib() {
-        self.style = .expanded
-    }
 }

@@ -8,11 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1921BF6E1F37FF2700BFD528 /* ExpandableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921BF6D1F37FF2700BFD528 /* ExpandableDelegate.swift */; };
-		1921BF701F3802C900BFD528 /* ExpandableCellStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */; };
 		1921BF731F3817B200BFD528 /* ExpandableCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1921BF721F3817B200BFD528 /* ExpandableCells.swift */; };
-		1921BF751F38187600BFD528 /* ExpandableNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF741F38187600BFD528 /* ExpandableNormalCell.xib */; };
-		1921BF781F381B8400BFD528 /* ExpandableExpandableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF761F381B8400BFD528 /* ExpandableExpandableCell.xib */; };
-		1921BF791F381B8400BFD528 /* ExpandableExpandedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */; };
+		1921BF751F38187600BFD528 /* NormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF741F38187600BFD528 /* NormalCell.xib */; };
+		1921BF781F381B8400BFD528 /* ExpandableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF761F381B8400BFD528 /* ExpandableCell.xib */; };
+		1921BF791F381B8400BFD528 /* ExpandedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1921BF771F381B8400BFD528 /* ExpandedCell.xib */; };
 		1946DA951F3841E30077D2FD /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
 		1946DA961F3841E30077D2FD /* ExpandableCell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		19E5B2671F39DD9400E7D311 /* ExpandableProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */; };
@@ -23,7 +22,6 @@
 		19EF95021F37580B00085BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19EF95011F37580B00085BCA /* Assets.xcassets */; };
 		19EF95051F37580B00085BCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EF95031F37580B00085BCA /* LaunchScreen.storyboard */; };
 		19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950A1F3758C300085BCA /* ExpandableTableView.swift */; };
-		19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950C1F3759E700085BCA /* ExpandableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,11 +50,10 @@
 
 /* Begin PBXFileReference section */
 		1921BF6D1F37FF2700BFD528 /* ExpandableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableDelegate.swift; sourceTree = "<group>"; };
-		1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCellStyle.swift; sourceTree = "<group>"; };
 		1921BF721F3817B200BFD528 /* ExpandableCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCells.swift; sourceTree = "<group>"; };
-		1921BF741F38187600BFD528 /* ExpandableNormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableNormalCell.xib; sourceTree = "<group>"; };
-		1921BF761F381B8400BFD528 /* ExpandableExpandableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableExpandableCell.xib; sourceTree = "<group>"; };
-		1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableExpandedCell.xib; sourceTree = "<group>"; };
+		1921BF741F38187600BFD528 /* NormalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NormalCell.xib; sourceTree = "<group>"; };
+		1921BF761F381B8400BFD528 /* ExpandableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandableCell.xib; sourceTree = "<group>"; };
+		1921BF771F381B8400BFD528 /* ExpandedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpandedCell.xib; sourceTree = "<group>"; };
 		19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableProcessor.swift; sourceTree = "<group>"; };
 		19EF94E91F3757AC00085BCA /* ExpandableCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExpandableCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EF94EC1F3757AC00085BCA /* ExpandableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpandableCell.h; sourceTree = "<group>"; };
@@ -69,7 +66,6 @@
 		19EF95041F37580B00085BCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19EF95061F37580B00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19EF950A1F3758C300085BCA /* ExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableView.swift; sourceTree = "<group>"; };
-		19EF950C1F3759E700085BCA /* ExpandableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +91,9 @@
 			isa = PBXGroup;
 			children = (
 				1921BF721F3817B200BFD528 /* ExpandableCells.swift */,
-				1921BF741F38187600BFD528 /* ExpandableNormalCell.xib */,
-				1921BF761F381B8400BFD528 /* ExpandableExpandableCell.xib */,
-				1921BF771F381B8400BFD528 /* ExpandableExpandedCell.xib */,
+				1921BF741F38187600BFD528 /* NormalCell.xib */,
+				1921BF761F381B8400BFD528 /* ExpandableCell.xib */,
+				1921BF771F381B8400BFD528 /* ExpandedCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -124,8 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				19EF950A1F3758C300085BCA /* ExpandableTableView.swift */,
-				19EF950C1F3759E700085BCA /* ExpandableCell.swift */,
-				1921BF6F1F3802C900BFD528 /* ExpandableCellStyle.swift */,
 				1921BF6D1F37FF2700BFD528 /* ExpandableDelegate.swift */,
 				19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */,
 				19EF94EC1F3757AC00085BCA /* ExpandableCell.h */,
@@ -255,10 +249,10 @@
 			files = (
 				19EF95051F37580B00085BCA /* LaunchScreen.storyboard in Resources */,
 				19EF95021F37580B00085BCA /* Assets.xcassets in Resources */,
-				1921BF751F38187600BFD528 /* ExpandableNormalCell.xib in Resources */,
+				1921BF751F38187600BFD528 /* NormalCell.xib in Resources */,
 				19EF95001F37580B00085BCA /* Main.storyboard in Resources */,
-				1921BF791F381B8400BFD528 /* ExpandableExpandedCell.xib in Resources */,
-				1921BF781F381B8400BFD528 /* ExpandableExpandableCell.xib in Resources */,
+				1921BF791F381B8400BFD528 /* ExpandedCell.xib in Resources */,
+				1921BF781F381B8400BFD528 /* ExpandableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +265,6 @@
 			files = (
 				19E5B2671F39DD9400E7D311 /* ExpandableProcessor.swift in Sources */,
 				1921BF6E1F37FF2700BFD528 /* ExpandableDelegate.swift in Sources */,
-				1921BF701F3802C900BFD528 /* ExpandableCellStyle.swift in Sources */,
-				19EF950D1F3759E700085BCA /* ExpandableCell.swift in Sources */,
 				19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

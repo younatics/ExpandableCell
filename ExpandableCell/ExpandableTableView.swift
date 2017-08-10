@@ -17,23 +17,6 @@ open class ExpandableTableView: UITableView {
             self.delegate = self
         }
     }
-    
-    override init(frame: CGRect, style: UITableViewStyle) {
-        super.init(frame: frame, style: style)
-        
-        initTableView()
-        
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
-        initTableView()
-    }
-    
-    func initTableView() {
-//        expandableData = ExpandableData()
-    }
 }
 
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
@@ -63,7 +46,6 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return }
             self.deleteRows(at: indexPaths, with: .top)
         }
-        
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
