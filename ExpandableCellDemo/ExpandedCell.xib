@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expanded Cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6x-gc-5Zj">
-                        <rect key="frame" x="30" y="11" width="110" height="21"/>
+                        <rect key="frame" x="20" y="11" width="110" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -28,7 +28,7 @@
                 <color key="backgroundColor" red="0.53333333333333333" green="0.69019607843137254" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstItem="Y6x-gc-5Zj" firstAttribute="centerY" secondItem="0E9-wZ-z0c" secondAttribute="centerY" id="GJs-st-69M"/>
-                    <constraint firstItem="Y6x-gc-5Zj" firstAttribute="leading" secondItem="0E9-wZ-z0c" secondAttribute="leading" constant="30" id="WWy-L4-hKr"/>
+                    <constraint firstItem="Y6x-gc-5Zj" firstAttribute="leading" secondItem="0E9-wZ-z0c" secondAttribute="leading" constant="20" id="WWy-L4-hKr"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="59" y="-10"/>

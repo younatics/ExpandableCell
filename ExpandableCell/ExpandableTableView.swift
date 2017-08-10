@@ -19,6 +19,7 @@ open class ExpandableTableView: UITableView {
     }
 }
 
+//MARK: Required methods
 extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     public func numberOfSections(in tableView: UITableView) -> Int {
         guard let delegate = expandableDelegate else { return 0 }
@@ -76,5 +77,24 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             let height = delegate.expandableTableView(self, heightForRowAt: originalIndexPath)
             return height
         }
+    }
+}
+
+
+//MARK: Optional methods
+extension ExpandableTableView {
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let delegate = expandableDelegate else { return nil }
+        return delegate.expandableTableView(self, titleForHeaderInSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let delegate = expandableDelegate else { return 0 }
+        return delegate.expandableTableView(self, heightForHeaderInSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let delegate = expandableDelegate else { return nil }
+        return delegate.expandableTableView(self, viewForHeaderInSection: section)
     }
 }

@@ -167,4 +167,12 @@ extension ViewController: ExpandableDelegate {
         
         return 44
     }
+    
+//    func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Section \(section)"
+//    }
+//    
+//    func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 33
+//    }
 }
