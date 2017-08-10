@@ -68,9 +68,10 @@ extension ViewController: ExpandableDelegate {
         return 5
     }
 
-    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath, expandableCellStyle: ExpandableCellStyle, isExpanded: Bool) {
-//        print("didSelectRow:\(indexPath) expandableCellStyle: \(expandableCellStyle), isExpanded: \(isExpanded)")
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath) {
+        print("didSelectRow:\(indexPath)")
     }
+    
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> ExpandableCell {
         switch indexPath.section {

@@ -9,19 +9,15 @@
 import UIKit
 
 struct ExpandableData {
-    // 그냥 인덱스 패쓰를 받은 후 클릭 한 후  오리지널 인덱스 패쓰를 저장 -> 그 이후 expandedIndexPaths를 인덱스 패쓰기준으로 세팅 -> 만약 인덱스 패쓰와 오리지널 인덱스 패쓰가 다른 경우에는 expandedIndexPaths를 다시 수정하여 저장 하면 버그가 없지 않을 까?
-    // ㅋ
-    var clickedIndexPath: IndexPath
+    var indexPath: IndexPath
     var originalIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
     var expandedIndexPaths: [IndexPath] {
         var indexPaths = [IndexPath]()
         for i in 0..<expandedCells.count {
-            let indexPath = IndexPath(row: clickedIndexPath.row + i + 1 , section: clickedIndexPath.section)
+            let indexPath = IndexPath(row: self.indexPath.row + i + 1 , section: self.indexPath.section)
             indexPaths.append(indexPath)
         }
-        // 실시간으로 인덱스가 반영되어야함 클릭트 인덱스 패쓰가 있어도 다음 것이 오면 다시 반영되야함.
-        print("clickedIndexPath: \(clickedIndexPath), originalIndexPath: \(originalIndexPath), expandedIndexPaths: \(indexPaths)")
         return indexPaths
     }
     var expandedCellCount: Int {
@@ -29,40 +25,46 @@ struct ExpandableData {
     }
 }
 
+//print("indexPath: \(expandableDatas[i].indexPath), originalIndexPath: \(expandableDatas[i].originalIndexPath), expandedIndexPaths: \(expandableDatas[i].expandedIndexPaths)")
+
 class ExpandableProcessor {
     var expandableDatas = [ExpandableData]()
     var willRemovedIndexPaths: [IndexPath]?
     
     func insert(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
-        expandableDatas.append(ExpandableData(clickedIndexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells))
+        for i in 0..<expandableDatas.count {
+            let expandableData = expandableDatas[i]
+            guard expandableData.indexPath.section == indexPath.section else { return }
+            
+            if expandableData.indexPath.row > indexPath.row {
+                expandableDatas[i].indexPath = IndexPath(row: expandableData.indexPath.row + expandedCells.count, section: expandableData.indexPath.section)
+            }
+        }
+        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells))
     }
     
     func delete(indexPath: IndexPath) {
+        var deletedIndexPath = IndexPath()
+        var deletedCellCount = 0
+        
         for i in 0..<expandableDatas.count {
-            if expandableDatas[i].clickedIndexPath == indexPath {
-                willRemovedIndexPaths = expandableDatas[i].expandedIndexPaths
+            if expandableDatas[i].indexPath == indexPath {
+                let expandableData = expandableDatas[i]
+                willRemovedIndexPaths = expandableData.expandedIndexPaths
+                deletedIndexPath = expandableData.indexPath
+                deletedCellCount = expandableData.expandedCellCount
                 expandableDatas.remove(at: i)
-                
-                return
+                break
             }
         }
-    }
-    
-    func refreshIndexPaths() {
         
-    }
-    
-    func isExpandable2(at indexPath: IndexPath) -> Bool {
-        let originalIndexPath = original(indexPath: indexPath)
-        
-        let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.clickedIndexPath == originalIndexPath)
-        })
-        
-        if filteredExpandedDatas.count > 0 {
-            return true
-        } else {
-            return false
+        for i in 0..<expandableDatas.count {
+            let expandableData = expandableDatas[i]
+            guard expandableData.indexPath.section == deletedIndexPath.section else { return }
+            
+            if expandableData.indexPath.row > deletedIndexPath.row {
+                expandableDatas[i].indexPath = IndexPath(row: expandableData.indexPath.row - deletedCellCount, section: expandableData.indexPath.section)
+            }
         }
     }
     
@@ -78,50 +80,50 @@ class ExpandableProcessor {
         return false
     }
     
-    
-    // 함수 두개 분기처리해서 처리하자 잘래.
     func isExpandable(at indexPath: IndexPath) -> Bool {
         for expandableData in expandableDatas {
-            if expandableData.clickedIndexPath == indexPath {
+            if expandableData.indexPath == indexPath {
                 return false
             }
         }
+        
         return true
     }
-
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {
         let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.clickedIndexPath == indexPath)
+            return (expandedData.indexPath == indexPath)
         })
         
         if filteredExpandedDatas.count > 1 {
             fatalError("Something Wrong")
         }
+        
         return filteredExpandedDatas[0].expandedIndexPaths
     }
     
     func numberOfExpandedRowsInSection(section: Int) -> Int {
         var count = 0
         let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.clickedIndexPath.section == section)
+            return (expandedData.indexPath.section == section)
         })
         
         for filteredExpandedData in filteredExpandedDatas {
             count += filteredExpandedData.expandedCellCount
         }
+        
         return count
     }
     
     func original(indexPath: IndexPath) -> IndexPath {
         let filteredExpandedDatas = expandableDatas.filter({ (expandedData: ExpandableData) -> Bool in
-            return (expandedData.clickedIndexPath.section == indexPath.section) && (expandedData.clickedIndexPath.row + expandedData.expandedCellCount < indexPath.row)
+            return (expandedData.indexPath.section == indexPath.section) && (expandedData.indexPath.row + expandedData.expandedCellCount < indexPath.row)
         })
         var count = 0
         for filteredExpandedData in filteredExpandedDatas {
             count += filteredExpandedData.expandedCellCount
         }
-//        print("original: \(IndexPath(row: indexPath.row - count, section: indexPath.section))")
+        
         return IndexPath(row: indexPath.row - count, section: indexPath.section)
     }
     
@@ -131,8 +133,8 @@ class ExpandableProcessor {
                 return expandableData.expandedCells[index]
             }
         }
+        
         return nil
     }
-    
 }
 
