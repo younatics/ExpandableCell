@@ -62,8 +62,6 @@ func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForE
 Set common `UITableViewDataSource`, `UITableViewDelegate` method
 ```swift
 func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-
-func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)
     
 func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int
     
@@ -72,6 +70,8 @@ func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRo
 
 Set optional `ExpandableDelegate` method.
 ```swift
+func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)
+
 func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String?
 
 func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat
