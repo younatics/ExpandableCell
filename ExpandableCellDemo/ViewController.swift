@@ -12,6 +12,10 @@ import ExpandableCell
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: ExpandableTableView!
 
+    var cell: UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID)!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,7 +23,6 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,28 +33,16 @@ class ViewController: UIViewController {
 
 extension ViewController: ExpandableDelegate {
     func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]? {
-        guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) else { return [UITableViewCell]() }
-        guard let cell2 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) else { return [UITableViewCell]() }
-        guard let cell3 = expandableTableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) else { return [UITableViewCell]() }
-
-        var cells = [UITableViewCell]()
-
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                cells.append(cell)
-                cells.append(cell2)
-                cells.append(cell3)
-                return cells
+                return [cell, cell, cell]
                 
             case 2:
-                cells.append(cell)
-                cells.append(cell2)
-                return cells
+                return [cell, cell]
             case 3:
-                cells.append(cell)
-                return cells
+                return [cell]
 
             default:
                 break
@@ -63,28 +54,17 @@ extension ViewController: ExpandableDelegate {
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]? {
-        var heights = [CGFloat]()
-
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                let height: CGFloat = 44
-                heights.append(height)
-                heights.append(height)
-                heights.append(height)
-                return heights
+                return [44, 44, 44]
                 
             case 2:
-                let height: CGFloat = 33
-                heights.append(height)
-                heights.append(height)
-                return heights
+                return [33, 33, 33]
                 
             case 3:
-                let height: CGFloat = 22
-                heights.append(height)
-                return heights
+                return [22]
 
             default:
                 break
