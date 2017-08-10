@@ -31,19 +31,19 @@ open class ExpandableCell: UITableViewCell {
         let width = UIScreen.main.bounds.width
         let height = self.frame.height
         
-        arrowImageView = UIImageView(frame: CGRect(x: width - 30, y: (height - 13)/2, width: 13, height: 13))
+        arrowImageView = UIImageView(frame: CGRect(x: width - 37, y: (height - 11)/2, width: 22, height: 11))
         arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
         self.contentView.addSubview(arrowImageView)
         
     }
     
-    public func open() {
+    func open() {
         UIView.animate(withDuration: 0.3) {
             self.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
         }
     }
     
-    public func closed() {
+    func closed() {
         UIView.animate(withDuration: 0.3) {
             self.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
         }
