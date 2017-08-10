@@ -19,7 +19,7 @@ Easiest usage of expandable & collapsible cell for iOS, written in Swift 3. You 
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { "Seungyoun Yi" => "younatics@gmail.com" }
 
-  s.source           = { :git => 'https://github.com/younatics/Toggler.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/younatics/ExpandableCell.git', :tag => s.version.to_s }
   s.source_files     = 'ExpandableCell/*.swift'
   s.resources        = "ExpandableCell/*.xcassets"
 
