@@ -19,9 +19,6 @@ open class ExpandableCell: UITableViewCell {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        initView()
-
     }
     
     open override func awakeFromNib() {
@@ -38,5 +35,17 @@ open class ExpandableCell: UITableViewCell {
         arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
         self.contentView.addSubview(arrowImageView)
         
+    }
+    
+    public func open() {
+        UIView.animate(withDuration: 0.3) {
+            self.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
+        }
+    }
+    
+    public func closed() {
+        UIView.animate(withDuration: 0.3) {
+            self.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
+        }
     }
 }

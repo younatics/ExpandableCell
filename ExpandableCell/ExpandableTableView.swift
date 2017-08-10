@@ -40,9 +40,16 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         guard !expandableProcessor.isExpandedCell(at: indexPath) else { return }
         
         if expandableProcessor.isExpandable(at: indexPath) {
+            if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+                cell.open()
+            }
             expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
             self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
         } else {
+            if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+                cell.closed()
+            }
+
             expandableProcessor.delete(indexPath: indexPath)
             guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return }
             self.deleteRows(at: indexPaths, with: animation)

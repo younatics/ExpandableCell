@@ -123,8 +123,8 @@
 		19EF94EB1F3757AC00085BCA /* ExpandableCell */ = {
 			isa = PBXGroup;
 			children = (
-				1946DAA91F3C222B0077D2FD /* ExpandableCell.swift */,
 				1946DAAB1F3C259E0077D2FD /* ExpandableCell.xcassets */,
+				1946DAA91F3C222B0077D2FD /* ExpandableCell.swift */,
 				19EF950A1F3758C300085BCA /* ExpandableTableView.swift */,
 				1921BF6D1F37FF2700BFD528 /* ExpandableDelegate.swift */,
 				19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */,
