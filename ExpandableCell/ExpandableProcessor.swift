@@ -46,7 +46,6 @@ class ExpandableProcessor {
     }
     
     func delete(indexPath: IndexPath) {
-        // 여기 수정이 필요함. 여기만 수정하면 끝인가?
         var deletedIndexPath = IndexPath(row: 0, section: 0)
         var deletedCellCount = 0
         

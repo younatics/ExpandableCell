@@ -9,7 +9,6 @@
 import UIKit
 
 open class ExpandableTableView: UITableView {
-    public var expandableStyle: ExpandableStyle = .openAndClose
     public var animation: UITableViewRowAnimation = .top
     
     fileprivate var expandableProcessor = ExpandableProcessor()
@@ -35,28 +34,13 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         guard let delegate = expandableDelegate else { return }
         delegate.expandableTableView(self, didSelectRowAt: indexPath)
-
+        
         guard !expandableProcessor.isExpandedCell(at: indexPath) else { return }
         
-        if expandableStyle == .normal {
-            if expandableProcessor.isExpandable(at: indexPath) {
-                open(indexPath: indexPath, delegate: delegate)
-            } else {
-                close(indexPath: indexPath)
-            }
-        } else if expandableStyle == .openAndClose {
-            if expandableProcessor.isExpandable(at: indexPath) {
-                let openIndexPath = expandableProcessor.correct(indexPath: indexPath)
-                if let _formerIndexPath = formerIndexPath {
-                    close(indexPath: _formerIndexPath)
-                }
-                print(openIndexPath)
-                open(indexPath: openIndexPath, delegate: delegate)
-                formerIndexPath = openIndexPath
-            } else {
-                close(indexPath: indexPath)
-                formerIndexPath = nil
-            }
+        if expandableProcessor.isExpandable(at: indexPath) {
+            open(indexPath: indexPath, delegate: delegate)
+        } else {
+            close(indexPath: indexPath)
         }
     }
     
