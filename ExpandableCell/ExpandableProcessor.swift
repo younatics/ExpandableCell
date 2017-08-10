@@ -12,6 +12,8 @@ struct ExpandableData {
     var indexPath: IndexPath
     var originalIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
+    var expandedHeights: [CGFloat]
+    
     var expandedIndexPaths: [IndexPath] {
         var indexPaths = [IndexPath]()
         for i in 0..<expandedCells.count {
@@ -31,7 +33,7 @@ class ExpandableProcessor {
     var expandableDatas = [ExpandableData]()
     var willRemovedIndexPaths: [IndexPath]?
     
-    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell]) {
+    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat]) {
         for i in 0..<expandableDatas.count {
             let expandableData = expandableDatas[i]
             guard expandableData.indexPath.section == indexPath.section else { return }
@@ -40,7 +42,7 @@ class ExpandableProcessor {
                 expandableDatas[i].indexPath = IndexPath(row: expandableData.indexPath.row + expandedCells.count, section: expandableData.indexPath.section)
             }
         }
-        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells))
+        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights))
     }
     
     func delete(indexPath: IndexPath) {
@@ -136,5 +138,16 @@ class ExpandableProcessor {
         
         return nil
     }
+    
+    func expandedHeight(at indexPath: IndexPath) -> CGFloat? {
+        for expandableData in expandableDatas {
+            if let index = expandableData.expandedIndexPaths.index(of: indexPath) {
+                return expandableData.expandedHeights[index]
+            }
+        }
+        
+        return nil
+    }
+
 }
 

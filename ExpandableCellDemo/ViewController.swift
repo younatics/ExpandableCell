@@ -59,7 +59,36 @@ extension ViewController: ExpandableDelegate {
         }
         return nil
     }
-
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]? {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                var heights = [CGFloat]()
+                let height: CGFloat = 44
+                heights.append(height)
+                heights.append(height)
+                heights.append(height)
+                return heights
+                
+            case 2, 3:
+                var heights = [CGFloat]()
+                let height: CGFloat = 44
+                heights.append(height)
+                heights.append(height)
+                return heights
+                
+            default:
+                break
+            }
+        default:
+            break
+        }
+        return nil
+        
+    }
+    
     func numberOfSections(in tableView: ExpandableTableView) -> Int {
         return 2
     }
@@ -90,10 +119,6 @@ extension ViewController: ExpandableDelegate {
             }
         case 1:
             switch indexPath.row {
-//            case 1, 2:
-//                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableExpandableCell.ID) as? ExpandableCell else { return ExpandableCell() }
-//                return cell
-                
             case 0, 1, 2, 3, 4:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableNormalCell.ID) as? ExpandableCell else { return ExpandableCell() }
                 return cell
@@ -108,4 +133,31 @@ extension ViewController: ExpandableDelegate {
         return ExpandableCell()
     }
     
+    func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0, 2, 3:
+                return 88
+                
+            case 1, 4:
+                return 66
+                
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 0, 1, 2, 3, 4:
+                return 66
+                
+            default:
+                break
+            }
+        default:
+            break
+        }
+        
+        return 44
+    }
 }

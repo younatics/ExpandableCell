@@ -45,15 +45,18 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let delegate = expandableDelegate else { return }
         
+        guard let delegate = expandableDelegate else { return }
+        delegate.expandableTableView(self, didSelectRowAt: indexPath)
+
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
 
         guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
+        guard let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: originalIndexPath) else { return }
         guard !expandableProcessor.isExpandedCell(at: indexPath) else { return }
         
         if expandableProcessor.isExpandable(at: indexPath) {
-            expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells)
+            expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
             self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: .top)
         } else {
             expandableProcessor.delete(indexPath: indexPath)
@@ -61,7 +64,6 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             self.deleteRows(at: indexPaths, with: .top)
         }
         
-        delegate.expandableTableView(self, didSelectRowAt: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,12 +74,25 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let delegate = expandableDelegate else { return UITableViewCell() }
-        
+        let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
+
         if let cell = expandableProcessor.expandedCell(at: indexPath) {
             return cell
         } else {
-            let cell = delegate.expandableTableView(self, cellForRowAt: indexPath)
+            let cell = delegate.expandableTableView(self, cellForRowAt: originalIndexPath)
             return cell
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let delegate = expandableDelegate else { return 44 }
+        let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
+
+        if let height = expandableProcessor.expandedHeight(at: indexPath) {
+            return height
+        } else {
+            let height = delegate.expandableTableView(self, heightForRowAt: originalIndexPath)
+            return height
         }
     }
 }
