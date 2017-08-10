@@ -43,7 +43,7 @@ open class ExpandableCell: UITableViewCell {
         }
     }
     
-    func closed() {
+    func close() {
         UIView.animate(withDuration: 0.3) {
             self.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
         }
