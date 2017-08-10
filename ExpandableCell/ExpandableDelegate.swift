@@ -23,14 +23,14 @@ public protocol ExpandableDelegate {
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?
     
-    func numberOfSections(in tableView: ExpandableTableView) -> Int
-
     //MARK: Optional Methods
     func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String?
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView?
+    
+    func numberOfSections(in expandableTableView: ExpandableTableView) -> Int
 }
 
 public extension ExpandableDelegate {
@@ -39,4 +39,6 @@ public extension ExpandableDelegate {
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat { return 0 }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView? { return nil }
+    
+    func numberOfSections(in expandableTableView: ExpandableTableView) -> Int { return 1 }
 }
