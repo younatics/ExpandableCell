@@ -100,6 +100,16 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: Optional methods
 extension ExpandableTableView {
+    public func closeAll() {
+        let indexPaths = expandableProcessor.deleteAllIndexPaths()
+        self.deleteRows(at: indexPaths, with: animation)
+        
+        for indexPath in indexPaths {
+            guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
+            cell.close()
+        }
+    }
+    
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let delegate = expandableDelegate else { return nil }
         return delegate.expandableTableView(self, titleForHeaderInSection: section)

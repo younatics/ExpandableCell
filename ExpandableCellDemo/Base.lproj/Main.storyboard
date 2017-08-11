@@ -34,8 +34,11 @@
                             <constraint firstItem="2vu-5y-4uM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="em4-Mh-sei"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ExpandableCell" id="CXN-9d-Y6i"/>
+                    <navigationItem key="navigationItem" title="ExpandableCell" id="CXN-9d-Y6i">
+                        <barButtonItem key="rightBarButtonItem" title="Close All" id="uLE-YT-7vL"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="CloseAllButton" destination="uLE-YT-7vL" id="rbE-3Z-d7e"/>
                         <outlet property="tableView" destination="2vu-5y-4uM" id="9RE-Vo-7Mi"/>
                     </connections>
                 </viewController>

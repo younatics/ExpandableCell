@@ -23,11 +23,20 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
+        
+        CloseAllButton.action = #selector(closeAllButtonClicked)
+        CloseAllButton.target = self
+
     }
+    @IBOutlet var CloseAllButton: UIBarButtonItem!
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func closeAllButtonClicked() {
+        tableView.closeAll()
     }
 }
 

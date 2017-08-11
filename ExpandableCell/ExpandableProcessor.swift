@@ -70,6 +70,19 @@ class ExpandableProcessor {
         }
     }
     
+    func deleteAllIndexPaths() -> [IndexPath] {
+        var indexPaths = [IndexPath]()
+        for expandableData in expandableDatas {
+            for indexPath in expandableData.expandedIndexPaths {
+                indexPaths.append(indexPath)
+            }
+        }
+        
+        expandableDatas.removeAll()
+        
+        return indexPaths
+    }
+    
     func isExpandedCell(at indexPath: IndexPath) -> Bool {
         for expandableData in expandableDatas {
             for expandedIndexPath in expandableData.expandedIndexPaths {
