@@ -100,6 +100,32 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: Optional methods
 extension ExpandableTableView {
+    public func openAll() {
+        var indexPaths = [IndexPath]()
+        
+        guard let delegate = expandableDelegate else { return }
+        
+        let section = self.numberOfSections(in: self)
+        for sectionNum in 0..<section {
+            let row = self.numberOfRows(inSection: sectionNum)
+            for rowNum in 0..<row {
+                let indexPath = IndexPath(row: rowNum, section: sectionNum)
+                
+                if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath), let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: indexPath) {
+                    expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
+                    
+                    indexPaths += expandableProcessor.indexPathsWhere(indexPath: indexPath)
+                    self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
+
+                    print(indexPaths)
+                    if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+                        cell.open()
+                    }
+                }
+            }
+        }
+    }
+    
     public func closeAll() {
         let indexPaths = expandableProcessor.deleteAllIndexPaths()
         self.deleteRows(at: indexPaths, with: animation)

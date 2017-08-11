@@ -10,8 +10,10 @@ import UIKit
 import ExpandableCell
 
 class ViewController: UIViewController {
-    @IBOutlet weak var tableView: ExpandableTableView!
-
+    @IBOutlet var tableView: ExpandableTableView!
+    @IBOutlet var closeAllButton: UIBarButtonItem!
+    @IBOutlet var openAllButton: UIBarButtonItem!
+    
     var cell: UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID)!
     }
@@ -24,15 +26,20 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
         
-        CloseAllButton.action = #selector(closeAllButtonClicked)
-        CloseAllButton.target = self
-
+        closeAllButton.action = #selector(closeAllButtonClicked)
+        closeAllButton.target = self
+        
+        openAllButton.action = #selector(openAllButtonClicked)
+        openAllButton.target = self
     }
-    @IBOutlet var CloseAllButton: UIBarButtonItem!
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func openAllButtonClicked() {
+        tableView.openAll()
     }
     
     func closeAllButtonClicked() {
