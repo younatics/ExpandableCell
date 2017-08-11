@@ -33,14 +33,16 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let delegate = expandableDelegate else { return }
-        delegate.expandableTableView(self, didSelectRowAt: indexPath)
         
-        guard !expandableProcessor.isExpandedCell(at: indexPath) else { return }
-        
-        if expandableProcessor.isExpandable(at: indexPath) {
-            open(indexPath: indexPath, delegate: delegate)
+        if !expandableProcessor.isExpandedCell(at: indexPath) {
+            delegate.expandableTableView(self, didSelectRowAt: indexPath)
+            if expandableProcessor.isExpandable(at: indexPath) {
+                open(indexPath: indexPath, delegate: delegate)
+            } else {
+                close(indexPath: indexPath)
+            }
         } else {
-            close(indexPath: indexPath)
+            delegate.expandableTableView(self, didSelectExpandedRowAt: indexPath)
         }
     }
     
