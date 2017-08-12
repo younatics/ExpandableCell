@@ -31,7 +31,6 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        formerIndexPath = indexPath
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let delegate = expandableDelegate else { return }
@@ -40,7 +39,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
                 if expandableStyle == .closeAndOpen {
-                    let closedIndexPaths = closeAll()
+                    let closedIndexPaths = closeAllIndexPaths()
                     var count = 0
                     for closedIndexPath in closedIndexPaths {
                         if closedIndexPath.section == indexPath.section && closedIndexPath.row < indexPath.row {
@@ -54,6 +53,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
                 }
             } else {
                 close(indexPath: indexPath)
+                formerIndexPath = nil
             }
         } else {
             delegate.expandableTableView(self, didSelectExpandedRowAt: indexPath)
@@ -148,7 +148,11 @@ extension ExpandableTableView {
         
     }
     
-    public func closeAll() -> [IndexPath] {
+    public func closeAll() {
+        _ = closeAllIndexPaths()
+    }
+    
+    public func closeAllIndexPaths() -> [IndexPath] {
         let indexPaths = expandableProcessor.deleteAllIndexPaths()
         self.deleteRows(at: indexPaths, with: animation)
         
