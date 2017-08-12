@@ -10,6 +10,7 @@ import UIKit
 
 open class ExpandableTableView: UITableView {
     public var animation: UITableViewRowAnimation = .top
+    public var expandableStyle: ExpandableStyle = .closeAndOpen
     
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
@@ -30,6 +31,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        formerIndexPath = indexPath
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard let delegate = expandableDelegate else { return }
@@ -37,7 +39,19 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if !expandableProcessor.isExpandedCell(at: indexPath) {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
-                open(indexPath: indexPath, delegate: delegate)
+                if expandableStyle == .closeAndOpen {
+                    let closedIndexPaths = closeAll()
+                    var count = 0
+                    for closedIndexPath in closedIndexPaths {
+                        if closedIndexPath.section == indexPath.section && closedIndexPath.row < indexPath.row {
+                            count += 1
+                        }
+                    }
+                    print(IndexPath(row: indexPath.row - count, section: indexPath.section))
+                    open(indexPath: IndexPath(row: indexPath.row - count, section: indexPath.section), delegate: delegate)
+                } else if expandableStyle == .normal {
+                    open(indexPath: indexPath, delegate: delegate)
+                }
             } else {
                 close(indexPath: indexPath)
             }
@@ -53,19 +67,25 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
         self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
-        
+
         guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
         cell.open()
     }
     
     private func close(indexPath: IndexPath) {
         expandableProcessor.delete(indexPath: indexPath)
-        guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return }
+        guard let indexPaths = closeIndexPaths(indexPath: indexPath) else { return }
         self.deleteRows(at: indexPaths, with: animation)
         
         guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
         cell.close()
 
+    }
+    
+    private func closeIndexPaths(indexPath: IndexPath) -> [IndexPath]? {
+        guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return nil }
+        
+        return indexPaths
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,23 +137,27 @@ extension ExpandableTableView {
                     indexPaths += expandableProcessor.indexPathsWhere(indexPath: indexPath)
                     self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
 
-                    print(indexPaths)
                     if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
                         cell.open()
                     }
                 }
             }
         }
+        
+        print(expandableProcessor.expandableDatas)
+        
     }
     
-    public func closeAll() {
+    public func closeAll() -> [IndexPath] {
         let indexPaths = expandableProcessor.deleteAllIndexPaths()
         self.deleteRows(at: indexPaths, with: animation)
         
         for indexPath in indexPaths {
-            guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
-            cell.close()
+            if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+                cell.close()
+            }
         }
+        return indexPaths
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

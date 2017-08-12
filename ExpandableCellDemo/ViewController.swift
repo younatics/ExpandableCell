@@ -101,11 +101,11 @@ extension ViewController: ExpandableDelegate {
     }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRow:\(indexPath)")
+//        print("didSelectRow:\(indexPath)")
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath) {
-        print("didSelectExpandedRowAt:\(indexPath)")
+//        print("didSelectExpandedRowAt:\(indexPath)")
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
