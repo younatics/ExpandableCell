@@ -153,14 +153,17 @@ extension ExpandableTableView {
     }
     
     public func closeAllIndexPaths() -> [IndexPath] {
-        let indexPaths = expandableProcessor.deleteAllIndexPaths()
-        self.deleteRows(at: indexPaths, with: animation)
+        let allIndexPaths = expandableProcessor.deleteAllIndexPaths()
+        let expandedIndexPaths = allIndexPaths.expandedIndexPaths
+        let indexPaths = allIndexPaths.indexPaths
         
         for indexPath in indexPaths {
             if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
                 cell.close()
             }
         }
+
+        self.deleteRows(at: expandedIndexPaths, with: animation)
         return indexPaths
     }
     
