@@ -41,13 +41,15 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
                 if expandableStyle == .closeAndOpen {
                     let closedIndexPaths = closeAllIndexPaths()
                     var count = 0
+                    
+                    var internalIndexPath = IndexPath()
                     for closedIndexPath in closedIndexPaths {
                         if closedIndexPath.section == indexPath.section && closedIndexPath.row < indexPath.row {
                             count += 1
                         }
                     }
-                    print(IndexPath(row: indexPath.row - count, section: indexPath.section))
-                    open(indexPath: IndexPath(row: indexPath.row - count, section: indexPath.section), delegate: delegate)
+                    internalIndexPath = IndexPath(row: indexPath.row - count, section: indexPath.section)
+                    open(indexPath: internalIndexPath, delegate: delegate)
                 } else if expandableStyle == .normal {
                     open(indexPath: indexPath, delegate: delegate)
                 }
@@ -135,11 +137,12 @@ extension ExpandableTableView {
                     expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
                     
                     indexPaths += expandableProcessor.indexPathsWhere(indexPath: indexPath)
-                    self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
 
                     if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
                         cell.open()
                     }
+                    self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
+
                 }
             }
         }
