@@ -101,13 +101,16 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 //MARK: Optional methods
 extension ExpandableTableView {
     public func closeAll() {
-        let indexPaths = expandableProcessor.deleteAllIndexPaths()
-        self.deleteRows(at: indexPaths, with: animation)
+        let allIndexPaths = expandableProcessor.deleteAllIndexPaths()
+        let expandedIndexPaths = allIndexPaths.expandedIndexPaths
+        let indexPaths = allIndexPaths.indexPaths
         
         for indexPath in indexPaths {
             guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
             cell.close()
         }
+
+        self.deleteRows(at: expandedIndexPaths, with: animation)
     }
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
