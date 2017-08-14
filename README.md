@@ -72,6 +72,8 @@ Set optional `ExpandableDelegate` method.
 ```swift
 func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)
 
+func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath)
+
 func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String?
 
 func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -88,6 +90,11 @@ Inherit `ExpandableCell` when you need arrow effect or change arrow image
 open class ExpandableCell: UITableViewCell {
     open var arrowImageView: UIImageView!
 }
+```
+
+Use collapse all function
+```Swift
+tableView.closeAll()
 ```
 
 Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
