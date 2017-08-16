@@ -127,4 +127,19 @@ extension ExpandableTableView {
         guard let delegate = expandableDelegate else { return nil }
         return delegate.expandableTableView(self, viewForHeaderInSection: section)
     }
+    
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let delegate = expandableDelegate else { return }
+        return delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let delegate = expandableDelegate else { return }
+        return delegate.expandableTableView(self, willDisplayHeaderView: view, forSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        guard let delegate = expandableDelegate else { return }
+        return delegate.expandableTableView(self, willDisplayFooterView: view, forSection: section)
+    }
 }
