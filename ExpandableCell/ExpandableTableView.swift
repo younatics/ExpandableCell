@@ -34,7 +34,8 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         guard let delegate = expandableDelegate else { return }
         
-        if !expandableProcessor.isExpandedCell(at: indexPath) {
+        let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
+        if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
                 open(indexPath: indexPath, delegate: delegate)
@@ -43,6 +44,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             }
         } else {
             delegate.expandableTableView(self, didSelectExpandedRowAt: indexPath)
+            delegate.expandableTableView(self, expandedCell: expandedData.expandedCell, didSelectExpandedRowAt: indexPath)
         }
     }
     

@@ -85,16 +85,16 @@ class ExpandableProcessor {
         return (expandedIndexPaths, indexPaths)
     }
     
-    func isExpandedCell(at indexPath: IndexPath) -> Bool {
+    func isExpandedCell(at indexPath: IndexPath) -> (isExpandedCell: Bool, expandedCell: UITableViewCell) {
         for expandableData in expandableDatas {
-            for expandedIndexPath in expandableData.expandedIndexPaths {
-                if expandedIndexPath == indexPath {
-                    return true
+            for i in 0..<expandableData.expandedIndexPaths.count {
+                if expandableData.expandedIndexPaths[i] == indexPath {
+                    return (true, expandableData.expandedCells[i])
                 }
             }
         }
         
-        return false
+        return (false, UITableViewCell())
     }
     
     func isExpandable(at indexPath: IndexPath) -> Bool {

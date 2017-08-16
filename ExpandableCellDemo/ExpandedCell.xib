@@ -31,6 +31,9 @@
                     <constraint firstItem="Y6x-gc-5Zj" firstAttribute="leading" secondItem="0E9-wZ-z0c" secondAttribute="leading" constant="20" id="WWy-L4-hKr"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="Y6x-gc-5Zj" id="2tY-lG-Reo"/>
+            </connections>
             <point key="canvasLocation" x="59" y="-10"/>
         </tableViewCell>
     </objects>
