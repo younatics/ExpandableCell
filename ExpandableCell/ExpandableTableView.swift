@@ -143,8 +143,9 @@ extension ExpandableTableView {
         for rowCountInSection in rowCountInSections {
             for row in 0..<rowCountInSection.rowCount {
                 let indexPath = IndexPath(row: row , section: rowCountInSection.section)
-                if expandableProcessor.isExpandable(at: indexPath) {
-                    self.tableView(self, didSelectRowAt: indexPath)
+                let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
+                if !expandedData.isExpandedCell && expandableProcessor.isExpandable(at: indexPath) {
+                    open(indexPath: indexPath, delegate: delegate)
                 }
             }
         }
