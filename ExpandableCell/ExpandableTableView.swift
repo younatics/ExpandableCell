@@ -10,7 +10,7 @@ import UIKit
 
 open class ExpandableTableView: UITableView {
     public var animation: UITableViewRowAnimation = .top
-    public var expandableStyle: ExpandableStyle = .closeAndOpen
+    public var expandableStyle: ExpandableStyle = .normal
     
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
@@ -64,14 +64,13 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    private func open(indexPath: IndexPath, delegate: ExpandableDelegate) {
+    fileprivate func open(indexPath: IndexPath, delegate: ExpandableDelegate) {
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
         guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
         guard let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: originalIndexPath) else { return }
         
         expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
         self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
-
         guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
         cell.open()
     }
@@ -125,32 +124,30 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 //MARK: Optional methods
 extension ExpandableTableView {
     public func openAll() {
-        var indexPaths = [IndexPath]()
-        
         guard let delegate = expandableDelegate else { return }
-        
+
+        var rowCountInSections = [(rowCount:Int, section: Int)]()
         let section = self.numberOfSections(in: self)
+        
         for sectionNum in 0..<section {
-            let row = self.numberOfRows(inSection: sectionNum)
+            var row = self.numberOfRows(inSection: sectionNum)
             for rowNum in 0..<row {
                 let indexPath = IndexPath(row: rowNum, section: sectionNum)
-                
-                if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath), let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: indexPath) {
-                    expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
-                    
-                    indexPaths += expandableProcessor.indexPathsWhere(indexPath: indexPath)
-
-                    if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
-                        cell.open()
-                    }
-                    self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
-
+                if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
+                    row += expandedCells.count
+                }
+            }
+            rowCountInSections.append((row,sectionNum))
+        }
+        
+        for rowCountInSection in rowCountInSections {
+            for row in 0..<rowCountInSection.rowCount {
+                let indexPath = IndexPath(row: row , section: rowCountInSection.section)
+                if expandableProcessor.isExpandable(at: indexPath) {
+                    self.tableView(self, didSelectRowAt: indexPath)
                 }
             }
         }
-        
-        print(expandableProcessor.expandableDatas)
-        
     }
     
     public func closeAll() {
