@@ -1,5 +1,5 @@
 # ExpandableCell
-
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 [![Version](https://img.shields.io/cocoapods/v/ExpandableCell.svg?style=flat)](http://cocoapods.org/pods/ExpandableCell)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/YNExpandableCell/blob/master/LICENSE)
@@ -72,6 +72,10 @@ Set optional `ExpandableDelegate` method.
 ```swift
 func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)
 
+func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCell: UITableViewCell, didSelectExpandedRowAt indexPath: IndexPath)
+
+func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath)
+
 func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String?
 
 func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat
@@ -79,6 +83,12 @@ func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHe
 func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView?
     
 func numberOfSections(in expandableTableView: ExpandableTableView) -> Int
+
+func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    
+func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int)
+    
+func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayFooterView view: UIView, forSection section: Int)
 ```
 
 ### Customize
@@ -88,6 +98,11 @@ Inherit `ExpandableCell` when you need arrow effect or change arrow image
 open class ExpandableCell: UITableViewCell {
     open var arrowImageView: UIImageView!
 }
+```
+
+Use collapse all function
+```Swift
+tableView.closeAll()
 ```
 
 Make protocols in `ExpandableDelegate` if you need or make pull request to me :)

@@ -21,5 +21,6 @@ class ExpandableCell2: ExpandableCell {
 
 class ExpandedCell: UITableViewCell {
     static let ID = "ExpandedCell"
-
+    
+    @IBOutlet var titleLabel: UILabel!
 }

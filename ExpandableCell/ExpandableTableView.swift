@@ -35,7 +35,8 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         
         guard let delegate = expandableDelegate else { return }
         
-        if !expandableProcessor.isExpandedCell(at: indexPath) {
+        let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
+        if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
                 if expandableStyle == .closeAndOpen {
@@ -59,6 +60,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             }
         } else {
             delegate.expandableTableView(self, didSelectExpandedRowAt: indexPath)
+            delegate.expandableTableView(self, expandedCell: expandedData.expandedCell, didSelectExpandedRowAt: indexPath)
         }
     }
     
@@ -183,5 +185,20 @@ extension ExpandableTableView {
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let delegate = expandableDelegate else { return nil }
         return delegate.expandableTableView(self, viewForHeaderInSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let delegate = expandableDelegate else { return }
+        return delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let delegate = expandableDelegate else { return }
+        return delegate.expandableTableView(self, willDisplayHeaderView: view, forSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        guard let delegate = expandableDelegate else { return }
+        return delegate.expandableTableView(self, willDisplayFooterView: view, forSection: section)
     }
 }

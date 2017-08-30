@@ -53,7 +53,13 @@ extension ViewController: ExpandableDelegate {
         case 0:
             switch indexPath.row {
             case 0:
-                return [cell, cell, cell]
+                let cell1 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
+                cell1.titleLabel.text = "First Expanded Cell"
+                let cell2 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
+                cell2.titleLabel.text = "Sceond Expanded Cell"
+                let cell3 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
+                cell3.titleLabel.text = "Third Expanded Cell"
+                return [cell1, cell2, cell3]
                 
             case 2:
                 return [cell, cell]
@@ -106,6 +112,12 @@ extension ViewController: ExpandableDelegate {
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath) {
 //        print("didSelectExpandedRowAt:\(indexPath)")
+    }
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCell: UITableViewCell, didSelectExpandedRowAt indexPath: IndexPath) {
+        if let cell = expandedCell as? ExpandedCell {
+            print("\(cell.titleLabel.text ?? "")")
+        }
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,6 +178,7 @@ extension ViewController: ExpandableDelegate {
         
         return 44
     }
+    
     
 //    func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String? {
 //        return "Section \(section)"
