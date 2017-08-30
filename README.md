@@ -100,9 +100,15 @@ open class ExpandableCell: UITableViewCell {
 }
 ```
 
-Use collapse all function
+Use close and open all function
 ```Swift
 tableView.closeAll()
+tableView.openAll()
+```
+
+Set tableview insert animation
+```Swift
+tableView.animation = .automatic
 ```
 
 Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
