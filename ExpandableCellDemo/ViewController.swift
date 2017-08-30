@@ -22,6 +22,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.expandableDelegate = self
+        tableView.animation = .automatic
+        
         tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
@@ -31,6 +33,8 @@ class ViewController: UIViewController {
         
         openAllButton.action = #selector(openAllButtonClicked)
         openAllButton.target = self
+        
+        tableView.openAll()
     }
 
     override func didReceiveMemoryWarning() {
