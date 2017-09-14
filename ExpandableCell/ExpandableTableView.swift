@@ -108,34 +108,41 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: Optional methods
 extension ExpandableTableView {
-    public func openAll() {
-        guard let delegate = expandableDelegate else { return }
+	public func openAll() {
+		guard let delegate = expandableDelegate else { return }
+		
+		var rowCountInSections = [(rowCount:Int, section: Int)]()
+		let sections = self.numberOfSections(in: self)
+		
+		for sectionNum in 0..<sections {
+			var rows = self.numberOfRows(inSection: sectionNum)
+			for rowNum in 0..<rows {
+				let indexPath = IndexPath(row: rowNum, section: sectionNum)
+				if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
+					rows += expandedCells.count
+				}
+			}
+			rowCountInSections.append((rows,sectionNum))
+		}
+		
+		for rowCountInSection in rowCountInSections {
+			for row in 0..<rowCountInSection.rowCount {
+				openAt(row: row, section: rowCountInSection.section)
+			}
+		}
+	}
+	
+	public func openAt(row: Int, section: Int)
+	{
+		guard let delegate = expandableDelegate else { return }
+		
+		let indexPath = IndexPath(row: row , section: section)
+		let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
+		if !expandedData.isExpandedCell && expandableProcessor.isExpandable(at: indexPath) {
+			open(indexPath: indexPath, delegate: delegate)
+		}
+	}
 
-        var rowCountInSections = [(rowCount:Int, section: Int)]()
-        let section = self.numberOfSections(in: self)
-        
-        for sectionNum in 0..<section {
-            var row = self.numberOfRows(inSection: sectionNum)
-            for rowNum in 0..<row {
-                let indexPath = IndexPath(row: rowNum, section: sectionNum)
-                if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
-                    row += expandedCells.count
-                }
-            }
-            rowCountInSections.append((row,sectionNum))
-        }
-        
-        for rowCountInSection in rowCountInSections {
-            for row in 0..<rowCountInSection.rowCount {
-                let indexPath = IndexPath(row: row , section: rowCountInSection.section)
-                let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
-                if !expandedData.isExpandedCell && expandableProcessor.isExpandable(at: indexPath) {
-                    open(indexPath: indexPath, delegate: delegate)
-                }
-            }
-        }
-    }
-    
     public func closeAll() {
         _ = closeAllIndexPaths()
     }
@@ -170,7 +177,7 @@ extension ExpandableTableView {
         return delegate.expandableTableView(self, viewForHeaderInSection: section)
     }
     
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    @objc(tableView:willDisplayCell:forRowAtIndexPath:) public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let delegate = expandableDelegate else { return }
         return delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
     }
