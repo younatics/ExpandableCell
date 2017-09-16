@@ -140,6 +140,16 @@ extension ExpandableTableView {
         _ = closeAllIndexPaths()
     }
     
+    open override func reloadData() {
+        if let delegate = expandableDelegate {
+            for i in 0..<expandableProcessor.expandableDatas.count {
+                guard let cells = delegate.expandableTableView(self, expandedCellsForRowAt: expandableProcessor.expandableDatas[i].originalIndexPath) else { return }
+                expandableProcessor.expandableDatas[i].expandedCells = cells
+            }
+        }
+        super.reloadData()
+    }
+    
     public func closeAllIndexPaths() -> [IndexPath] {
         let allIndexPaths = expandableProcessor.deleteAllIndexPaths()
         let expandedIndexPaths = allIndexPaths.expandedIndexPaths
