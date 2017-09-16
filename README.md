@@ -5,31 +5,15 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/YNExpandableCell/blob/master/LICENSE)
 [![Platform](https://img.shields.io/cocoapods/p/YNExpandableCell.svg?style=flat)](http://cocoapods.org/pods/ExpandableCell)
 [![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+![iOS 8.0+](https://img.shields.io/badge/iOS-8.0%2B-blue.svg)
 
 ## Intoduction
 Fully refactored [YNExapnadableCell](https://github.com/younatics/YNExpandableCell) with more concise, bug free. Easiest usage of expandable & collapsible cell for iOS, written in Swift 3. You can customize expandable `UITableViewCell` whatever you like. `ExpandableCell` is made because `insertRows` and `deleteRows` is hard to use. Just inheirt `ExpandableDelegate`
 
 ![demo](Images/ExpandableCell.gif)
 
-## Requirements
-
-`ExpandableCell` written in Swift 3. Compatible with iOS 8.0+
-
-## Installation
-
-### Cocoapods
-
-ExpandableCell is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'ExpandableCell'
-```
-### Carthage
-```
-github "younatics/ExpandableCell"
-```
 ## Usage
+### Basic
 ```swift
 import ExpandableCell
 ```
@@ -52,21 +36,24 @@ tableView.expandableDelegate = self
 Set required `ExpandableDelegate` method.
 
 #### Key two methods
-Set `expandedCells` and height in these two methods. Pass one parameter when you need to expand only one cell
-```swift
-func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?
-    
-func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?
-```
+| Required Delegate | return type | Explanation |
+| ----------------- | ----------- | ----------- |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` | `[UITableViewCell]?` | `ExpandableDelegate` key method to get expandable cells |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?` | `[CGFloat]?` | `ExpandableDelegate` key method to get expandable cells's height |
 
-Set common `UITableViewDataSource`, `UITableViewDelegate` method
-```swift
-func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    
-func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int
-    
-func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat    
-```
+#### UITableViewDelegate, UITableViewDataSource
+
+| Required Delegate | return type |
+| ----------------- | ----------- |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell` | `UITableViewCell` |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int` | `Int` |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat` | `CGFloat` |
+
+### Advanced
+| Optional Delegate | return type | Explanation |
+| ----------------- | ----------- | ----------- |
+| `didSelectRowAt` | - | UITableViewDelegate |
+| `heightsForExpandedRowAt` | `[CGFloat]?` | `ExpandableDelegate` key method to get expandable cells's height |
 
 Set optional `ExpandableDelegate` method.
 ```swift
@@ -112,6 +99,24 @@ tableView.animation = .automatic
 ```
 
 Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
+
+## Requirements
+`ExpandableCell` written in Swift 3. Compatible with iOS 8.0+
+
+## Installation
+
+### Cocoapods
+
+ExpandableCell is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'ExpandableCell'
+```
+### Carthage
+```
+github "younatics/ExpandableCell"
+```
 
 ## References
 #### Please tell me or make pull request if you use this library in your application :) 
