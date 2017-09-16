@@ -40,7 +40,6 @@ Set required `ExpandableDelegate` method.
 | `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` | Key method to get expandable cells |
 | `func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?` | Key method to get expandable cells's height |
 
-#### UITableViewDelegate, UITableViewDataSource
 | Required UITableViewDelegate, UITableViewDataSource | Explanation |
 | --------------------------------------------------- | ----------- |
 | `func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell` | - |
