@@ -34,63 +34,56 @@ tableView.expandableDelegate = self
 ```
 
 Set required `ExpandableDelegate` method.
-
 #### Key two methods
-| Required Delegate | return type | Explanation |
-| ----------------- | ----------- | ----------- |
-| `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` | `[UITableViewCell]?` | `ExpandableDelegate` key method to get expandable cells |
-| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?` | `[CGFloat]?` | `ExpandableDelegate` key method to get expandable cells's height |
+| Required ExpandableDelegate | Explanation |
+| --------------------------- | ----------- |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` | Key method to get expandable cells |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?` | Key method to get expandable cells's height |
 
 #### UITableViewDelegate, UITableViewDataSource
-
-| Required Delegate | return type |
-| ----------------- | ----------- |
-| `func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell` | `UITableViewCell` |
-| `func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int` | `Int` |
-| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat` | `CGFloat` |
+| Required UITableViewDelegate, UITableViewDataSource | Explanation |
+| --------------------------------------------------- | ----------- |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat` | - |
 
 ### Advanced
-| Optional Delegate | return type | Explanation |
-| ----------------- | ----------- | ----------- |
-| `didSelectRowAt` | - | UITableViewDelegate |
-| `heightsForExpandedRowAt` | `[CGFloat]?` | `ExpandableDelegate` key method to get expandable cells's height |
+#### ExpandableTableView property
+| Property | Type | Explanation |
+| -------- | ---- | ----------- |
+| `animation` | `UITableViewRowAnimation` | Animation when open and close | 
 
-Set optional `ExpandableDelegate` method.
-```swift
-func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)
+#### ExpandableTableView methods
+| Method | Explanation |
+| ------ | ----------- |
+| `openAll` | Open all that you set in `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` |
+| `closeAll` | Close all that you set in `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` |
+| `reloadData` | TableView reload data. Expanded cells will be work also |
 
-func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCell: UITableViewCell, didSelectExpandedRowAt indexPath: IndexPath)
+#### Optional delegates
+| Optional ExpandableDelegate | Explanation |
+| --------------------------- | ----------- |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath)` | Get indexpath in expanded row |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCell: UITableViewCell, didSelectExpandedRowAt indexPath: IndexPath)` | Get expandedCell and indexPath |
 
-func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath)
 
-func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String?
+| Optional UITableViewDelegate, UITableViewDataSource | Explanation |
+| --------------------------------------------------- | ----------- |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)` | - | 
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String?` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView?` | - |
+| `func numberOfSections(in expandableTableView: ExpandableTableView) -> Int` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int)` | - |
+| `func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayFooterView view: UIView, forSection section: Int)` | - |
 
-func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat
-
-func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView?
-    
-func numberOfSections(in expandableTableView: ExpandableTableView) -> Int
-
-func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
-    
-func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    
-func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayFooterView view: UIView, forSection section: Int)
-```
-
-### Customize
+#### For arrow effect
 Inherit `ExpandableCell` when you need arrow effect or change arrow image
-
 ```swift
 open class ExpandableCell: UITableViewCell {
     open var arrowImageView: UIImageView!
 }
-```
-
-Use close and open all function
-```Swift
-tableView.closeAll()
-tableView.openAll()
 ```
 
 Set tableview insert animation
