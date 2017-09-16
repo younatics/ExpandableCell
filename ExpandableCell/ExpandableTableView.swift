@@ -127,16 +127,14 @@ extension ExpandableTableView {
 		
 		for rowCountInSection in rowCountInSections {
 			for row in 0..<rowCountInSection.rowCount {
-				openAt(row: row, section: rowCountInSection.section)
+                open(at: IndexPath(row: row, section: rowCountInSection.section))
 			}
 		}
 	}
 	
-	public func openAt(row: Int, section: Int)
-	{
+    public func open(at indexPath: IndexPath) {
 		guard let delegate = expandableDelegate else { return }
 		
-		let indexPath = IndexPath(row: row , section: section)
 		let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
 		if !expandedData.isExpandedCell && expandableProcessor.isExpandable(at: indexPath) {
 			open(indexPath: indexPath, delegate: delegate)
