@@ -59,6 +59,7 @@ Set required `ExpandableDelegate` method.
 | `openAll` | Open all that you set in `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` |
 | `closeAll` | Close all that you set in `func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]?` |
 | `reloadData` | TableView reload data. Expanded cells will be work also |
+| `open(at indexPath: IndexPath)` | Open specific indexPath |
 
 #### Optional delegates
 | Optional ExpandableDelegate | Explanation |
