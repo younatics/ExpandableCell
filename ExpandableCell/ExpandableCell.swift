@@ -28,13 +28,18 @@ open class ExpandableCell: UITableViewCell {
     }
     
     func initView() {
-        let width = UIScreen.main.bounds.width
-        let height = self.frame.height
-        
-        arrowImageView = UIImageView(frame: CGRect(x: width - 54, y: (height - 11)/2, width: 22, height: 11))
+        arrowImageView = UIImageView()
         arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
         self.contentView.addSubview(arrowImageView)
-        
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let width = self.bounds.width
+        let height = self.bounds.height
+
+        arrowImageView.frame = CGRect(x: width - 54, y: (height - 11)/2, width: 22, height: 11)
     }
     
     func open() {
