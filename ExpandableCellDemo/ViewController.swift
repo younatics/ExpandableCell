@@ -42,11 +42,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func openAllButtonClicked() {
+    @objc func openAllButtonClicked() {
         tableView.openAll()
     }
     
-    func closeAllButtonClicked() {
+    @objc func closeAllButtonClicked() {
         tableView.closeAll()
     }
 }

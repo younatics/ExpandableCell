@@ -10,7 +10,6 @@ import UIKit
 
 open class ExpandableTableView: UITableView {
     public var animation: UITableViewRowAnimation = .top
-    public var expandableStyle: ExpandableStyle = .normal
     
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
@@ -39,21 +38,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
-                if expandableStyle == .closeAndOpen {
-                    let closedIndexPaths = closeAllIndexPaths()
-                    var count = 0
-                    
-                    var internalIndexPath = IndexPath()
-                    for closedIndexPath in closedIndexPaths {
-                        if closedIndexPath.section == indexPath.section && closedIndexPath.row < indexPath.row {
-                            count += 1
-                        }
-                    }
-                    internalIndexPath = IndexPath(row: indexPath.row - count, section: indexPath.section)
-                    open(indexPath: internalIndexPath, delegate: delegate)
-                } else if expandableStyle == .normal {
-                    open(indexPath: indexPath, delegate: delegate)
-                }
+                open(indexPath: indexPath, delegate: delegate)
             } else {
                 close(indexPath: indexPath)
                 formerIndexPath = nil
@@ -123,36 +108,51 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: Optional methods
 extension ExpandableTableView {
-    public func openAll() {
-        guard let delegate = expandableDelegate else { return }
+	public func openAll() {
+		guard let delegate = expandableDelegate else { return }
+		
+		var rowCountInSections = [(rowCount:Int, section: Int)]()
+		let sections = self.numberOfSections(in: self)
+		
+		for sectionNum in 0..<sections {
+			var rows = self.numberOfRows(inSection: sectionNum)
+			for rowNum in 0..<rows {
+				let indexPath = IndexPath(row: rowNum, section: sectionNum)
+				if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
+					rows += expandedCells.count
+				}
+			}
+			rowCountInSections.append((rows,sectionNum))
+		}
+		
+		for rowCountInSection in rowCountInSections {
+			for row in 0..<rowCountInSection.rowCount {
+                open(at: IndexPath(row: row, section: rowCountInSection.section))
+			}
+		}
+	}
+	
+    public func open(at indexPath: IndexPath) {
+		guard let delegate = expandableDelegate else { return }
+		
+		let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
+		if !expandedData.isExpandedCell && expandableProcessor.isExpandable(at: indexPath) {
+			open(indexPath: indexPath, delegate: delegate)
+		}
+	}
 
-        var rowCountInSections = [(rowCount:Int, section: Int)]()
-        let section = self.numberOfSections(in: self)
-        
-        for sectionNum in 0..<section {
-            var row = self.numberOfRows(inSection: sectionNum)
-            for rowNum in 0..<row {
-                let indexPath = IndexPath(row: rowNum, section: sectionNum)
-                if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
-                    row += expandedCells.count
-                }
-            }
-            rowCountInSections.append((row,sectionNum))
-        }
-        
-        for rowCountInSection in rowCountInSections {
-            for row in 0..<rowCountInSection.rowCount {
-                let indexPath = IndexPath(row: row , section: rowCountInSection.section)
-                let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
-                if !expandedData.isExpandedCell && expandableProcessor.isExpandable(at: indexPath) {
-                    open(indexPath: indexPath, delegate: delegate)
-                }
-            }
-        }
-    }
-    
     public func closeAll() {
         _ = closeAllIndexPaths()
+    }
+    
+    open override func reloadData() {
+        if let delegate = expandableDelegate {
+            for i in 0..<expandableProcessor.expandableDatas.count {
+                guard let cells = delegate.expandableTableView(self, expandedCellsForRowAt: expandableProcessor.expandableDatas[i].originalIndexPath) else { return }
+                expandableProcessor.expandableDatas[i].expandedCells = cells
+            }
+        }
+        super.reloadData()
     }
     
     public func closeAllIndexPaths() -> [IndexPath] {
@@ -185,7 +185,7 @@ extension ExpandableTableView {
         return delegate.expandableTableView(self, viewForHeaderInSection: section)
     }
     
-    public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    @objc(tableView:willDisplayCell:forRowAtIndexPath:) public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let delegate = expandableDelegate else { return }
         return delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
     }
