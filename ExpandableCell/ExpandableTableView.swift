@@ -199,4 +199,22 @@ extension ExpandableTableView {
         guard let delegate = expandableDelegate else { return }
         return delegate.expandableTableView(self, willDisplayFooterView: view, forSection: section)
     }
+    
+    public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+         guard let delegate = expandableDelegate else
+         { return false }
+        return delegate.expandableTableView(self, shouldHighlightRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+        guard let delegate = expandableDelegate else
+        { return }
+        return delegate.expandableTableView(self, didHighlightRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
+        guard let delegate = expandableDelegate else
+        { return }
+        return delegate.expandableTableView(self, didUnhighlightRowAt:indexPath)
+    }
 }
