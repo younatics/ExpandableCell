@@ -93,6 +93,12 @@ tableView.animation = .automatic
 
 Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
 
+#### ExpandableCell methods
+
+| ExpandableCell methods | Explanation |
+| --------------------------- | ----------- |
+| `isExpanded()` | Check if cell is expanded or not |
+
 ## Requirements
 `ExpandableCell` written in Swift 3. Compatible with iOS 8.0+
 
