@@ -33,16 +33,17 @@ class ExpandableProcessor {
     var expandableDatas = [ExpandableData]()
     var willRemovedIndexPaths: [IndexPath]?
     
-    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat]) {
+    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat]) -> Bool {
         for i in 0..<expandableDatas.count {
             let expandableData = expandableDatas[i]
-            guard expandableData.indexPath.section == indexPath.section else { return }
+            guard expandableData.indexPath.section == indexPath.section else { return false }
             
             if expandableData.indexPath.row > indexPath.row {
                 expandableDatas[i].indexPath = IndexPath(row: expandableData.indexPath.row + expandedCells.count, section: expandableData.indexPath.section)
             }
         }
         expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights))
+        return true
     }
     
     func delete(indexPath: IndexPath) {

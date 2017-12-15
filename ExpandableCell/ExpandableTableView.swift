@@ -53,8 +53,8 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
         guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
         guard let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: originalIndexPath) else { return }
+        guard expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights) else { return }
         
-        expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights)
         self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
         guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
         cell.open()
