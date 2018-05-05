@@ -108,7 +108,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
 
 //MARK: Optional methods
 extension ExpandableTableView {
-	public func openAll() {
+	public func expandAllCells() {
 		guard let delegate = expandableDelegate else { return }
 		
 		var rowCountInSections = [(rowCount:Int, section: Int)]()
@@ -141,7 +141,7 @@ extension ExpandableTableView {
 		}
 	}
 
-    public func closeAll() {
+    public func collapseAllCells() {
         _ = closeAllIndexPaths()
     }
     

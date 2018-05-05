@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         openAllButton.action = #selector(openAllButtonClicked)
         openAllButton.target = self
         
-        tableView.openAll()
+        tableView.expandAllCells()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,11 +43,11 @@ class ViewController: UIViewController {
     }
     
     @objc func openAllButtonClicked() {
-        tableView.openAll()
+        tableView.expandAllCells()
     }
     
     @objc func closeAllButtonClicked() {
-        tableView.closeAll()
+        tableView.collapseAllCells()
     }
 }
 
