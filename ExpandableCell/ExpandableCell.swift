@@ -9,9 +9,8 @@
 import UIKit
 
 open class ExpandableCell: UITableViewCell {
+    open var arrowImageView: UIImageView!
     private var isOpen = false
-
-    @IBOutlet open weak var arrowImageView: UIImageView!
 
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,11 +29,9 @@ open class ExpandableCell: UITableViewCell {
     }
 
     func initView() {
-        if (arrowImageView == nil) {
-            arrowImageView = UIImageView()
-            arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
-            self.contentView.addSubview(arrowImageView)
-        }
+        arrowImageView = UIImageView()
+        arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
+        self.contentView.addSubview(arrowImageView)
     }
     
     open override func layoutSubviews() {
