@@ -145,6 +145,13 @@ extension ExpandableTableView {
         _ = closeAllIndexPaths()
     }
     
+    public func close(at indexPath: IndexPath) {
+        guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
+        if cell.isExpanded() {
+            close(indexPath: indexPath)
+        }
+    }
+    
     open override func reloadData() {
         if let delegate = expandableDelegate {
             for i in 0..<expandableProcessor.expandableDatas.count {
