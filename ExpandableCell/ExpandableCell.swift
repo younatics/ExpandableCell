@@ -12,7 +12,7 @@ open class ExpandableCell: UITableViewCell {
     open var arrowImageView: UIImageView!
     private var isOpen = false
 
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         initView()
