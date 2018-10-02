@@ -9,7 +9,7 @@
 import UIKit
 
 open class ExpandableTableView: UITableView {
-    public var animation: UITableViewRowAnimation = .top
+    public var animation: UITableView.RowAnimation = .top
     
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
