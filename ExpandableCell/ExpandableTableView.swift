@@ -10,7 +10,7 @@ import UIKit
 
 open class ExpandableTableView: UITableView {
     public var animation: UITableView.RowAnimation = .top
-    
+    public var expansionStyle : ExpandableTableView.ExpansionStyle = .multi
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
 
@@ -19,6 +19,13 @@ open class ExpandableTableView: UITableView {
             self.dataSource = self
             self.delegate = self
         }
+    }
+}
+
+extension ExpandableTableView {
+    public enum ExpansionStyle {
+        case multi
+        case single
     }
 }
 
@@ -38,7 +45,14 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
-                open(indexPath: indexPath, delegate: delegate)
+                if let cell = self.cellForRow(at: indexPath) {
+                    if self.expansionStyle == .single {
+                        closeAll()
+                    }
+                    if let correctIndexPath = self.indexPath(for: cell) {
+                        open(indexPath: correctIndexPath, delegate: delegate)
+                    }
+                }
             } else {
                 close(indexPath: indexPath)
                 formerIndexPath = nil

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rgj-32-aFx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rgj-32-aFx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -35,8 +35,22 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="ExpandableCell" id="CXN-9d-Y6i">
-                        <barButtonItem key="leftBarButtonItem" title="Open All" id="FWd-PW-qEi"/>
-                        <barButtonItem key="rightBarButtonItem" title="Close All" id="uLE-YT-7vL"/>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Open All" id="FWd-PW-qEi"/>
+                            <barButtonItem title="Expand Multi" id="WEp-Br-2yU" userLabel="Expand Multi">
+                                <connections>
+                                    <action selector="expandMultiButtonClicked:" destination="BYZ-38-t0r" id="2Li-Wy-Fgj"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Close All" id="uLE-YT-7vL"/>
+                            <barButtonItem title="Expand Single" id="pDB-0c-Q4L" userLabel="Expand Single">
+                                <connections>
+                                    <action selector="expandSingleButtonClicked:" destination="BYZ-38-t0r" id="ezV-tr-1IG"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="closeAllButton" destination="uLE-YT-7vL" id="lhO-Ta-rYw"/>
@@ -54,7 +68,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rgj-32-aFx" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lwA-eo-cpa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

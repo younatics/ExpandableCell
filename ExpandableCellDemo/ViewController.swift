@@ -46,6 +46,15 @@ class ViewController: UIViewController {
         tableView.openAll()
     }
     
+    @IBAction func expandMultiButtonClicked(_ sender: Any) {
+        tableView.expansionStyle = .multi
+    }
+    
+    @IBAction func expandSingleButtonClicked(_ sender: Any) {
+        tableView.expansionStyle = .single
+        tableView.closeAll()
+    }
+    
     @objc func closeAllButtonClicked() {
         tableView.closeAll()
     }
