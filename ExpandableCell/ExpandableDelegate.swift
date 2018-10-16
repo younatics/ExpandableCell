@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ExpandableDelegate {
+public protocol ExpandableDelegate : UIScrollViewDelegate {
 
     //MARK: Required Methods
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
