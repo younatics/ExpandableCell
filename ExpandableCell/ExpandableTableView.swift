@@ -206,6 +206,31 @@ extension ExpandableTableView {
 			open(indexPath: indexPath, delegate: delegate)
 		}
 	}
+    
+    public func reloadExpandableExpandedCells(at indexPaths:[IndexPath]){
+        guard let delegate = expandableDelegate else { return }
+
+        var originalCells = [ExpandableCell]()
+        indexPaths.forEach { (indexPath) in
+            if let cell = delegate.expandableTableView(self, cellForRowAt: indexPath) as? ExpandableCell {
+                originalCells.append(cell)
+            }
+        }
+        self.reloadExpandableExpandedCells(originalCells)
+    }
+    
+    public func reloadExpandableExpandedCells(_ cells: [ExpandableCell]) {
+        cells.forEach { (cell) in
+            if let currentIndexPath = self.indexPath(for: cell) {
+                if cell.isExpanded() {
+                    close(at: currentIndexPath)
+                    if let newIndexPath = self.indexPath(for: cell) {
+                        open(at: newIndexPath)
+                    }
+                }
+            }
+        }
+    }
 
     public func closeAll() {
         _ = closeAllIndexPaths()
