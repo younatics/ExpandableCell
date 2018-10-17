@@ -14,10 +14,17 @@ open class ExpandableTableView: UITableView {
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
 
-    weak public var expandableDelegate: ExpandableDelegate? {
+    public var expandableDelegate: ExpandableDelegate? {
         didSet {
             self.dataSource = self
             self.delegate = self
+        }
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow == nil {
+            self.expandableDelegate = nil
         }
     }
 }
