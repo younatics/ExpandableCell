@@ -10,7 +10,7 @@ import UIKit
 
 open class ExpandableTableView: UITableView {
     public var animation: UITableView.RowAnimation = .top
-    
+    public var expansionStyle : ExpandableTableView.ExpansionStyle = .multi
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
 
@@ -19,6 +19,13 @@ open class ExpandableTableView: UITableView {
             self.dataSource = self
             self.delegate = self
         }
+    }
+}
+
+extension ExpandableTableView {
+    public enum ExpansionStyle {
+        case multi
+        case single
     }
 }
 
@@ -38,7 +45,14 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
-                open(indexPath: indexPath, delegate: delegate)
+                if let cell = self.cellForRow(at: indexPath) {
+                    if self.expansionStyle == .single {
+                        closeAll()
+                    }
+                    if let correctIndexPath = self.indexPath(for: cell) {
+                        open(indexPath: correctIndexPath, delegate: delegate)
+                    }
+                }
             } else {
                 close(indexPath: indexPath)
                 formerIndexPath = nil
@@ -103,6 +117,58 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
             let height = delegate.expandableTableView(self, heightForRowAt: originalIndexPath)
             return height
         }
+    }
+    
+//Mark: Optional forward ScrollView methods
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewDidScrollToTop?(scrollView)
+    }
+    
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewDidZoom?(scrollView)
+    }
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        expandableDelegate?.scrollViewWillBeginZooming?(scrollView, with:view)
+    }
+    
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        expandableDelegate?.scrollViewDidEndZooming?(scrollView, with:view, atScale:scale)
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewWillBeginDragging?(scrollView)
+    }
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        expandableDelegate?.scrollViewDidEndDragging?(scrollView, willDecelerate:decelerate)
+    }
+    
+    public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        expandableDelegate?.scrollViewWillEndDragging?(scrollView, withVelocity:velocity, targetContentOffset:targetContentOffset)
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewDidEndDecelerating?(scrollView)
+    }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewDidEndScrollingAnimation?(scrollView)
+    }
+    
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewWillBeginDecelerating?(scrollView)
+    }
+    
+    public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        return expandableDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? false
+    }
+    
+    @available(iOS 11.0, *)
+    public func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
+        expandableDelegate?.scrollViewDidChangeAdjustedContentInset?(scrollView)
     }
 }
 

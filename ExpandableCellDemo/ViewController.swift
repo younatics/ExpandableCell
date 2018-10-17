@@ -46,12 +46,35 @@ class ViewController: UIViewController {
         tableView.openAll()
     }
     
+    @IBAction func expandMultiButtonClicked(_ sender: Any) {
+        tableView.expansionStyle = .multi
+    }
+    
+    @IBAction func expandSingleButtonClicked(_ sender: Any) {
+        tableView.expansionStyle = .single
+        tableView.closeAll()
+    }
+    
     @objc func closeAllButtonClicked() {
         tableView.closeAll()
+    }
+    
+    //scroll view methods are being forwarded correctly
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("scrollViewDidScroll")
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidScroll, decelerate:\(decelerate)")
+    }
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        print("scrollViewDidEndScrollingAnimation")
     }
 }
 
 extension ViewController: ExpandableDelegate {
+    
+  
     func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]? {
         switch indexPath.section {
         case 0:

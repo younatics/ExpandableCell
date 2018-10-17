@@ -53,6 +53,7 @@ Set required `ExpandableDelegate` method.
 | Property | Type | Explanation |
 | -------- | ---- | ----------- |
 | `animation` | `UITableViewRowAnimation` | Animation when open and close | 
+| `expansionStyle` | `ExpandableTableView.ExpansionStyle` | Select expansion type: single: One row at a time, multi: Any number of rows at a time| 
 
 #### ExpandableTableView methods
 | Method | Explanation |
