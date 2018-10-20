@@ -11,6 +11,7 @@ import UIKit
 open class ExpandableTableView: UITableView {
     public var animation: UITableView.RowAnimation = .top
     public var expansionStyle : ExpandableTableView.ExpansionStyle = .multi
+    public var autoReleaseDelegate: Bool = true
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
 
@@ -18,6 +19,13 @@ open class ExpandableTableView: UITableView {
         didSet {
             self.dataSource = self
             self.delegate = self
+        }
+    }
+    
+    open override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow == nil && self.autoReleaseDelegate{
+            self.expandableDelegate = nil
         }
     }
 }
@@ -206,6 +214,31 @@ extension ExpandableTableView {
 			open(indexPath: indexPath, delegate: delegate)
 		}
 	}
+    
+    public func reloadExpandableExpandedCells(at indexPaths:[IndexPath]){
+        guard let delegate = expandableDelegate else { return }
+
+        var originalCells = [ExpandableCell]()
+        indexPaths.forEach { (indexPath) in
+            if let cell = delegate.expandableTableView(self, cellForRowAt: indexPath) as? ExpandableCell {
+                originalCells.append(cell)
+            }
+        }
+        self.reloadExpandableExpandedCells(originalCells)
+    }
+    
+    public func reloadExpandableExpandedCells(_ cells: [ExpandableCell]) {
+        cells.forEach { (cell) in
+            if let currentIndexPath = self.indexPath(for: cell) {
+                if cell.isExpanded() {
+                    close(at: currentIndexPath)
+                    if let newIndexPath = self.indexPath(for: cell) {
+                        open(at: newIndexPath)
+                    }
+                }
+            }
+        }
+    }
 
     public func closeAll() {
         _ = closeAllIndexPaths()

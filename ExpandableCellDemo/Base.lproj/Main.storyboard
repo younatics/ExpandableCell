@@ -56,11 +56,30 @@
                         <outlet property="closeAllButton" destination="uLE-YT-7vL" id="lhO-Ta-rYw"/>
                         <outlet property="openAllButton" destination="FWd-PW-qEi" id="bYD-sC-4An"/>
                         <outlet property="tableView" destination="2vu-5y-4uM" id="9RE-Vo-7Mi"/>
+                        <segue destination="PWp-gA-7hF" kind="showDetail" identifier="replace" id="gf6-Lz-WXZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1079.2" y="113.79310344827587"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="87i-FC-LKV">
+            <objects>
+                <viewController storyboardIdentifier="ReplacingWithEmptyViewController" id="PWp-gA-7hF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bVe-xl-ZEP"/>
+                        <viewControllerLayoutGuide type="bottom" id="urV-yY-uMB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4u4-xL-G18">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SBm-wA-8Yg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="819"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1mB-US-dYD">

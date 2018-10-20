@@ -25,6 +25,8 @@
 		19EF95001F37580B00085BCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EF94FE1F37580B00085BCA /* Main.storyboard */; };
 		19EF95021F37580B00085BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19EF95011F37580B00085BCA /* Assets.xcassets */; };
 		19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950A1F3758C300085BCA /* ExpandableTableView.swift */; };
+		BF9048D521776DE100BE514F /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
+		BF9048DF21776E1400BE514F /* MemoryLeakTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9048DE21776E1400BE514F /* MemoryLeakTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 19EF94E81F3757AC00085BCA;
 			remoteInfo = ExpandableCell;
+		};
+		BF9048D621776DE100BE514F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19EF94E01F3757AC00085BCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19EF94E81F3757AC00085BCA;
+			remoteInfo = ExpandableCell;
+		};
+		BF9048DB21776DE900BE514F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19EF94E01F3757AC00085BCA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19EF94F71F37580B00085BCA;
+			remoteInfo = ExpandableCellDemo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -72,6 +88,10 @@
 		19EF95011F37580B00085BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19EF95061F37580B00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19EF950A1F3758C300085BCA /* ExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableView.swift; sourceTree = "<group>"; };
+		BF9048D021776DE100BE514F /* ExpandableCellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpandableCellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF9048D421776DE100BE514F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF9048DD21776E1400BE514F /* ExpandableCellTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExpandableCellTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		BF9048DE21776E1400BE514F /* MemoryLeakTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeakTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +107,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1946DA951F3841E30077D2FD /* ExpandableCell.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF9048CD21776DE100BE514F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF9048D521776DE100BE514F /* ExpandableCell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +137,7 @@
 			children = (
 				19EF94EB1F3757AC00085BCA /* ExpandableCell */,
 				19EF94F91F37580B00085BCA /* ExpandableCellDemo */,
+				BF9048D121776DE100BE514F /* ExpandableCellTests */,
 				19EF94EA1F3757AC00085BCA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -118,6 +147,7 @@
 			children = (
 				19EF94E91F3757AC00085BCA /* ExpandableCell.framework */,
 				19EF94F81F37580B00085BCA /* ExpandableCellDemo.app */,
+				BF9048D021776DE100BE514F /* ExpandableCellTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +179,16 @@
 				19EF95061F37580B00085BCA /* Info.plist */,
 			);
 			path = ExpandableCellDemo;
+			sourceTree = "<group>";
+		};
+		BF9048D121776DE100BE514F /* ExpandableCellTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF9048D421776DE100BE514F /* Info.plist */,
+				BF9048DE21776E1400BE514F /* MemoryLeakTest.swift */,
+				BF9048DD21776E1400BE514F /* ExpandableCellTests-Bridging-Header.h */,
+			);
+			path = ExpandableCellTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,19 +242,38 @@
 			productReference = 19EF94F81F37580B00085BCA /* ExpandableCellDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
+		BF9048CF21776DE100BE514F /* ExpandableCellTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF9048DA21776DE100BE514F /* Build configuration list for PBXNativeTarget "ExpandableCellTests" */;
+			buildPhases = (
+				BF9048CC21776DE100BE514F /* Sources */,
+				BF9048CD21776DE100BE514F /* Frameworks */,
+				BF9048CE21776DE100BE514F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF9048D721776DE100BE514F /* PBXTargetDependency */,
+				BF9048DC21776DE900BE514F /* PBXTargetDependency */,
+			);
+			name = ExpandableCellTests;
+			productName = ExpandableCellTests;
+			productReference = BF9048D021776DE100BE514F /* ExpandableCellTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		19EF94E01F3757AC00085BCA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = SeungyounYi;
 				TargetAttributes = {
 					19EF94E81F3757AC00085BCA = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 4G7K3CN2JU;
+						DevelopmentTeam = W3F5TKW2X2;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
@@ -222,6 +281,12 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 4G7K3CN2JU;
 						ProvisioningStyle = Automatic;
+					};
+					BF9048CF21776DE100BE514F = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 19EF94F71F37580B00085BCA;
 					};
 				};
 			};
@@ -240,6 +305,7 @@
 			targets = (
 				19EF94E81F3757AC00085BCA /* ExpandableCell */,
 				19EF94F71F37580B00085BCA /* ExpandableCellDemo */,
+				BF9048CF21776DE100BE514F /* ExpandableCellTests */,
 			);
 		};
 /* End PBXProject section */
@@ -263,6 +329,13 @@
 				1921BF791F381B8400BFD528 /* ExpandedCell.xib in Resources */,
 				1946DAAF1F3C27690077D2FD /* LaunchScreen.xib in Resources */,
 				1921BF781F381B8400BFD528 /* ExpandableCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF9048CE21776DE100BE514F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +364,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BF9048CC21776DE100BE514F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF9048DF21776E1400BE514F /* MemoryLeakTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -298,6 +379,16 @@
 			isa = PBXTargetDependency;
 			target = 19EF94E81F3757AC00085BCA /* ExpandableCell */;
 			targetProxy = 1946DA971F3841E30077D2FD /* PBXContainerItemProxy */;
+		};
+		BF9048D721776DE100BE514F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19EF94E81F3757AC00085BCA /* ExpandableCell */;
+			targetProxy = BF9048D621776DE100BE514F /* PBXContainerItemProxy */;
+		};
+		BF9048DC21776DE900BE514F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19EF94F71F37580B00085BCA /* ExpandableCellDemo */;
+			targetProxy = BF9048DB21776DE900BE514F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -484,6 +575,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
 				INFOPLIST_FILE = ExpandableCellDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -499,6 +591,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 4G7K3CN2JU;
 				INFOPLIST_FILE = ExpandableCellDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -506,6 +599,60 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seungyounyi.ExpandableCellDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		BF9048D821776DE100BE514F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExpandableCellTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lenabru.ExpandableCellTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ExpandableCellTests/ExpandableCellTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExpandableCellDemo.app/ExpandableCellDemo";
+			};
+			name = Debug;
+		};
+		BF9048D921776DE100BE514F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ExpandableCellTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lenabru.ExpandableCellTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ExpandableCellTests/ExpandableCellTests-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExpandableCellDemo.app/ExpandableCellDemo";
 			};
 			name = Release;
 		};
@@ -535,6 +682,15 @@
 			buildConfigurations = (
 				19EF95071F37580B00085BCA /* Debug */,
 				19EF95081F37580B00085BCA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF9048DA21776DE100BE514F /* Build configuration list for PBXNativeTarget "ExpandableCellTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF9048D821776DE100BE514F /* Debug */,
+				BF9048D921776DE100BE514F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
