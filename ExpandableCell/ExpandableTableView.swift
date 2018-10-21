@@ -291,6 +291,20 @@ extension ExpandableTableView {
         return delegate.expandableTableView(self, viewForHeaderInSection: section)
     }
     
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let delegate = expandableDelegate else { return 0 }
+        return delegate.expandableTableView(self, heightForFooterInSection: section)
+    }
+    
+    public func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let delegate = expandableDelegate else { return nil }
+        return delegate.expandableTableView(self, viewForFooterInSection: section)
+    }
+    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        guard let delegate = expandableDelegate else { return nil }
+        return delegate.expandableTableView(self, titleForFooterInSection: section)
+    }
+    
     @objc(tableView:willDisplayCell:forRowAtIndexPath:) public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let delegate = expandableDelegate else { return }
         return delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
