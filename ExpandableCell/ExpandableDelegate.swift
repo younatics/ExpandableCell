@@ -48,6 +48,7 @@ public protocol ExpandableDelegate : UIScrollViewDelegate {
 
     func expandableTableView(_ expandableTableView: UITableView, didUnhighlightRowAt indexPath: IndexPath)
 
+    func expandableTableView(_ expandableTableView: UITableView, didCloseRowAt indexPath: IndexPath)
 }
 
 public extension ExpandableDelegate {
