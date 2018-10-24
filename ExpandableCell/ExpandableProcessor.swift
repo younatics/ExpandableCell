@@ -157,7 +157,8 @@ class ExpandableProcessor {
     
     func expandedHeight(at indexPath: IndexPath) -> CGFloat? {
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: indexPath) {
+            if let index = expandableData.expandedIndexPaths.index(of: indexPath),
+                index < expandableData.expandedHeights.count {
                 return expandableData.expandedHeights[index]
             }
         }
