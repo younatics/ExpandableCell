@@ -147,7 +147,8 @@ class ExpandableProcessor {
     
     func expandedCell(at indexPath: IndexPath) -> UITableViewCell? {
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: indexPath) {
+            if let index = expandableData.expandedIndexPaths.index(of: indexPath),
+                index < expandableData.expandedCells.count {
                 return expandableData.expandedCells[index]
             }
         }
