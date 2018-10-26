@@ -33,6 +33,10 @@ class ViewController: UIViewController {
         
         openAllButton.action = #selector(openAllButtonClicked)
         openAllButton.target = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         tableView.openAll()
     }
@@ -83,7 +87,7 @@ extension ViewController: ExpandableDelegate {
                 let cell1 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
                 cell1.titleLabel.text = "First Expanded Cell"
                 let cell2 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
-                cell2.titleLabel.text = "Sceond Expanded Cell"
+                cell2.titleLabel.text = "Second Expanded Cell"
                 let cell3 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
                 cell3.titleLabel.text = "Third Expanded Cell"
                 return [cell1, cell2, cell3]
@@ -93,6 +97,21 @@ extension ViewController: ExpandableDelegate {
             case 3:
                 return [cell]
 
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 0:
+                let cell1 = tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID) as! ExpandedCell
+                cell1.titleLabel.text = "First Expanded Cell - Section 2"
+                return [cell1]
+                
+            case 2:
+                return [cell, cell]
+            case 3:
+                return [cell]
+                
             default:
                 break
             }
@@ -115,6 +134,20 @@ extension ViewController: ExpandableDelegate {
             case 3:
                 return [22]
 
+            default:
+                break
+            }
+        case 1:
+            switch indexPath.row {
+            case 0:
+                return [44]
+                
+            case 2:
+                return [33, 33]
+                
+            case 3:
+                return [22]
+                
             default:
                 break
             }
@@ -164,8 +197,12 @@ extension ViewController: ExpandableDelegate {
             }
         case 1:
             switch indexPath.row {
-            case 0, 1, 2, 3, 4:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID) else { return UITableViewCell() }
+            case 0, 2, 3:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell2.ID) else { return UITableViewCell() }
+                return cell
+                
+            case 1, 4:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID)  else { return UITableViewCell() }
                 return cell
                 
             default:
@@ -193,7 +230,10 @@ extension ViewController: ExpandableDelegate {
             }
         case 1:
             switch indexPath.row {
-            case 0, 1, 2, 3, 4:
+            case 0, 2, 3:
+                return 66
+                
+            case 1, 4:
                 return 55
                 
             default:
@@ -206,7 +246,7 @@ extension ViewController: ExpandableDelegate {
         return 44
     }
     
-    func expandableTableView(_ expandableTableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
+    @objc(expandableTableView:didCloseRowAt:) func expandableTableView(_ expandableTableView: UITableView, didCloseRowAt indexPath: IndexPath) {
         let cell = expandableTableView.cellForRow(at: indexPath)
         cell?.contentView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
         cell?.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
