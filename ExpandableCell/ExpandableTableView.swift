@@ -56,13 +56,13 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
                 if self.expansionStyle == .single {
                     closeAll()
                 }
-                // Check if there are other rows expanded in section
-                if expandableProcessor.numberOfExpandedRowsInSection(section: indexPath.section) == 0 {
-                    let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
-                    open(indexPath: originalIndexPath, delegate: delegate)
-                } else {
-                    if let cell = self.cellForRow(at: indexPath) {
-                        if let correctIndexPath = self.indexPath(for: cell) {
+                if let cell = self.cellForRow(at: indexPath) {
+                    if let correctIndexPath = self.indexPath(for: cell) {
+                        // Check if there are other rows expanded in section
+                        if expandableProcessor.numberOfExpandedRowsInSection(section: correctIndexPath.section) == 0 {
+                            let originalIndexPath = expandableProcessor.original(indexPath: correctIndexPath)
+                            open(indexPath: originalIndexPath, delegate: delegate)
+                        } else {
                             open(indexPath: correctIndexPath, delegate: delegate)
                         }
                     }
