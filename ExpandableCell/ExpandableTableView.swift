@@ -53,12 +53,18 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
-                if let cell = self.cellForRow(at: indexPath) {
-                    if self.expansionStyle == .single {
-                        closeAll()
-                    }
-                    if let correctIndexPath = self.indexPath(for: cell) {
-                        open(indexPath: correctIndexPath, delegate: delegate)
+                // Check if there are other rows expanded in section
+                if expandableProcessor.numberOfExpandedRowsInSection(section: indexPath.section) == 0 {
+                    let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
+                    open(indexPath: originalIndexPath, delegate: delegate)
+                } else {
+                    if let cell = self.cellForRow(at: indexPath) {
+                        if self.expansionStyle == .single {
+                            closeAll()
+                        }
+                        if let correctIndexPath = self.indexPath(for: cell) {
+                            open(indexPath: correctIndexPath, delegate: delegate)
+                        }
                     }
                 }
             } else {
@@ -253,9 +259,12 @@ extension ExpandableTableView {
     
     open override func reloadData() {
         if let delegate = expandableDelegate {
-            for i in 0..<expandableProcessor.expandableDatas.count {
-                guard let cells = delegate.expandableTableView(self, expandedCellsForRowAt: expandableProcessor.expandableDatas[i].originalIndexPath) else { return }
-                expandableProcessor.expandableDatas[i].expandedCells = cells
+            for i in 0..<expandableProcessor.expandableDatasPerSection.count {
+                guard var expandableDatas = expandableProcessor.expandableDatasPerSection[i] else { continue }
+                for j in 0..<expandableDatas.count {
+                    guard let cells = delegate.expandableTableView(self, expandedCellsForRowAt: expandableDatas[j].originalIndexPath) else { return }
+                    expandableDatas[j].expandedCells = cells
+                }
             }
         }
         super.reloadData()
