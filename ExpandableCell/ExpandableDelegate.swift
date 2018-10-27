@@ -34,6 +34,12 @@ public protocol ExpandableDelegate : UIScrollViewDelegate {
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView?
 
+    func expandableTableView(_ expandableTableView: ExpandableTableView, heightForFooterInSection section: Int) -> CGFloat
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, viewForFooterInSection section: Int) -> UIView?
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, titleForFooterInSection section: Int) -> String?
+    
     func numberOfSections(in expandableTableView: ExpandableTableView) -> Int
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
@@ -63,6 +69,17 @@ public extension ExpandableDelegate {
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, viewForHeaderInSection section: Int) -> UIView? { return nil }
 
+    func expandableTableView(_ expandableTableView: ExpandableTableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, titleForFooterInSection section: Int) -> String? {
+        return nil
+    }
     func numberOfSections(in expandableTableView: ExpandableTableView) -> Int { return 1 }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) { }
