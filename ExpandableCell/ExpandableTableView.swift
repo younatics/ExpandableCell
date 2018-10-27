@@ -34,6 +34,7 @@ extension ExpandableTableView {
     public enum ExpansionStyle {
         case multi
         case single
+        case singlePerSection
     }
 }
 
@@ -52,14 +53,20 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
+            
             if expandableProcessor.isExpandable(at: indexPath) {
+                // Check if there are other rows expanded in section
+                let noExpandedRowsInSection = expandableProcessor.numberOfExpandedRowsInSection(section: indexPath.section) == 0
+                
                 if let cell = self.cellForRow(at: indexPath) {
                     if self.expansionStyle == .single {
                         closeAll()
+                    } else if self.expansionStyle == .singlePerSection && !noExpandedRowsInSection {
+                        closeAllInSection(indexPath.section)
                     }
                     if let correctIndexPath = self.indexPath(for: cell) {
-                        // Check if there are other rows expanded in section
-                        if expandableProcessor.numberOfExpandedRowsInSection(section: correctIndexPath.section) == 0 {
+                        // If no other row is expanded in section
+                        if noExpandedRowsInSection {
                             let originalIndexPath = expandableProcessor.original(indexPath: correctIndexPath)
                             open(indexPath: originalIndexPath, delegate: delegate)
                         } else {
@@ -248,6 +255,25 @@ extension ExpandableTableView {
 
     public func closeAll() {
         _ = closeAllIndexPaths()
+    }
+    
+    public func closeAllInSection(_ section: Int) {
+        _ = closeAllIndexPathsInSection(section)
+    }
+    
+    public func closeAllIndexPathsInSection(_ section: Int) -> [IndexPath] {
+        let allIndexPaths = expandableProcessor.deleteAllIndexPathsInSection(section)
+        let expandedIndexPaths = allIndexPaths.expandedIndexPaths
+        let indexPaths = allIndexPaths.indexPaths
+        
+        for indexPath in indexPaths {
+            if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+                cell.close()
+            }
+        }
+        
+        self.deleteRows(at: expandedIndexPaths, with: animation)
+        return indexPaths
     }
     
     public func close(at indexPath: IndexPath) {
