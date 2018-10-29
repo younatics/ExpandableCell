@@ -53,10 +53,10 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             if expandableProcessor.isExpandable(at: indexPath) {
-                if self.expansionStyle == .single {
-                    closeAll()
-                }
                 if let cell = self.cellForRow(at: indexPath) {
+                    if self.expansionStyle == .single {
+                        closeAll()
+                    }
                     if let correctIndexPath = self.indexPath(for: cell) {
                         // Check if there are other rows expanded in section
                         if expandableProcessor.numberOfExpandedRowsInSection(section: correctIndexPath.section) == 0 {
