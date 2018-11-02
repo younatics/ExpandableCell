@@ -84,6 +84,24 @@ class ExpandableProcessor {
         expandableDatasPerSection[indexPath.section] = expandableDatas
     }
     
+    func deleteAllIndexPathsInSection(_ section: Int) -> (expandedIndexPaths:[IndexPath], indexPaths: [IndexPath]) {
+        var expandedIndexPaths = [IndexPath]()
+        var indexPaths = [IndexPath]()
+        
+        if let expandableDataInSection = expandableDatasPerSection[section] {
+            for expandableData in expandableDataInSection {
+                indexPaths.append(expandableData.indexPath)
+                for expandedIndexPath in expandableData.expandedIndexPaths {
+                    expandedIndexPaths.append(expandedIndexPath)
+                }
+            }
+        }
+        
+        expandableDatasPerSection.removeValue(forKey: section)
+        
+        return (expandedIndexPaths, indexPaths)
+    }
+    
     func deleteAllIndexPaths() -> (expandedIndexPaths:[IndexPath], indexPaths: [IndexPath]) {
         var expandedIndexPaths = [IndexPath]()
         var indexPaths = [IndexPath]()
