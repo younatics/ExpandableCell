@@ -94,4 +94,7 @@ public extension ExpandableDelegate {
     func expandableTableView(_ expandableTableView: UITableView, didHighlightRowAt indexPath: IndexPath) { }
 
     func expandableTableView(_ expandableTableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) { }
+    func expandableTableView(_ expandableTableView: UITableView, didCloseRowAt indexPath: IndexPath){
+        
+    }
 }

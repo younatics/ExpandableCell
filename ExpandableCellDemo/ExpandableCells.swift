@@ -16,7 +16,14 @@ class NormalCell: UITableViewCell {
 
 class ExpandableCell2: ExpandableCell {
     static let ID = "ExpandableCell"
-    
+
+}
+class ExpandableSelectableCell2: ExpandableCell {
+    static let ID = "ExpandableSelectableCell2"
+
+    override func isSelectable() -> Bool {
+        return true
+    }
 }
 
 class ExpandedCell: UITableViewCell {

@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
+        tableView.register(UINib(nibName: "ExpandableSelectableCell", bundle: nil), forCellReuseIdentifier: ExpandableSelectableCell2.ID)
         
         closeAllButton.action = #selector(closeAllButtonClicked)
         closeAllButton.target = self
@@ -184,10 +185,12 @@ extension ViewController: ExpandableDelegate {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 0, 2, 3:
+            case 0, 2:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell2.ID) else { return UITableViewCell() }
                 return cell
-                
+            case 3:
+                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableSelectableCell2.ID) else { return UITableViewCell() }
+                return cell
             case 1, 4:
                 guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID)  else { return UITableViewCell() }
                 return cell

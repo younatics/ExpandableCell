@@ -60,4 +60,11 @@ open class ExpandableCell: UITableViewCell {
     open func isExpanded() -> Bool {
         return isOpen
     }
+    
+    open func isInitiallyExpanded() -> Bool {
+        return false
+    }
+    open func isSelectable() -> Bool {
+        return false
+    }
 }

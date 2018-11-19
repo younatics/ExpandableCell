@@ -27,6 +27,7 @@
 		19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950A1F3758C300085BCA /* ExpandableTableView.swift */; };
 		BF9048D521776DE100BE514F /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
 		BF9048DF21776E1400BE514F /* MemoryLeakTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9048DE21776E1400BE514F /* MemoryLeakTest.swift */; };
+		BFB9A6C421A3595D00DEF043 /* ExpandableSelectableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BFB9A6C221A3595D00DEF043 /* ExpandableSelectableCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		BF9048D421776DE100BE514F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF9048DD21776E1400BE514F /* ExpandableCellTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExpandableCellTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		BF9048DE21776E1400BE514F /* MemoryLeakTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeakTest.swift; sourceTree = "<group>"; };
+		BFB9A6C221A3595D00DEF043 /* ExpandableSelectableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExpandableSelectableCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				1921BF741F38187600BFD528 /* NormalCell.xib */,
 				1921BF761F381B8400BFD528 /* ExpandableCell.xib */,
 				1921BF771F381B8400BFD528 /* ExpandedCell.xib */,
+				BFB9A6C221A3595D00DEF043 /* ExpandableSelectableCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				19EF95021F37580B00085BCA /* Assets.xcassets in Resources */,
 				1921BF751F38187600BFD528 /* NormalCell.xib in Resources */,
 				19EF95001F37580B00085BCA /* Main.storyboard in Resources */,
+				BFB9A6C421A3595D00DEF043 /* ExpandableSelectableCell.xib in Resources */,
 				1921BF791F381B8400BFD528 /* ExpandedCell.xib in Resources */,
 				1946DAAF1F3C27690077D2FD /* LaunchScreen.xib in Resources */,
 				1921BF781F381B8400BFD528 /* ExpandableCell.xib in Resources */,
