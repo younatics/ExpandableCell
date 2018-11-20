@@ -226,10 +226,10 @@ extension ExpandableTableView {
 		guard let delegate = expandableDelegate else { return }
 		
 		var rowCountInSections = [(rowCount:Int, section: Int)]()
-		let sections = self.numberOfSections(in: self)
+		let sections = delegate.numberOfSections(in: self)
 		
 		for sectionNum in 0..<sections {
-			var rows = self.numberOfRows(inSection: sectionNum)
+			var rows = delegate.expandableTableView(self, numberOfRowsInSection: sectionNum)
 			for rowNum in 0..<rows {
 				let indexPath = IndexPath(row: rowNum, section: sectionNum)
 				if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
@@ -247,11 +247,13 @@ extension ExpandableTableView {
 	}
     
     func openAllInitiallyExpanded() {
+        guard let delegate = expandableDelegate else { return }
+
         var rowsToExpand = [IndexPath]()
-        let sections = self.numberOfSections(in: self)
-        
+        let sections = delegate.numberOfSections(in: self)
+
         for sectionNum in 0..<sections {
-            let rows = self.numberOfRows(inSection: sectionNum)
+            let rows = delegate.expandableTableView(self, numberOfRowsInSection: sectionNum)
             for rowNum in 0..<rows {
                 let indexPath = IndexPath(row: rowNum, section: sectionNum)
                 if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
