@@ -53,7 +53,8 @@ Set required `ExpandableDelegate` method.
 | Property | Type | Explanation |
 | -------- | ---- | ----------- |
 | `animation` | `UITableViewRowAnimation` | Animation when open and close | 
-| `expansionStyle` | `ExpandableTableView.ExpansionStyle` | Select expansion type:<br>**single** - one row at a time;<br>**singlePerSection** - one row at a time, per section;<br>**multi** - any number of rows at a time| 
+| `expansionStyle` | `ExpandableTableView.ExpansionStyle` | Select expansion type:<br>**single** - one row at a time;<br>**singlePerSection** - one row at a time, per section;<br>**multi** - any number of rows at a time|
+| `autoRemoveSelection` | `Bool` | autoRemoveSelection on means the cell will flicker selected, and autoRemoveSelection off means the default selection behaviour of the tableview will apply (single or multi selection) | 
 
 #### ExpandableTableView methods
 | Method | Explanation |
