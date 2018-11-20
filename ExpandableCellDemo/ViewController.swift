@@ -11,8 +11,6 @@ import ExpandableCell
 
 class ViewController: UIViewController {
     @IBOutlet var tableView: ExpandableTableView!
-    @IBOutlet var closeAllButton: UIBarButtonItem!
-    @IBOutlet var openAllButton: UIBarButtonItem!
     var parentCells:[[String]] = [
         [ExpandableCell2.ID,//
          NormalCell.ID,//
@@ -42,11 +40,6 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
         tableView.register(UINib(nibName: "ExpandableSelectableCell", bundle: nil), forCellReuseIdentifier: ExpandableSelectableCell2.ID)
            tableView.register(UINib(nibName: "InitiallyExpandedExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableInitiallyExpanded.ID)
-        closeAllButton.action = #selector(closeAllButtonClicked)
-        closeAllButton.target = self
-        
-        openAllButton.action = #selector(openAllButtonClicked)
-        openAllButton.target = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,7 +53,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func openAllButtonClicked() {
+    @IBAction func openAllButtonClicked() {
         tableView.openAll()
     }
     
@@ -73,8 +66,14 @@ class ViewController: UIViewController {
         tableView.closeAll()
     }
     
-    @objc func closeAllButtonClicked() {
+    @IBAction func closeAllButtonClicked() {
         tableView.closeAll()
+    }
+    
+    @IBAction func SelectionDisplayOn(_ sender: UIButton){
+        tableView.autoRemoveSelection = !tableView.autoRemoveSelection
+        let isOn = tableView.autoRemoveSelection ? "Off" : "On"
+        sender.setTitle("Selection Stays \(isOn)", for: .normal)
     }
     
     //scroll view methods are being forwarded correctly

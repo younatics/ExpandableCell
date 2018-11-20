@@ -12,6 +12,7 @@ open class ExpandableTableView: UITableView {
     public var animation: UITableView.RowAnimation = .top
     public var expansionStyle : ExpandableTableView.ExpansionStyle = .multi
     public var autoReleaseDelegate: Bool = true
+    public var autoRemoveSelection : Bool = true
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
 
@@ -55,7 +56,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         //other types of selection will be handled directly by the underlined
         //tableview selectionStyle
         let allowsSelection = self.allowsSelection || self.allowsMultipleSelection
-        if !expandableProcessor.isSelectable(at:indexPath,defaultValue:allowsSelection) {
+        if !expandableProcessor.isSelectable(at:indexPath,defaultValue:allowsSelection) || self.autoRemoveSelection {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         if !expandedData.isExpandedCell {
@@ -228,7 +229,7 @@ extension ExpandableTableView {
 		let sections = self.numberOfSections(in: self)
 		
 		for sectionNum in 0..<sections {
-			var rows = self.numberOfRows(inSection: sectionNum)
+			var rows = delegate.expandableTableView(self, numberOfRowsInSection: sectionNum)
 			for rowNum in 0..<rows {
 				let indexPath = IndexPath(row: rowNum, section: sectionNum)
 				if let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: indexPath) {
