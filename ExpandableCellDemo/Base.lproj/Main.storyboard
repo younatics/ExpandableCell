@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rgj-32-aFx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rgj-32-aFx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,39 +22,103 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2vu-5y-4uM" customClass="ExpandableTableView" customModule="ExpandableCell">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="164" width="375" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PpN-6r-8r4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="100"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MaF-Q1-hDQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="100"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mkz-aL-t92">
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="100"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIm-JR-hBo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="33.5"/>
+                                                        <state key="normal" title="Open All"/>
+                                                        <connections>
+                                                            <action selector="openAllButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="apS-vP-CU5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxQ-uA-zxi">
+                                                        <rect key="frame" x="0.0" y="33.5" width="187.5" height="33"/>
+                                                        <state key="normal" title="Expand Multi"/>
+                                                        <connections>
+                                                            <action selector="expandMultiButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0lX-8x-A4t"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBv-Tl-xra">
+                                                        <rect key="frame" x="0.0" y="66.5" width="187.5" height="33.5"/>
+                                                        <state key="normal" title="Selection Stays Off"/>
+                                                        <connections>
+                                                            <action selector="SelectionDisplayOn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wiv-yE-57A"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.88077520799999998" blue="0.47433176269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="mkz-aL-t92" secondAttribute="trailing" id="3KP-VP-z6w"/>
+                                            <constraint firstAttribute="bottom" secondItem="mkz-aL-t92" secondAttribute="bottom" id="8k4-vA-c5n"/>
+                                            <constraint firstItem="mkz-aL-t92" firstAttribute="top" secondItem="MaF-Q1-hDQ" secondAttribute="top" id="d02-5g-g5a"/>
+                                            <constraint firstItem="mkz-aL-t92" firstAttribute="leading" secondItem="MaF-Q1-hDQ" secondAttribute="leading" id="gLH-7k-ZBu"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OfV-CZ-X8z">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="100"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="jkh-1h-ggq">
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="100"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfT-8d-Zi8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="33.5"/>
+                                                        <state key="normal" title="Close all"/>
+                                                        <connections>
+                                                            <action selector="closeAllButtonClicked" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fxv-OJ-GC8"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4I-Dd-9cX">
+                                                        <rect key="frame" x="0.0" y="33.5" width="187.5" height="33"/>
+                                                        <state key="normal" title="Expand Signle"/>
+                                                        <connections>
+                                                            <action selector="expandSingleButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dDl-2l-2yp"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svz-bu-vaA">
+                                                        <rect key="frame" x="0.0" y="66.5" width="187.5" height="33.5"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="jkh-1h-ggq" firstAttribute="top" secondItem="OfV-CZ-X8z" secondAttribute="top" id="AWn-qz-eAw"/>
+                                            <constraint firstAttribute="trailing" secondItem="jkh-1h-ggq" secondAttribute="trailing" id="ebR-GD-pff"/>
+                                            <constraint firstAttribute="bottom" secondItem="jkh-1h-ggq" secondAttribute="bottom" id="q2d-Za-roF"/>
+                                            <constraint firstItem="jkh-1h-ggq" firstAttribute="leading" secondItem="OfV-CZ-X8z" secondAttribute="leading" id="zki-5m-HKz"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="KMb-OG-H2o"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="2vu-5y-4uM" firstAttribute="top" secondItem="PpN-6r-8r4" secondAttribute="bottom" id="1Tv-cO-IyM"/>
+                            <constraint firstItem="PpN-6r-8r4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="E04-8y-L58"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="2vu-5y-4uM" secondAttribute="bottom" id="JPV-EF-K0c"/>
-                            <constraint firstItem="2vu-5y-4uM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Mfc-m9-JTr"/>
+                            <constraint firstItem="PpN-6r-8r4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jmb-Yn-IaP"/>
                             <constraint firstAttribute="trailing" secondItem="2vu-5y-4uM" secondAttribute="trailing" id="O18-jr-QWs"/>
                             <constraint firstItem="2vu-5y-4uM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="em4-Mh-sei"/>
+                            <constraint firstAttribute="trailing" secondItem="PpN-6r-8r4" secondAttribute="trailing" id="i7I-l8-TAK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="ExpandableCell" id="CXN-9d-Y6i">
-                        <leftBarButtonItems>
-                            <barButtonItem title="Open All" id="FWd-PW-qEi"/>
-                            <barButtonItem title="Expand Multi" id="WEp-Br-2yU" userLabel="Expand Multi">
-                                <connections>
-                                    <action selector="expandMultiButtonClicked:" destination="BYZ-38-t0r" id="2Li-Wy-Fgj"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <rightBarButtonItems>
-                            <barButtonItem title="Close All" id="uLE-YT-7vL"/>
-                            <barButtonItem title="Expand Single" id="pDB-0c-Q4L" userLabel="Expand Single">
-                                <connections>
-                                    <action selector="expandSingleButtonClicked:" destination="BYZ-38-t0r" id="ezV-tr-1IG"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="ExpandableCell" id="CXN-9d-Y6i"/>
                     <connections>
-                        <outlet property="closeAllButton" destination="uLE-YT-7vL" id="lhO-Ta-rYw"/>
-                        <outlet property="openAllButton" destination="FWd-PW-qEi" id="bYD-sC-4An"/>
                         <outlet property="tableView" destination="2vu-5y-4uM" id="9RE-Vo-7Mi"/>
                         <segue destination="PWp-gA-7hF" kind="showDetail" identifier="replace" id="gf6-Lz-WXZ"/>
                     </connections>
