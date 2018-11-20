@@ -49,7 +49,7 @@ class ExpandableProcessor {
             expandableDatas = array
         }
         expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights,isSelectable:isExpandCellSelectable))
-        
+        6
         expandableDatasPerSection[indexPath.section] = expandableDatas
         
         return true

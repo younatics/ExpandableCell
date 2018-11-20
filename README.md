@@ -101,9 +101,11 @@ Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
 | ExpandableCell methods | Explanation |
 | --------------------------- | ----------- |
 | `isExpanded()` | Check if cell is expanded or not |
+| `isInitiallyExpanded()` | Make cell be open when the tableView content first appears in the view |
+| `isSelectable()` | Make cell be selectable or not, regardless of tableView selectionStyle |
 
 ## Requirements
-`ExpandableCell` written in Swift 3. Compatible with iOS 8.0+
+`ExpandableCell` written in Swift 4.2. Compatible with iOS 8.0+
 
 ## Installation
 

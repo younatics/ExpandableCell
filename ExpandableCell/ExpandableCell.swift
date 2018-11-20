@@ -11,6 +11,7 @@ import UIKit
 open class ExpandableCell: UITableViewCell {
     open var arrowImageView: UIImageView!
     private var isOpen = false
+    private var initialExpansionAllowed = true
 
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,6 +46,7 @@ open class ExpandableCell: UITableViewCell {
 
     func open() {
         self.isOpen = true
+        self.initialExpansionAllowed = false
         UIView.animate(withDuration: 0.3) {[weak self] in
             self?.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
         }
@@ -56,6 +58,10 @@ open class ExpandableCell: UITableViewCell {
             self?.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)
         }
     }
+    
+    func isInitiallyExpandedInternal() -> Bool {
+        return self.initialExpansionAllowed && self.isInitiallyExpanded()
+    }
 
     open func isExpanded() -> Bool {
         return isOpen
@@ -64,6 +70,7 @@ open class ExpandableCell: UITableViewCell {
     open func isInitiallyExpanded() -> Bool {
         return false
     }
+    
     open func isSelectable() -> Bool {
         return false
     }
