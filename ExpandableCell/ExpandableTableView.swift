@@ -12,7 +12,7 @@ open class ExpandableTableView: UITableView {
     public var animation: UITableView.RowAnimation = .top
     public var expansionStyle : ExpandableTableView.ExpansionStyle = .multi
     public var autoReleaseDelegate: Bool = true
-    public var autoRemoveSelection = true
+    public var autoRemoveSelection: Bool = true
     fileprivate var expandableProcessor = ExpandableProcessor()
     fileprivate var formerIndexPath: IndexPath?
 
