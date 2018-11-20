@@ -44,51 +44,77 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         guard let delegate = expandableDelegate else { return 0 }
         return delegate.numberOfSections(in: self)
     }
-    
+
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         
         guard let delegate = expandableDelegate else { return }
         
         let expandedData = expandableProcessor.isExpandedCell(at: indexPath)
+        
+        //unhighlight cell if it is not selectable
+        //other types of selection will be handled directly by the underlined
+        //tableview selectionStyle
+        let allowsSelection = self.allowsSelection || self.allowsMultipleSelection
+        if !expandableProcessor.isSelectable(at:indexPath,defaultValue:allowsSelection) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
         if !expandedData.isExpandedCell {
             delegate.expandableTableView(self, didSelectRowAt: indexPath)
             
-            if expandableProcessor.isExpandable(at: indexPath) {
-                // Check if there are other rows expanded in section
-                let noExpandedRowsInSection = expandableProcessor.numberOfExpandedRowsInSection(section: indexPath.section) == 0
-                
-                if let cell = self.cellForRow(at: indexPath) {
-                    if self.expansionStyle == .single {
-                        closeAll()
-                    } else if self.expansionStyle == .singlePerSection && !noExpandedRowsInSection {
-                        closeAllInSection(indexPath.section)
-                    }
-                    if let correctIndexPath = self.indexPath(for: cell) {
-                        // If no other row is expanded in section
-                        if noExpandedRowsInSection {
-                            let originalIndexPath = expandableProcessor.original(indexPath: correctIndexPath)
-                            open(indexPath: originalIndexPath, delegate: delegate)
-                        } else {
-                            open(indexPath: correctIndexPath, delegate: delegate)
-                        }
-                    }
-                }
-            } else {
-                close(indexPath: indexPath)
-                formerIndexPath = nil
-            }
+            handleRowExpansion(at: indexPath)
         } else {
             delegate.expandableTableView(self, didSelectExpandedRowAt: indexPath)
             delegate.expandableTableView(self, expandedCell: expandedData.expandedCell, didSelectExpandedRowAt: indexPath)
         }
     }
     
+    fileprivate func handleRowExpansion(at indexPath:IndexPath){
+        guard let delegate = expandableDelegate else { return }
+
+        if expandableProcessor.isExpandable(at: indexPath) {
+            
+            // Check if there are other rows expanded in section
+            let noExpandedRowsInSection = expandableProcessor.numberOfExpandedRowsInSection(section: indexPath.section) == 0
+            
+            if let cell = self.cellForRow(at: indexPath) {
+                if self.expansionStyle == .single {
+                    closeAll()
+                } else if self.expansionStyle == .singlePerSection && !noExpandedRowsInSection {
+                    closeAllInSection(indexPath.section)
+                }
+                if let correctIndexPath = self.indexPath(for: cell) {
+                    // If no other row is expanded in section
+                    if noExpandedRowsInSection {
+                        let originalIndexPath = expandableProcessor.original(indexPath: correctIndexPath)
+                        open(indexPath: originalIndexPath, delegate: delegate)
+                    } else {
+                        open(indexPath: correctIndexPath, delegate: delegate)
+                    }
+                }
+            }
+        } else {
+            close(indexPath: indexPath)
+            formerIndexPath = nil
+        }
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        //Intially expanded rows can only be expanded on the first load of the
+        //cell into the table view, after that they are ignored
+        self.openAllInitiallyExpanded()
+    }
+    
     fileprivate func open(indexPath: IndexPath, delegate: ExpandableDelegate) {
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
         guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
         guard let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: originalIndexPath) else { return }
-        guard expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights) else { return }
+        var isSelectable = false
+        if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+            isSelectable = cell.isSelectable()
+        }
+        
+        guard expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights,isExpandCellSelectable:isSelectable) else { return }
         
         self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
         guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
@@ -129,7 +155,7 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let delegate = expandableDelegate else { return 44 }
+        guard let delegate = expandableDelegate else { return UITableView.automaticDimension }
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
 
         if let height = expandableProcessor.expandedHeight(at: indexPath) {
@@ -218,6 +244,27 @@ extension ExpandableTableView {
 			}
 		}
 	}
+    
+    func openAllInitiallyExpanded() {
+        var rowsToExpand = [IndexPath]()
+        let sections = self.numberOfSections(in: self)
+        
+        for sectionNum in 0..<sections {
+            let rows = self.numberOfRows(inSection: sectionNum)
+            for rowNum in 0..<rows {
+                let indexPath = IndexPath(row: rowNum, section: sectionNum)
+                if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
+                    if cell.isInitiallyExpandedInternal() {
+                        rowsToExpand.append(indexPath)
+                    }
+                }
+            }
+        }
+        
+        for indexPath in rowsToExpand {
+            open(at: indexPath)
+        }
+    }
 	
     public func open(at indexPath: IndexPath) {
 		guard let delegate = expandableDelegate else { return }
@@ -342,7 +389,14 @@ extension ExpandableTableView {
     
     @objc(tableView:willDisplayCell:forRowAtIndexPath:) public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let delegate = expandableDelegate else { return }
-        return delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
+        delegate.expandableTableView(self, willDisplay: cell, forRowAt: indexPath)
+    }
+    
+    public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let delegate = expandableDelegate else { return }
+
+        delegate.expandableTableView(self, didEndDisplaying: cell, forRow:indexPath)
+      
     }
     
     public func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

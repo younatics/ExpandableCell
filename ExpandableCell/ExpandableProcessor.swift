@@ -13,6 +13,7 @@ struct ExpandableData {
     var originalIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
     var expandedHeights: [CGFloat]
+    var isSelectable : Bool
     
     var expandedIndexPaths: [IndexPath] {
         var indexPaths = [IndexPath]()
@@ -33,7 +34,7 @@ class ExpandableProcessor {
     var expandableDatasPerSection = [Int: [ExpandableData]]()
     var willRemovedIndexPaths: [IndexPath]?
     
-    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat]) -> Bool {
+    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat], isExpandCellSelectable:Bool) -> Bool {
         var expandableDatas: [ExpandableData] = [ExpandableData]()
         
         if expandableDatasPerSection.keys.contains(indexPath.section), var array = expandableDatasPerSection[indexPath.section] {
@@ -47,8 +48,8 @@ class ExpandableProcessor {
             }
             expandableDatas = array
         }
-        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights))
-        
+        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights,isSelectable:isExpandCellSelectable))
+        6
         expandableDatasPerSection[indexPath.section] = expandableDatas
         
         return true
@@ -146,6 +147,19 @@ class ExpandableProcessor {
         }
         
         return true
+    }
+    
+    func isSelectable(at indexPath: IndexPath, defaultValue:Bool) -> Bool {
+        guard expandableDatasPerSection.keys.contains(indexPath.section),
+            let expandableDatas = expandableDatasPerSection[indexPath.section] else { return true }
+        
+        for expandableData in expandableDatas {
+            if expandableData.indexPath == indexPath {
+                return expandableData.isSelectable
+            }
+        }
+        
+        return defaultValue
     }
     
     func indexPathsWhere(indexPath: IndexPath) -> [IndexPath] {

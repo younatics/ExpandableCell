@@ -43,6 +43,8 @@ public protocol ExpandableDelegate : UIScrollViewDelegate {
     func numberOfSections(in expandableTableView: ExpandableTableView) -> Int
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didEndDisplaying cell: UITableViewCell, forRow indexPath:IndexPath)
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int)
 
@@ -83,8 +85,10 @@ public extension ExpandableDelegate {
     }
     func numberOfSections(in expandableTableView: ExpandableTableView) -> Int { return 1 }
 
-    func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) { }
-
+    func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay: UITableViewCell, forRowAt: IndexPath) { }
+    
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didEndDisplaying: UITableViewCell, forRow:IndexPath){ }
+    
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int) { }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayFooterView view: UIView, forSection section: Int) { }
@@ -94,4 +98,5 @@ public extension ExpandableDelegate {
     func expandableTableView(_ expandableTableView: UITableView, didHighlightRowAt indexPath: IndexPath) { }
 
     func expandableTableView(_ expandableTableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) { }
+    func expandableTableView(_ expandableTableView: UITableView, didCloseRowAt indexPath: IndexPath){ }
 }

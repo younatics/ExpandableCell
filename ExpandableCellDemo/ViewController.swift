@@ -13,7 +13,20 @@ class ViewController: UIViewController {
     @IBOutlet var tableView: ExpandableTableView!
     @IBOutlet var closeAllButton: UIBarButtonItem!
     @IBOutlet var openAllButton: UIBarButtonItem!
-    
+    var parentCells:[[String]] = [
+        [ExpandableCell2.ID,//
+         NormalCell.ID,//
+         ExpandableCell2.ID,//
+         ExpandableSelectableCell2.ID,//
+         NormalCell.ID//
+        ],
+        [ExpandableCell2.ID,//
+         NormalCell.ID,//
+         ExpandableCell2.ID,//
+         ExpandableInitiallyExpanded.ID//
+        ]
+    ]
+
     var cell: UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: ExpandedCell.ID)!
     }
@@ -27,7 +40,8 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "NormalCell", bundle: nil), forCellReuseIdentifier: NormalCell.ID)
         tableView.register(UINib(nibName: "ExpandedCell", bundle: nil), forCellReuseIdentifier: ExpandedCell.ID)
         tableView.register(UINib(nibName: "ExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableCell2.ID)
-        
+        tableView.register(UINib(nibName: "ExpandableSelectableCell", bundle: nil), forCellReuseIdentifier: ExpandableSelectableCell2.ID)
+           tableView.register(UINib(nibName: "InitiallyExpandedExpandableCell", bundle: nil), forCellReuseIdentifier: ExpandableInitiallyExpanded.ID)
         closeAllButton.action = #selector(closeAllButtonClicked)
         closeAllButton.target = self
         
@@ -38,7 +52,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        tableView.openAll()
+//        tableView.openAll()
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,7 +92,6 @@ class ViewController: UIViewController {
 
 extension ViewController: ExpandableDelegate {
     
-  
     func expandableTableView(_ expandableTableView: ExpandableTableView, expandedCellsForRowAt indexPath: IndexPath) -> [UITableViewCell]? {
         switch indexPath.section {
         case 0:
@@ -95,8 +108,9 @@ extension ViewController: ExpandableDelegate {
             case 2:
                 return [cell, cell]
             case 3:
-                return [cell]
-
+                return [cell,cell, cell]
+            case 5:
+                return [cell,cell, cell]
             default:
                 break
             }
@@ -110,7 +124,7 @@ extension ViewController: ExpandableDelegate {
             case 2:
                 return [cell, cell]
             case 3:
-                return [cell]
+                return [cell,cell]
                 
             default:
                 break
@@ -133,7 +147,8 @@ extension ViewController: ExpandableDelegate {
                 
             case 3:
                 return [22]
-
+            case 5:
+                return [33, 33, 33]
             default:
                 break
             }
@@ -159,11 +174,11 @@ extension ViewController: ExpandableDelegate {
     }
     
     func numberOfSections(in tableView: ExpandableTableView) -> Int {
-        return 2
+        return parentCells.count
     }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return parentCells[section].count
     }
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath) {
@@ -180,39 +195,16 @@ extension ViewController: ExpandableDelegate {
         }
     }
     
+    func expandableTableView(_ expandableTableView: ExpandableTableView, titleForHeaderInSection section: Int) -> String? {
+        return "Section:\(section)"
+    }
+    func expandableTableView(_ expandableTableView: ExpandableTableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0, 2, 3:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell2.ID) else { return UITableViewCell() }
-                return cell
-                
-            case 1, 4:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID)  else { return UITableViewCell() }
-                return cell
-
-            default:
-                break
-            }
-        case 1:
-            switch indexPath.row {
-            case 0, 2, 3:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: ExpandableCell2.ID) else { return UITableViewCell() }
-                return cell
-                
-            case 1, 4:
-                guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: NormalCell.ID)  else { return UITableViewCell() }
-                return cell
-                
-            default:
-                break
-            }
-        default:
-            break
-        }
-        
-        return UITableViewCell()
+        guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: parentCells[indexPath.section][indexPath.row]) else { return UITableViewCell() }
+        return cell
     }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
