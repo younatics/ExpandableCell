@@ -7,8 +7,6 @@
 [![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 ![iOS 8.0+](https://img.shields.io/badge/iOS-8.0%2B-blue.svg)
 
-#### Find someone who want to make this project better than before :) Currently, I don't have enough time to resolve issues :(
-
 ## Intoduction
 Fully refactored [YNExapnadableCell](https://github.com/younatics/YNExpandableCell) with more concise, bug free. Easiest usage of expandable & collapsible cell for iOS, written in Swift 3. You can customize expandable `UITableViewCell` whatever you like. `ExpandableCell` is made because `insertRows` and `deleteRows` is hard to use. Just inheirt `ExpandableDelegate`
 
