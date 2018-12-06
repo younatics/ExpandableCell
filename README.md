@@ -90,6 +90,22 @@ open class ExpandableCell: UITableViewCell {
 }
 ```
 
+#### For highlight animation
+Inherit `ExpandableCell` when you need disable or enable highlight animation
+```swift
+open class ExpandableCell: UITableViewCell {
+    open var highlightAnimation = HighlightAnimation.animated
+}
+```
+
+#### Adding right margin to arrow icon
+Inherit `ExpandableCell` when you need right margin ( Default margin is 16 )
+```swift
+open class ExpandableCell: UITableViewCell {
+    open var rightMargin: CGFloat = 16
+}
+```
+
 Set tableview insert animation
 ```Swift
 tableView.animation = .automatic
