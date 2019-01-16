@@ -107,6 +107,14 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
     }
     
     fileprivate func open(indexPath: IndexPath, delegate: ExpandableDelegate) {
+        populateExpandedSection(indexPath: indexPath, delegate: delegate)
+
+        self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
+        guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
+        cell.open()
+    }
+
+    private func populateExpandedSection(indexPath: IndexPath, delegate: ExpandableDelegate) {
         let originalIndexPath = expandableProcessor.original(indexPath: indexPath)
         guard let expandedCells = delegate.expandableTableView(self, expandedCellsForRowAt: originalIndexPath) else { return }
         guard let expandedHeights = delegate.expandableTableView(self, heightsForExpandedRowAt: originalIndexPath) else { return }
@@ -114,24 +122,23 @@ extension ExpandableTableView: UITableViewDataSource, UITableViewDelegate {
         if let cell = self.cellForRow(at: indexPath) as? ExpandableCell {
             isSelectable = cell.isSelectable()
         }
-        
+
         guard expandableProcessor.insert(indexPath: indexPath, expandedCells: expandedCells, expandedHeights: expandedHeights,isExpandCellSelectable:isSelectable) else { return }
-        
-        self.insertRows(at: expandableProcessor.indexPathsWhere(indexPath: indexPath), with: animation)
-        guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
-        cell.open()
     }
     
     private func close(indexPath: IndexPath) {
-        expandableProcessor.delete(indexPath: indexPath)
+        clearExpandedSection(indexPath: indexPath)
         guard let indexPaths = closeIndexPaths(indexPath: indexPath) else { return }
         self.deleteRows(at: indexPaths, with: animation)
         
         guard let cell = self.cellForRow(at: indexPath) as? ExpandableCell else { return }
         cell.close()
-
     }
-    
+
+    private func clearExpandedSection(indexPath: IndexPath) {
+        expandableProcessor.delete(indexPath: indexPath)
+    }
+
     private func closeIndexPaths(indexPath: IndexPath) -> [IndexPath]? {
         guard let indexPaths = expandableProcessor.willRemovedIndexPaths else { return nil }
         
@@ -291,13 +298,14 @@ extension ExpandableTableView {
     }
     
     public func reloadExpandableExpandedCells(_ cells: [ExpandableCell]) {
+        guard let delegate = expandableDelegate else { return }
+
         cells.forEach { (cell) in
             if let currentIndexPath = self.indexPath(for: cell) {
                 if cell.isExpanded() {
-                    close(at: currentIndexPath)
-                    if let newIndexPath = self.indexPath(for: cell) {
-                        open(at: newIndexPath)
-                    }
+                    clearExpandedSection(indexPath: currentIndexPath)
+                    populateExpandedSection(indexPath: currentIndexPath, delegate: delegate)
+                    reloadData()
                 }
             }
         }
