@@ -15,7 +15,7 @@ class MemoryLeakTest: XCTestCase {
     override func setUp() {
         if let nav = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController){
             self.navigationController = nav
-            self.viewController = nav.visibleViewController as! ViewController
+            self.viewController = nav.visibleViewController as? ViewController
         }
         
         XCTAssertNotNil(self.navigationController)

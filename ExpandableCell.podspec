@@ -9,10 +9,10 @@
 Pod::Spec.new do |s|
   s.name             = 'ExpandableCell'
   s.version          = '1.2.8'
-  s.summary          = 'Easiest way to expand and collapse cell for iOS with Swift 4'
+  s.summary          = 'Easiest way to expand and collapse cell for iOS with Swift 5'
 
   s.description      = <<-DESC
-Easiest usage of expandable & collapsible cell for iOS, written in Swift 4. You can customize expandable `UITableViewCell` whatever you like. `YNExpandableCell` is made because `insertRows(at indexPaths, with animation` and `deleteRows(at indexPaths, with animation` is hard to use. You can just inheirt `YNTableViewDelegate` and add one more method `func tableView(_ tableView: YNTableView, expandCellAt indexPath) -> UITableViewCell?` 
+Easiest usage of expandable & collapsible cell for iOS, written in Swift 5. You can customize expandable `UITableViewCell` whatever you like. `YNExpandableCell` is made because `insertRows(at indexPaths, with animation` and `deleteRows(at indexPaths, with animation` is hard to use. You can just inheirt `YNTableViewDelegate` and add one more method `func tableView(_ tableView: YNTableView, expandCellAt indexPath) -> UITableViewCell?` 
                         DESC
 
   s.homepage         = 'https://github.com/younatics/ExpandableCell'
@@ -23,6 +23,7 @@ Easiest usage of expandable & collapsible cell for iOS, written in Swift 4. You 
   s.source_files     = 'ExpandableCell/*.swift'
   s.resources        = "ExpandableCell/*.xcassets"
 
+  s.swift_version = '5.0'
   s.ios.deployment_target = '8.0'
 
   s.frameworks = 'UIKit'

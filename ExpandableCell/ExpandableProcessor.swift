@@ -212,7 +212,7 @@ class ExpandableProcessor {
             let expandableDatas = expandableDatasPerSection[indexPath.section] else { return nil }
         
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: indexPath),
+            if let index = expandableData.expandedIndexPaths.firstIndex(of: indexPath),
                 index < expandableData.expandedCells.count {
                 return expandableData.expandedCells[index]
             }
@@ -226,7 +226,7 @@ class ExpandableProcessor {
             let expandableDatas = expandableDatasPerSection[indexPath.section] else { return nil }
         
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: indexPath),
+            if let index = expandableData.expandedIndexPaths.firstIndex(of: indexPath),
                 index < expandableData.expandedHeights.count {
                 return expandableData.expandedHeights[index]
             }

@@ -4,11 +4,11 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/YNExpandableCell/blob/master/LICENSE)
 [![Platform](https://img.shields.io/cocoapods/p/YNExpandableCell.svg?style=flat)](http://cocoapods.org/pods/ExpandableCell)
-[![Swift 4.0](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 ![iOS 8.0+](https://img.shields.io/badge/iOS-8.0%2B-blue.svg)
 
 ## Intoduction
-Fully refactored [YNExapnadableCell](https://github.com/younatics/YNExpandableCell) with more concise, bug free. Easiest usage of expandable & collapsible cell for iOS, written in Swift 3. You can customize expandable `UITableViewCell` whatever you like. `ExpandableCell` is made because `insertRows` and `deleteRows` is hard to use. Just inheirt `ExpandableDelegate`
+Fully refactored [YNExapnadableCell](https://github.com/younatics/YNExpandableCell) with more concise, bug free. Easiest usage of expandable & collapsible cell for iOS, written in Swift 5. You can customize expandable `UITableViewCell` whatever you like. `ExpandableCell` is made because `insertRows` and `deleteRows` is hard to use. Just inheirt `ExpandableDelegate`
 
 ![demo](Images/ExpandableCell.gif)
 
@@ -120,7 +120,7 @@ Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
 | `isSelectable()` | Make cell be selectable or not, regardless of tableView selectionStyle |
 
 ## Requirements
-`ExpandableCell` written in Swift 4.2. Compatible with iOS 8.0+
+`ExpandableCell` written in Swift 5.0. Compatible with iOS 8.0+
 
 ## Installation
 
