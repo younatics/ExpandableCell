@@ -11,17 +11,17 @@ import ExpandableCell
 
 class ViewController: UIViewController {
     @IBOutlet var tableView: ExpandableTableView!
-    var parentCells:[[String]] = [
-        [ExpandableCell2.ID,//
-         NormalCell.ID,//
-         ExpandableCell2.ID,//
-         ExpandableSelectableCell2.ID,//
-         NormalCell.ID//
+    var parentCells: [[String]] = [
+        [ExpandableCell2.ID,
+         NormalCell.ID,
+         ExpandableCell2.ID,
+         ExpandableSelectableCell2.ID,
+         NormalCell.ID
         ],
-        [ExpandableCell2.ID,//
-         NormalCell.ID,//
-         ExpandableCell2.ID,//
-         ExpandableInitiallyExpanded.ID//
+        [ExpandableCell2.ID,
+         NormalCell.ID,
+         ExpandableCell2.ID,
+         ExpandableInitiallyExpanded.ID
         ]
     ]
 
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         tableView.closeAll()
     }
     
-    @IBAction func SelectionDisplayOn(_ sender: UIButton){
+    @IBAction func SelectionDisplayOn(_ sender: UIButton) {
         tableView.autoRemoveSelection = !tableView.autoRemoveSelection
         let isOn = tableView.autoRemoveSelection ? "Off" : "On"
         sender.setTitle("Selection Stays \(isOn)", for: .normal)
@@ -107,9 +107,9 @@ extension ViewController: ExpandableDelegate {
             case 2:
                 return [cell, cell]
             case 3:
-                return [cell,cell, cell]
+                return [cell, cell, cell]
             case 5:
-                return [cell,cell, cell]
+                return [cell, cell, cell]
             default:
                 break
             }
@@ -123,7 +123,7 @@ extension ViewController: ExpandableDelegate {
             case 2:
                 return [cell, cell]
             case 3:
-                return [cell,cell]
+                return [cell, cell]
                 
             default:
                 break

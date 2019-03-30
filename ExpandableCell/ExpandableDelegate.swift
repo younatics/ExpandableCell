@@ -8,9 +8,9 @@
 
 import UIKit
 
-public protocol ExpandableDelegate : UIScrollViewDelegate {
+public protocol ExpandableDelegate: UIScrollViewDelegate {
 
-    //MARK: Required Methods
+    // MARK: Required Methods
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, numberOfRowsInSection section: Int) -> Int
@@ -21,7 +21,7 @@ public protocol ExpandableDelegate : UIScrollViewDelegate {
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, heightsForExpandedRowAt indexPath: IndexPath) -> [CGFloat]?
 
-    //MARK: Optional Methods
+    // MARK: Optional Methods
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectRowAt indexPath: IndexPath)
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, didSelectExpandedRowAt indexPath: IndexPath)
@@ -44,7 +44,7 @@ public protocol ExpandableDelegate : UIScrollViewDelegate {
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath)
     
-    func expandableTableView(_ expandableTableView: ExpandableTableView, didEndDisplaying cell: UITableViewCell, forRow indexPath:IndexPath)
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didEndDisplaying cell: UITableViewCell, forRow indexPath: IndexPath)
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int)
 
@@ -87,7 +87,7 @@ public extension ExpandableDelegate {
 
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplay: UITableViewCell, forRowAt: IndexPath) { }
     
-    func expandableTableView(_ expandableTableView: ExpandableTableView, didEndDisplaying: UITableViewCell, forRow:IndexPath){ }
+    func expandableTableView(_ expandableTableView: ExpandableTableView, didEndDisplaying: UITableViewCell, forRow: IndexPath) { }
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, willDisplayHeaderView view: UIView, forSection section: Int) { }
 
@@ -98,5 +98,5 @@ public extension ExpandableDelegate {
     func expandableTableView(_ expandableTableView: UITableView, didHighlightRowAt indexPath: IndexPath) { }
 
     func expandableTableView(_ expandableTableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) { }
-    func expandableTableView(_ expandableTableView: UITableView, didCloseRowAt indexPath: IndexPath){ }
+    func expandableTableView(_ expandableTableView: UITableView, didCloseRowAt indexPath: IndexPath) { }
 }

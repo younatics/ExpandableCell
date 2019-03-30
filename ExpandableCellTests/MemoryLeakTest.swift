@@ -10,10 +10,10 @@ import XCTest
 @testable import ExpandableCellDemo
 class MemoryLeakTest: XCTestCase {
 
-    weak var viewController : ViewController?
-    weak var navigationController :UINavigationController?
+    weak var viewController: ViewController?
+    weak var navigationController: UINavigationController?
     override func setUp() {
-        if let nav = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController){
+        if let nav = (UIApplication.shared.keyWindow?.rootViewController as? UINavigationController) {
             self.navigationController = nav
             self.viewController = nav.visibleViewController as? ViewController
         }
