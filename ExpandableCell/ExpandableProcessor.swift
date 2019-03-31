@@ -13,12 +13,12 @@ struct ExpandableData {
     var originalIndexPath: IndexPath
     var expandedCells: [UITableViewCell]
     var expandedHeights: [CGFloat]
-    var isSelectable : Bool
+    var isSelectable: Bool
     
     var expandedIndexPaths: [IndexPath] {
         var indexPaths = [IndexPath]()
         for i in 0..<expandedCells.count {
-            let indexPath = IndexPath(row: self.indexPath.row + i + 1 , section: self.indexPath.section)
+            let indexPath = IndexPath(row: self.indexPath.row + i + 1, section: self.indexPath.section)
             indexPaths.append(indexPath)
         }
         return indexPaths
@@ -34,7 +34,7 @@ class ExpandableProcessor {
     var expandableDatasPerSection = [Int: [ExpandableData]]()
     var willRemovedIndexPaths: [IndexPath]?
     
-    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat], isExpandCellSelectable:Bool) -> Bool {
+    func insert(indexPath: IndexPath, expandedCells: [UITableViewCell], expandedHeights: [CGFloat], isExpandCellSelectable: Bool) -> Bool {
         var expandableDatas: [ExpandableData] = [ExpandableData]()
         
         if expandableDatasPerSection.keys.contains(indexPath.section), var array = expandableDatasPerSection[indexPath.section] {
@@ -48,7 +48,7 @@ class ExpandableProcessor {
             }
             expandableDatas = array
         }
-        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights,isSelectable:isExpandCellSelectable))
+        expandableDatas.append(ExpandableData(indexPath: indexPath, originalIndexPath: original(indexPath: indexPath), expandedCells: expandedCells, expandedHeights: expandedHeights, isSelectable: isExpandCellSelectable))
         expandableDatasPerSection[indexPath.section] = expandableDatas
         
         return true
@@ -61,15 +61,13 @@ class ExpandableProcessor {
         var deletedIndexPath = IndexPath(row: 0, section: 0)
         var deletedCellCount = 0
         
-        for i in 0..<expandableDatas.count {
-            if expandableDatas[i].indexPath == indexPath {
-                let expandableData = expandableDatas[i]
-                willRemovedIndexPaths = expandableData.expandedIndexPaths
-                deletedIndexPath = expandableData.indexPath
-                deletedCellCount = expandableData.expandedCellCount
-                expandableDatas.remove(at: i)
-                break
-            }
+        for i in 0..<expandableDatas.count where expandableDatas[i].indexPath == indexPath {
+            let expandableData = expandableDatas[i]
+            willRemovedIndexPaths = expandableData.expandedIndexPaths
+            deletedIndexPath = expandableData.indexPath
+            deletedCellCount = expandableData.expandedCellCount
+            expandableDatas.remove(at: i)
+            break
         }
         
         for i in 0..<expandableDatas.count {
@@ -84,7 +82,7 @@ class ExpandableProcessor {
         expandableDatasPerSection[indexPath.section] = expandableDatas
     }
     
-    func deleteAllIndexPathsInSection(_ section: Int) -> (expandedIndexPaths:[IndexPath], indexPaths: [IndexPath]) {
+    func deleteAllIndexPathsInSection(_ section: Int) -> (expandedIndexPaths: [IndexPath], indexPaths: [IndexPath]) {
         var expandedIndexPaths = [IndexPath]()
         var indexPaths = [IndexPath]()
         
@@ -148,7 +146,7 @@ class ExpandableProcessor {
         return true
     }
     
-    func isSelectable(at indexPath: IndexPath, defaultValue:Bool) -> Bool {
+    func isSelectable(at indexPath: IndexPath, defaultValue: Bool) -> Bool {
         guard expandableDatasPerSection.keys.contains(indexPath.section),
             let expandableDatas = expandableDatasPerSection[indexPath.section] else { return true }
         
@@ -212,7 +210,7 @@ class ExpandableProcessor {
             let expandableDatas = expandableDatasPerSection[indexPath.section] else { return nil }
         
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: indexPath),
+            if let index = expandableData.expandedIndexPaths.firstIndex(of: indexPath),
                 index < expandableData.expandedCells.count {
                 return expandableData.expandedCells[index]
             }
@@ -226,7 +224,7 @@ class ExpandableProcessor {
             let expandableDatas = expandableDatasPerSection[indexPath.section] else { return nil }
         
         for expandableData in expandableDatas {
-            if let index = expandableData.expandedIndexPaths.index(of: indexPath),
+            if let index = expandableData.expandedIndexPaths.firstIndex(of: indexPath),
                 index < expandableData.expandedHeights.count {
                 return expandableData.expandedHeights[index]
             }
