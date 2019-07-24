@@ -25,6 +25,7 @@
 		19EF95001F37580B00085BCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EF94FE1F37580B00085BCA /* Main.storyboard */; };
 		19EF95021F37580B00085BCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19EF95011F37580B00085BCA /* Assets.xcassets */; };
 		19EF950B1F3758C300085BCA /* ExpandableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF950A1F3758C300085BCA /* ExpandableTableView.swift */; };
+		AB3919EF22E89D080041AD58 /* ExpandableCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3919EE22E89D080041AD58 /* ExpandableCellDelegate.swift */; };
 		BF790BC021A3E5DF00BF5B66 /* InitiallyExpandedExpandableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF790BBE21A3E5DF00BF5B66 /* InitiallyExpandedExpandableCell.xib */; };
 		BF9048D521776DE100BE514F /* ExpandableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19EF94E91F3757AC00085BCA /* ExpandableCell.framework */; };
 		BF9048DF21776E1400BE514F /* MemoryLeakTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9048DE21776E1400BE514F /* MemoryLeakTest.swift */; };
@@ -90,6 +91,7 @@
 		19EF95011F37580B00085BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19EF95061F37580B00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19EF950A1F3758C300085BCA /* ExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableView.swift; sourceTree = "<group>"; };
+		AB3919EE22E89D080041AD58 /* ExpandableCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableCellDelegate.swift; sourceTree = "<group>"; };
 		BF790BBE21A3E5DF00BF5B66 /* InitiallyExpandedExpandableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitiallyExpandedExpandableCell.xib; sourceTree = "<group>"; };
 		BF9048D021776DE100BE514F /* ExpandableCellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpandableCellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9048D421776DE100BE514F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				19E5B2661F39DD9400E7D311 /* ExpandableProcessor.swift */,
 				19EF94EC1F3757AC00085BCA /* ExpandableCell.h */,
 				19EF94ED1F3757AC00085BCA /* Info.plist */,
+				AB3919EE22E89D080041AD58 /* ExpandableCellDelegate.swift */,
 			);
 			path = ExpandableCell;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB3919EF22E89D080041AD58 /* ExpandableCellDelegate.swift in Sources */,
 				19E5B2671F39DD9400E7D311 /* ExpandableProcessor.swift in Sources */,
 				1921BF6E1F37FF2700BFD528 /* ExpandableDelegate.swift in Sources */,
 				196801921F3EB97B002DFC73 /* ExpandableStyle.swift in Sources */,
