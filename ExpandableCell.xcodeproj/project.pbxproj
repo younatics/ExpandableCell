@@ -90,6 +90,7 @@
 		19EF95011F37580B00085BCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19EF95061F37580B00085BCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19EF950A1F3758C300085BCA /* ExpandableTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableTableView.swift; sourceTree = "<group>"; };
+		A0EA6FD6246092C8006F7027 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
 		BF790BBE21A3E5DF00BF5B66 /* InitiallyExpandedExpandableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InitiallyExpandedExpandableCell.xib; sourceTree = "<group>"; };
 		BF9048D021776DE100BE514F /* ExpandableCellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpandableCellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9048D421776DE100BE514F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -304,6 +305,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
 			);
 			mainGroup = 19EF94DF1F3757AC00085BCA;
 			productRefGroup = 19EF94EA1F3757AC00085BCA /* Products */;
@@ -414,6 +416,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				19EF94FF1F37580B00085BCA /* Base */,
+				A0EA6FD6246092C8006F7027 /* ar */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
