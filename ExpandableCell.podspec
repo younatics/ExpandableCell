@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ExpandableCell'
-  s.version          = '1.3.0'
+  s.version          = '1.3.1'
   s.summary          = 'Easiest way to expand and collapse cell for iOS with Swift 5'
 
   s.description      = <<-DESC
@@ -21,7 +21,7 @@ Easiest usage of expandable & collapsible cell for iOS, written in Swift 5. You 
 
   s.source           = { :git => 'https://github.com/younatics/ExpandableCell.git', :tag => s.version.to_s }
   s.source_files     = 'ExpandableCell/*.swift'
-  s.resources        = "ExpandableCell/*.xcassets"
+  s.resource_bundles        = "ExpandableCell/*.xcassets"
 
   s.swift_version = '5.0'
   s.ios.deployment_target = '8.0'
