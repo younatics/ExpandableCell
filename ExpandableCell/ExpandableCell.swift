@@ -9,43 +9,43 @@
 import UIKit
 
 open class ExpandableCell: UITableViewCell {
-    open var arrowImageView: UIImageView!
-    open var rightMargin: CGFloat = 16
+    open var arrowImageView = UIImageView()
+    open var trailingMargin: CGFloat = 16
     open var highlightAnimation = HighlightAnimation.animated
     private var isOpen = false
     private var initialExpansionAllowed = true
-
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         initView()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
+    
     open override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         initView()
     }
-
+    
     func initView() {
-        arrowImageView = UIImageView()
         arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
         self.contentView.addSubview(arrowImageView)
     }
     
     open override func layoutSubviews() {
         super.layoutSubviews()
-
-        let width = self.bounds.width
-        let height = self.bounds.height
-
-        arrowImageView.frame = CGRect(x: width - rightMargin, y: (height - 11)/2, width: 22, height: 11)
+        let widthConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 22)
+        let heightConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 11)
+        let centerVerticallyConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -trailingMargin)
+        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([widthConstraint,heightConstraint,centerVerticallyConstraint,trailingConstraint])
     }
-
+    
     func open() {
         self.isOpen = true
         self.initialExpansionAllowed = false
@@ -55,7 +55,7 @@ open class ExpandableCell: UITableViewCell {
             }
         }
     }
-
+    
     func close() {
         self.isOpen = false
         if highlightAnimation == .animated {
@@ -68,7 +68,7 @@ open class ExpandableCell: UITableViewCell {
     func isInitiallyExpandedInternal() -> Bool {
         return self.initialExpansionAllowed && self.isInitiallyExpanded()
     }
-
+    
     open func isExpanded() -> Bool {
         return isOpen
     }

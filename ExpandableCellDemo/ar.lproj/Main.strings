@@ -1,0 +1,18 @@
+
+/* Class = "UINavigationItem"; title = "ExpandableCell"; ObjectID = "CXN-9d-Y6i"; */
+"CXN-9d-Y6i.title" = "ExpandableCell";
+
+/* Class = "UIButton"; normalTitle = "Close all"; ObjectID = "DfT-8d-Zi8"; */
+"DfT-8d-Zi8.normalTitle" = "Close all";
+
+/* Class = "UIButton"; normalTitle = "Expand Multi"; ObjectID = "dxQ-uA-zxi"; */
+"dxQ-uA-zxi.normalTitle" = "Expand Multi";
+
+/* Class = "UIButton"; normalTitle = "Selection Stays Off"; ObjectID = "jBv-Tl-xra"; */
+"jBv-Tl-xra.normalTitle" = "Selection Stays Off";
+
+/* Class = "UIButton"; normalTitle = "Open All"; ObjectID = "oIm-JR-hBo"; */
+"oIm-JR-hBo.normalTitle" = "Open All";
+
+/* Class = "UIButton"; normalTitle = "Expand Signle"; ObjectID = "s4I-Dd-9cX"; */
+"s4I-Dd-9cX.normalTitle" = "Expand Signle";
