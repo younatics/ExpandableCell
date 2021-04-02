@@ -14,7 +14,9 @@ open class ExpandableCell: UITableViewCell {
     open var highlightAnimation = HighlightAnimation.animated
     private var isOpen = false
     private var initialExpansionAllowed = true
-
+    
+    public var expandableDelegate: ExpandableCellDelegate?
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -49,6 +51,7 @@ open class ExpandableCell: UITableViewCell {
     func open() {
         self.isOpen = true
         self.initialExpansionAllowed = false
+        self.expandableDelegate?.expandableCell(expandedCell: self)
         if highlightAnimation == .animated {
             UIView.animate(withDuration: 0.3) {[weak self] in
                 self?.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
@@ -58,6 +61,7 @@ open class ExpandableCell: UITableViewCell {
 
     func close() {
         self.isOpen = false
+        self.expandableDelegate?.expandableCell(collapsedCell: self)
         if highlightAnimation == .animated {
             UIView.animate(withDuration: 0.3) {[weak self] in
                 self?.arrowImageView.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 0.0, 0.0, 0.0)

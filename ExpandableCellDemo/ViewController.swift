@@ -203,6 +203,10 @@ extension ViewController: ExpandableDelegate {
     
     func expandableTableView(_ expandableTableView: ExpandableTableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = expandableTableView.dequeueReusableCell(withIdentifier: parentCells[indexPath.section][indexPath.row]) else { return UITableViewCell() }
+        if let cellExp = cell as? ExpandableCell {
+            cellExp.expandableDelegate = self
+            return cellExp
+        }
         return cell
     }
     
@@ -261,3 +265,15 @@ extension ViewController: ExpandableDelegate {
 //        return 33
 //    }
 }
+extension ViewController: ExpandableCellDelegate {
+    func expandableCell(expandedCell expandableCell: ExpandableCell) {
+        print("expandedCell")
+    }
+    
+    func expandableCell(collapsedCell expandableCell: ExpandableCell) {
+        print("collapsedCell")
+    }
+    
+    
+}
+
