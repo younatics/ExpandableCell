@@ -28,8 +28,7 @@ struct ExpandableData {
     }
 }
 
-//print("indexPath: \(expandableDatas[i].indexPath), originalIndexPath: \(expandableDatas[i].originalIndexPath), expandedIndexPaths: \(expandableDatas[i].expandedIndexPaths)")
-
+@MainActor
 class ExpandableProcessor {
     var expandableDatasPerSection = [Int: [ExpandableData]]()
     var willRemovedIndexPaths: [IndexPath]?

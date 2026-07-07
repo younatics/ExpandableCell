@@ -14,7 +14,9 @@ open class ExpandableCell: UITableViewCell {
     open var highlightAnimation = HighlightAnimation.animated
     private var isOpen = false
     private var initialExpansionAllowed = true
-    
+    private var arrowConstraintsInstalled = false
+    private var arrowTrailingConstraint: NSLayoutConstraint?
+
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -27,23 +29,36 @@ open class ExpandableCell: UITableViewCell {
     
     open override func awakeFromNib() {
         super.awakeFromNib()
-        
-        initView()
+
+        MainActor.assumeIsolated {
+            initView()
+        }
     }
     
     func initView() {
-        arrowImageView.image = UIImage(named: "expandableCell_arrow", in: Bundle(for: ExpandableCell.self), compatibleWith: nil)
+        arrowImageView.image = UIImage(named: "expandableCell_arrow", in: .expandableCell, compatibleWith: nil)
         self.contentView.addSubview(arrowImageView)
     }
-    
+
     open override func layoutSubviews() {
         super.layoutSubviews()
-        let widthConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 22)
-        let heightConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 11)
-        let centerVerticallyConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
-        let trailingConstraint = NSLayoutConstraint(item: arrowImageView, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -trailingMargin)
-        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addConstraints([widthConstraint,heightConstraint,centerVerticallyConstraint,trailingConstraint])
+        // Install the arrow's constraints once. Re-adding them on every layout
+        // pass (as earlier versions did) accumulated duplicate constraints.
+        if !arrowConstraintsInstalled {
+            arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+            let trailingConstraint = arrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -trailingMargin)
+            arrowTrailingConstraint = trailingConstraint
+            NSLayoutConstraint.activate([
+                arrowImageView.widthAnchor.constraint(equalToConstant: 22),
+                arrowImageView.heightAnchor.constraint(equalToConstant: 11),
+                arrowImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                trailingConstraint,
+            ])
+            arrowConstraintsInstalled = true
+        } else {
+            // Keep honoring a changed `trailingMargin` without re-adding constraints.
+            arrowTrailingConstraint?.constant = -trailingMargin
+        }
     }
     
     func open() {
@@ -85,4 +100,24 @@ open class ExpandableCell: UITableViewCell {
 public enum HighlightAnimation {
     case animated
     case none
+}
+
+private final class BundleToken {}
+
+extension Bundle {
+    /// The bundle that ships ExpandableCell's asset catalog, resolved for every
+    /// integration path: Swift Package Manager (`Bundle.module`), CocoaPods
+    /// (`resource_bundles` → `ExpandableCell.bundle`), and a plain framework.
+    static var expandableCell: Bundle {
+        #if SWIFT_PACKAGE
+        return .module
+        #else
+        let host = Bundle(for: BundleToken.self)
+        if let url = host.url(forResource: "ExpandableCell", withExtension: "bundle"),
+           let resourceBundle = Bundle(url: url) {
+            return resourceBundle
+        }
+        return host
+        #endif
+    }
 }
