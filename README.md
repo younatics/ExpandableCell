@@ -1,11 +1,10 @@
 # ExpandableCell
-[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
-[![Version](https://img.shields.io/cocoapods/v/ExpandableCell.svg?style=flat)](http://cocoapods.org/pods/ExpandableCell)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/younatics/YNExpandableCell/blob/master/LICENSE)
-[![Platform](https://img.shields.io/cocoapods/p/YNExpandableCell.svg?style=flat)](http://cocoapods.org/pods/ExpandableCell)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-brightgreen.svg?style=flat)](Package.swift)
+[![CocoaPods](https://img.shields.io/cocoapods/v/ExpandableCell.svg?style=flat)](https://cocoapods.org/pods/ExpandableCell)
+![Platform](https://img.shields.io/badge/platform-iOS%2013.0%2B-blue.svg?style=flat)
 [![Swift 6.0](https://img.shields.io/badge/Swift-6.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
-![iOS 13.0+](https://img.shields.io/badge/iOS-13.0%2B-blue.svg)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/vsouza/awesome-ios)
 
 ## Intoduction
 Fully refactored [YNExapnadableCell](https://github.com/younatics/YNExpandableCell) with more concise, bug free. Easiest usage of expandable & collapsible cell for iOS, written in Swift 6. You can customize expandable `UITableViewCell` whatever you like. `ExpandableCell` is made because `insertRows` and `deleteRows` is hard to use. Just inheirt `ExpandableDelegate`
@@ -50,7 +49,7 @@ Set required `ExpandableDelegate` method.
 #### ExpandableTableView property
 | Property | Type | Explanation |
 | -------- | ---- | ----------- |
-| `animation` | `UITableViewRowAnimation` | Animation when open and close | 
+| `animation` | `UITableView.RowAnimation` | Animation when open and close |
 | `expansionStyle` | `ExpandableTableView.ExpansionStyle` | Select expansion type:<br>**single** - one row at a time;<br>**singlePerSection** - one row at a time, per section;<br>**multi** - any number of rows at a time|
 | `autoRemoveSelection` | `Bool` | autoRemoveSelection __true__ means the cell will flicker selected, and autoRemoveSelection __false__ means the default selection behaviour of the tableview will apply (single or multi selection) | 
 
@@ -84,7 +83,7 @@ Set required `ExpandableDelegate` method.
 Inherit `ExpandableCell` when you need arrow effect or change arrow image
 ```swift
 open class ExpandableCell: UITableViewCell {
-    open var arrowImageView: UIImageView!
+    open var arrowImageView = UIImageView()
 }
 ```
 
@@ -96,11 +95,11 @@ open class ExpandableCell: UITableViewCell {
 }
 ```
 
-#### Adding right margin to arrow icon
-Inherit `ExpandableCell` when you need right margin ( Default margin is 16 )
+#### Adding trailing margin to arrow icon
+Inherit `ExpandableCell` when you need a trailing margin (default margin is 16)
 ```swift
 open class ExpandableCell: UITableViewCell {
-    open var rightMargin: CGFloat = 16
+    open var trailingMargin: CGFloat = 16
 }
 ```
 
@@ -120,7 +119,7 @@ Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
 | `isSelectable()` | Make cell be selectable or not, regardless of tableView selectionStyle |
 
 ## Requirements
-`ExpandableCell` written in Swift 6.0. Compatible with iOS 13.0+. Supports Swift Package Manager, CocoaPods, and Carthage.
+`ExpandableCell` uses Swift 6 and requires iOS 13 or later. It supports Swift Package Manager with Swift tools 6 and CocoaPods with an iOS 13 deployment target.
 
 ## Installation
 
@@ -140,17 +139,13 @@ dependencies: [
 ]
 ```
 
-### Cocoapods
+### CocoaPods
 
 ExpandableCell is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'ExpandableCell'
-```
-### Carthage
-```
-github "younatics/ExpandableCell"
+pod 'ExpandableCell', '2.0.0'
 ```
 
 ## References
