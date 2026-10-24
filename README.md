@@ -119,7 +119,7 @@ Make protocols in `ExpandableDelegate` if you need or make pull request to me :)
 | `isSelectable()` | Make cell be selectable or not, regardless of tableView selectionStyle |
 
 ## Requirements
-`ExpandableCell` uses Swift 6 and requires iOS 13 or later. It supports Swift Package Manager with Swift tools 6 and CocoaPods with an iOS 13 deployment target.
+`ExpandableCell` uses Swift 6 and requires iOS 15 or later. It supports Swift Package Manager with Swift tools 6 and CocoaPods with an iOS 15 deployment target.
 
 ## Installation
 

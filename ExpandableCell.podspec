@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ExpandableCell'
-  s.version          = '2.0.0'
+  s.version          = '2.1.0'
   s.summary          = 'Easiest way to expand and collapse cell for iOS with Swift 6'
 
   s.description      = <<-DESC
@@ -24,7 +24,7 @@ Easiest usage of expandable & collapsible cell for iOS, written in Swift 6. You 
   s.resource_bundles        = { 'ExpandableCell' => [ 'ExpandableCell/*.xcassets' ] }
 
   s.swift_version = '6.0'
-  s.ios.deployment_target = '13.0'
+  s.ios.deployment_target = '15.0'
 
   s.frameworks = 'UIKit'
   s.requires_arc = true
